@@ -1,0 +1,53 @@
+<hr>
+<div class="row">
+
+    <div class="col-md-12">
+        <h2>
+            <i class="fa fa-edit" style="color:royalblue"></i> Edit Position
+        </h2>
+    </div>
+</div>
+<hr>
+
+<form #postPosForm="ngForm" (ngSubmit)="onSubmit(postPosForm)">
+    <div class="form-group">
+        <label for="Title">Title</label>
+        <input type="text" class="form-control" name="title" #titleName="ngModel" [ngClass]="{'is-invalid':titleName.errors && titleName.touched}"
+            [(ngModel)]="position.title" minlength="2" required>
+
+        <div [hidden]="!titleName.errors?.required" class="invalid-feedback">
+            Title required
+        </div>
+
+        <div [hidden]="titleName.errors?.minlength" class="invalid-feedback">
+            Must be at least 2 characters
+        </div>
+    </div>
+
+    <div class="form-group">
+        <label for="description">Description</label>
+        <input type="text" class="form-control" name="description" #positionsubtitle="ngModel" [ngClass]="{'is-invalid':positionsubtitle.errors && positionsubtitle.touched}"
+            [(ngModel)]="position.subtitle" minlength="2" required>
+
+        <div [hidden]="!positionsubtitle.errors?.required" class="invalid-feedback">
+            Description required
+        </div>
+
+        <div [hidden]="!positionsubtitle.errors?.minlength" class="invalid-feedback">
+            Must be at least 2 characters
+        </div>
+    </div>
+
+    <div class="form-group">
+        <label for="compensation">Compensation</label>
+        <input type="text" class="form-control" name="compensation" #positionCompensation="ngModel" [ngClass]="{'is-invalid':positionCompensation.errors && positionCompensation.touched}"
+            [(ngModel)]="position.compensation" required>
+
+    </div>
+
+
+    <button type="submit" name="button" class="btn btn-success" [disabled]="postPosForm.invalid"> Save </button>
+    <button type="button" name="button" class="btn btn-danger" (click)="onDelete()"> Delete </button>
+    <button type="button" name="button" class="btn btn-primary" (click)="onBack()"> Back </button>
+</form>
+

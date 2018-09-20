@@ -1,0 +1,50 @@
+<div class="row">
+    <div class="col-md-6">
+        <h2>
+            <i class="fa fa-briefcase" style="color:royalblue"></i> Post Avaliable Positions</h2>
+    </div>
+    <div class="col-md-6">
+        <h5 class="text-right-text-secondary">Total Position: {{totalPositions}}</h5>
+    </div>
+  </div>
+  
+  <table *ngIf="positions?.length> 0; else noEmails" class="table table-striped">
+    <thead class= "thead-inverse">
+        <tr>
+            <th>Picture</th>
+            <th>Title</th>
+            <th>Compensation</th>
+            <th>Date</th>
+          
+        </tr>
+    </thead>
+    <tbody>
+        <tr *ngFor="let pos of positions">
+            <td sytle="width:30%"> 
+                <img [src]="pos.url"  height="100px" width="100px" class="tn"> 
+            </td>
+            <td> {{pos.title}}</td>
+            <td> {{pos.compensation}} </td>
+            <td> {{pos.date |date:'fullDate'}}</td>
+
+            <td> <a routerLink="../edit-post/{{pos.id}}" class="btn btn-secondary btn-sm"><i class="fa fa-arrow-circle-o-right"></i> Details</a></td>
+  
+        </tr>
+    </tbody>
+  
+  
+  </table>
+
+  <div class="card">
+    <div class="btn-group">
+        <button type="button" class="btn btn-success" routerLink="/addnewpost">Add</button>
+        <button type="button" class="btn btn-danger"></button>
+        <button type="button" class="btn btn-primary" (click)="onBack()">Back</button>
+      </div>
+  </div>
+  
+  <ng-template #noEmails>
+    <hr>
+    <h5>There are no positions post in the system</h5>
+  </ng-template>
+  

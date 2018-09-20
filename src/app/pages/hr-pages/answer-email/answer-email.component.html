@@ -1,0 +1,38 @@
+<hr>
+<div class="row">
+
+    <div class="col-md-12">
+        <h2>
+            <i class="fa fa-envelope" style="color:blue"></i> Answer
+        </h2>
+    </div>
+</div>
+<hr>
+<div class="row">
+    <div class="col-md-8">
+        <p>
+            To: {{email.email}}
+        </p>
+    </div>
+
+    <div class="col-md-4">
+     
+    </div>
+</div>
+<br>
+<br>
+<div class="card">
+    <div class="card-body">
+        <p>
+            <editor [(ngModel)]="dataModel"></editor>
+        </p>
+    </div>
+</div>
+<br>
+<div class="card">
+    <div class="btn-group">
+        <button type="button" class="btn btn-success" (click)="onSend()">Send</button>
+        <button type="button" class="btn btn-danger" (click)="onDelete()">Delete</button>
+        <button type="button" class="btn btn-primary" (click)="onBack()">Back</button>
+    </div>
+</div>

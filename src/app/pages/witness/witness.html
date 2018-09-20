@@ -1,0 +1,35 @@
+<div class="container">
+    <div class="card">
+        <div class="card-header">
+            <h2>
+              {{userApp}}' Application ... 
+            </h2>
+
+        </div>
+
+
+        <div class="card-body">
+
+            <div class="row">
+                <signature-pad [options]="signaturePadOptions" (onBeginEvent)="drawStart()" (onEndEvent)="drawComplete2()" #sigPad1></signature-pad>
+            </div>
+
+            <div class="row">
+
+                <div class="col-xs-12 col-sm-12 col-md-8 col-lg-8 col-xlg-8">
+
+                    _______________________________________
+                    <p>
+                        Signature of Witness
+                    </p>
+
+                </div>
+            </div>
+        </div>
+        <div class="card-footer">
+            <button type="button" class="btn btn-primary" (click)="OnClose()"> Cancel</button>
+            <button type="button" class="btn btn-danger" (click)="OnClear()"> Clear</button>
+            <button type="button" class="btn btn-success" (click)="OnSave()"> Save</button>
+        </div>
+    </div>
+</div>

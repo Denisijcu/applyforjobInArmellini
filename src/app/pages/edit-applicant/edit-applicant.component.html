@@ -1,0 +1,1313 @@
+<div class="row">
+    <div class="col-md-6">
+        <a (click)="onBack()" class="btn btn-link">
+            <i class="fa fa-arrow-circle-o-left"></i> Back
+        </a>
+    </div>
+    <div class="col-md-6">
+
+    </div>
+</div>
+
+
+
+<div class="card">
+    <div class="card-header" style="text-align: center">
+        <h2>
+            Editing Application
+        </h2>
+    </div>
+    <div class="card-body">
+        <form #applicantForm="ngForm" (ngSubmit)="onSubmit(applicantForm)">
+            <div class="row">
+                <div class="col-xs-6 col-sm-6 col-md-6 col-lg-6 col-xlg-6">
+                    <div class="form-group">
+                        <label for="positionApply">Position Applied For:</label>
+                        <input type="text" class="form-control" name="positionApplied" #positionApplied="ngModel" [ngClass]="{'is-invalid':positionApplied.errors && positionApplied.touched}"
+                            [(ngModel)]="applicant.applyfor" minlength="2" required *ngIf="!selected">
+                        <div ng-app ng-controller="myCtrl">
+                            <select class="form-control" id="position" required (change)="Onchange($event)">
+                                <option *ngFor="let pos of positions" [value]="pos">{{pos}}</option>
+                            </select>
+                        </div>
+
+                    </div>
+                </div>
+                <div class="col-xs-6 col-sm-6 col-md-6 col-lg-6 col-xlg-6">
+                    <div class="form-group">
+                        <label for="positionApply"> Date Applied:</label>
+
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-xs-12 col-sm-12 col-md-4 col-lg-4 col-xlg-4">
+                    <div class="form-group">
+                        <label for="lastName">Last Name</label>
+                        <input type="text" class="form-control" name="lastName" #applicantLastName="ngModel" [ngClass]="{'is-invalid':applicantLastName.errors && applicantLastName.touched}"
+                            [(ngModel)]="applicant.lastName" minlength="2" required>
+
+                        <div [hidden]="!applicantLastName.errors?.required" class="invalid-feedback">
+                            Last name required
+                        </div>
+
+                        <div [hidden]="!applicantLastName.errors?.minlength" class="invalid-feedback">
+                            Must be at least 2 characters
+                        </div>
+                    </div>
+
+                </div>
+                <div class="col-xs-12 col-sm-12 col-md-4 col-lg-4 col-xlg-4">
+                    <div class="form-group">
+                        <label for="firstName">First Name</label>
+                        <input type="text" class="form-control" name="firstName" #applicantFirstName="ngModel" [ngClass]="{'is-invalid':applicantFirstName.errors && applicantFirstName.touched}"
+                            [(ngModel)]="applicant.firstName" minlength="2" required>
+
+                        <div [hidden]="!applicantFirstName.errors?.required" class="invalid-feedback">
+                            First name required
+                        </div>
+
+                        <div [hidden]="!applicantFirstName.errors?.minlength" class="invalid-feedback">
+                            Must be at least 2 characters
+                        </div>
+                    </div>
+
+                </div>
+                <div class="col-xs-12 col-sm-12 col-md-4 col-lg-4 col-xlg-4">
+                    <div class="form-group">
+                        <label for="firstName">Middle Name</label>
+                        <input type="text" class="form-control" name="middleName" #applicantMiddleName="ngModel" [ngClass]="{'is-invalid':applicantMiddleName.errors && applicantMiddleName.touched}"
+                            [(ngModel)]="applicant.middleName">
+
+                    </div>
+
+                </div>
+            </div>
+            <label for="name"> ADDRESS</label>
+            <div class="row">
+                <div class="col-xs-12 col-sm-12 col-md-4 col-lg-4 col-xlg-4">
+                    <div class="form-group">
+                        <label for="name"> Number</label>
+                        <input type="text" class="form-control" id="addressn" required [(ngModel)]="applicant.number" name="xaddressnumber" #adressn="ngModel">
+                        <div [hidden]="adressn.valid || adressn.pristine" class="alert alert-danger">
+                            Address number is required
+                        </div>
+                    </div>
+                </div>
+                <div class="col-xs-12 col-sm-12 col-md-4 col-lg-4 col-xlg-4">
+                    <div class="form-group">
+                        <label for="name">Street</label>
+                        <input type="text" class="form-control" id="street" required [(ngModel)]="applicant.street" name="xstreet" #calle="ngModel">
+                        <div [hidden]="calle.valid || calle.pristine" class="alert alert-danger">
+                            Street is required
+                        </div>
+                    </div>
+                </div>
+                <div class="col-xs-12 col-sm-12 col-md-4 col-lg-4 col-xlg-4">
+                    <div class="form-group">
+                        <label for="name">City</label>
+                        <input type="text" class="form-control" id="city" required [(ngModel)]="applicant.city" name="xcity" #city="ngModel">
+                        <div [hidden]="city.valid || city.pristine" class="alert alert-danger">
+                            City is required
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-xs-12 col-sm-12 col-md-4 col-lg-4 col-xlg-4">
+                    <div class="form-group">
+                        <label for="name">County</label>
+                        <input type="text" class="form-control" id="county" required [(ngModel)]="applicant.county" name="xcounty" #county="ngModel">
+                        <div [hidden]="county.valid || county.pristine" class="alert alert-danger">
+                            County is required
+                        </div>
+                    </div>
+                </div>
+                <div class="col-xs-12 col-sm-12 col-md-4 col-lg-4 col-xlg-4">
+                    <div class="form-group">
+                        <label for="name">State</label>
+                        <input type="text" class="form-control" id="state" required [(ngModel)]="applicant.state" name="xstate" #state="ngModel">
+                        <div [hidden]="state.valid || state.pristine" class="alert alert-danger">
+                            State is required
+                        </div>
+                    </div>
+                </div>
+                <div class="col-xs-12 col-sm-12 col-md-4 col-lg-4 col-xlg-4">
+                    <div class="form-group">
+                        <label for="name">Zip Code</label>
+                        <input type="text" class="form-control" id="zcode" required [(ngModel)]="applicant.zipcode" name="xzipcode" #zipcode="ngModel">
+                        <div [hidden]="zipcode.valid || zipcode.pristine" class="alert alert-danger">
+                            Zip Code is required
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 col-xlg-12">
+                    <div class="form-group">
+                        <label for="name">Phone Number(s)</label>
+                        <input type="text" class="form-control" (change)="onKeyPHONE($event)" placeholder="" id="phone" maxlength="14" required [(ngModel)]="applicant.phone"
+                            name="xphone" #phone="ngModel">
+                        <div [hidden]="phone.valid || phone.pristine" class="alert alert-danger">
+                            Phone Number is required
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+
+
+            <div class="row">
+                <div class="col-xs-8 col-sm-8 col-md-8 col-lg-8 col-xlg-8">
+                    <label for="name">If you are under 18 years of age, can you provide required proof of your eligibility to work?</label>
+                </div>
+                <div class="col-xs-2 col-sm-2 col-md-2 col-lg-2 col-xlg-2">
+                    <input type="checkbox" name="q1y" value="true" id="q1y" [(ngModel)]="applicant.q1y" (change)="checkYesQ1($event)"> Yes
+                    <br>
+                </div>
+                <div class="col-xs-2 col-sm-2 col-md-2 col-lg-2 col-xlg-2">
+                    <input type="checkbox" name="q1n" value="false" id="q1yn" [(ngModel)]="applicant.q1n" (change)="checkNoQ1($event)"> No
+                    <br>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-xs-8 col-sm-8 col-md-8 col-lg-8 col-xlg-8">
+                    <label for="name">Have you ever filed an application with us before?</label>
+                </div>
+                <div class="col-xs-2 col-sm-2 col-md-2 col-lg-2 col-xlg-2">
+                    <input type="checkbox" name="q2y" value="true" id="q2y" [(ngModel)]="applicant.q2y" (change)="checkYesQ2($event)"> Yes
+                    <br>
+                </div>
+                <div class="col-xs-2 col-sm-2 col-md-2 col-lg-2 col-xlg-2">
+                    <input type="checkbox" name="q2n" value="false" id="q2yn" [(ngModel)]="applicant.q2n" (change)="checkNoQ2($event)"> No
+                    <br>
+                </div>
+            </div>
+            <br>
+            <div class="row">
+                <div class="col-xs-2 col-sm-2 col-md-2 col-lg-2 col-xlg-2">
+
+                </div>
+                <div class="col-xs-5 col-sm-5 col-md-5 col-lg-5 col-xlg-5" *ngIf="applicant.q2y">
+                    <label for="name">If Yes, give date: </label>
+                </div>
+                <div class="col-xs-5 col-sm-5 col-md-5 col-lg-5 col-xlg-5" *ngIf="applicant.q2y">
+                    <input type="text" name="ifyes" placeholder="mm/dd/year" id="ifyes" [(ngModel)]="applicant.ifyes">
+                </div>
+            </div>
+            <br>
+            <div class="row">
+                <div class="col-xs-8 col-sm-8 col-md-8 col-lg-8 col-xlg-8">
+                    <label for="name">Have you ever been employed with us before?</label>
+                </div>
+                <div class="col-xs-2 col-sm-2 col-md-2 col-lg-2 col-xlg-2">
+                    <input type="checkbox" name="q3y" value="true" id="q3y" [(ngModel)]="applicant.q3y" (change)="checkYesQ3($event)"> Yes
+                    <br>
+                </div>
+                <div class="col-xs-2 col-sm-2 col-md-2 col-lg-2 col-xlg-2">
+                    <input type="checkbox" name="q3n" value="false" id="q3yn" [(ngModel)]="applicant.q3n" (change)="checkNoQ3($event)"> No
+                    <br>
+                </div>
+            </div>
+            <br>
+            <div class="row">
+                <div class="col-xs-2 col-sm-2 col-md-2 col-lg-2 col-xlg-2">
+                </div>
+                <div class="col-xs-5 col-sm-5 col-md-5 col-lg-5 col-xlg-5" *ngIf="applicant.q3y">
+                    <label for="name">If Yes, give date and location: </label>
+                </div>
+                <div class="col-xs-5 col-sm-5 col-md-5 col-lg-5 col-xlg-5" *ngIf="applicant.q3y">
+                    <input type="text" name="ifyeswhenandwhere" placeholder="Explain..." id="ifyeswhenwhere" [(ngModel)]="applicant.ifemployedwhenandwhere">
+                </div>
+            </div>
+            <br>
+            <div class="row">
+                <div class="col-xs-8 col-sm-8 col-md-8 col-lg-8 col-xlg-8">
+                    <label for="name">Are you currently employed?</label>
+                </div>
+                <div class="col-xs-2 col-sm-2 col-md-2 col-lg-2 col-xlg-2">
+                    <input type="checkbox" name="q4y" value="true" id="q4y" [(ngModel)]="applicant.q4y" (change)="checkYesQ4($event)"> Yes
+                    <br>
+                </div>
+                <div class="col-xs-2 col-sm-2 col-md-2 col-lg-2 col-xlg-2">
+                    <input type="checkbox" name="q4n" value="false" id="q4yn" [(ngModel)]="applicant.q4n" (change)="checkNoQ4($event)"> No
+                    <br>
+                </div>
+            </div>
+            <br>
+            <div class="row">
+                <div class="col-xs-8 col-sm-8 col-md-8 col-lg-8 col-xlg-8">
+                    <label for="name">May we contact your present employer?</label>
+                </div>
+                <div class="col-xs-2 col-sm-2 col-md-2 col-lg-2 col-xlg-2">
+                    <input type="checkbox" name="q5y" value="true" id="q5y" [(ngModel)]="applicant.q5y" (change)="checkYesQ5($event)"> Yes
+                    <br>
+                </div>
+                <div class="col-xs-2 col-sm-2 col-md-2 col-lg-2 col-xlg-2">
+                    <input type="checkbox" name="q5n" value="false" id="q5yn" [(ngModel)]="applicant.q5n" (change)="checkNoQ5($event)"> No
+                    <br>
+                </div>
+            </div>
+            <br>
+            <div class="row">
+                <div class="col-xs-8 col-sm-8 col-md-8 col-lg-8 col-xlg-8">
+                    <label for="name">Are you prevented from lawfully becoming employed in this country because of Visa or Immigration Status?</label>
+                    <p style="color:black;font-family:'Times New Roman', Times, serif; font-size:9px; font-weight:bold">Proof of Citizenship or immigration status will be required upon employment.</p>
+                </div>
+                <div class="col-xs-2 col-sm-2 col-md-2 col-lg-2 col-xlg-2">
+                    <input type="checkbox" name="q6y" value="true" id="q6y" [(ngModel)]="applicant.q6y" (change)="checkYesQ6($event)"> Yes
+                    <br>
+                </div>
+                <div class="col-xs-2 col-sm-2 col-md-2 col-lg-2 col-xlg-2">
+                    <input type="checkbox" name="q6n" value="false" id="q6yn" [(ngModel)]="applicant.q6n" (change)="checkNoQ6($event)"> No
+                    <br>
+                </div>
+            </div>
+            <br>
+            <div class="row">
+                <div class="col-xs-8 col-sm-8 col-md-8 col-lg-8 col-xlg-8">
+                    <label for="name">On What date would you be available for work?</label>
+                </div>
+                <div class="col-xs-4 col-sm-4 col-md-4 col-lg-4 col-xlg-4">
+
+                    <div class="form-group">
+                        <input type="date" class="form-control" placeholder="date" aria-label="Today" aria-describedby="basic-addon1" [(ngModel)]="applicant.availabetowork"
+                            name="dateofapply">
+                    </div>
+                    <br>
+                </div>
+
+            </div>
+            <br>
+            <div class="row">
+                <div class="col-xs-4 col-sm-4 col-md-4 col-lg-4 col-xlg-4">
+                    <label for="name">Are you available to work?</label>
+                </div>
+                <div class="col-xs-2 col-sm-2 col-md-2 col-lg-2 col-xlg-2">
+                    <input type="checkbox" name="fulltime" id="fulltime" [(ngModel)]="applicant.fulltime" style="font-size:9px"> Full Time
+                </div>
+                <div class="col-xs-2 col-sm-2 col-md-2 col-lg-2 col-xlg-2">
+                    <input type="checkbox" name="partime" id="partime" [(ngModel)]="applicant.parttime" style="font-size:9px"> Part Time
+                </div>
+                <div class="col-xs-2 col-sm-2 col-md-2 col-lg-2 col-xlg-2">
+                    <input type="checkbox" name="shiftwork" id="shiftwork" [(ngModel)]="applicant.shiftwork" style="font-size:9px"> Shift Work
+                </div>
+                <div class="col-xs-2 col-sm-2 col-md-2 col-lg-2 col-xlg-2">
+                    <input type="checkbox" name="temporary" id="temporary" [(ngModel)]="applicant.temporary" style="font-size:9px"> Temporary
+                </div>
+            </div>
+            <br>
+            <div class="row">
+                <div class="col-xs-8 col-sm-8 col-md-8 col-lg-8 col-xlg-8">
+                    <label for="name">Are you currently on "lay-off" status and subject to recall?</label>
+                </div>
+                <div class="col-xs-2 col-sm-2 col-md-2 col-lg-2 col-xlg-2">
+                    <input type="checkbox" name="q7y" value="true" id="q7y" [(ngModel)]="applicant.q7y" (change)="checkYesQ7($event)"> Yes
+                    <br>
+                </div>
+                <div class="col-xs-2 col-sm-2 col-md-2 col-lg-2 col-xlg-2">
+                    <input type="checkbox" name="q7n" value="false" id="q5yn" [(ngModel)]="applicant.q7n" (change)="checkNoQ7($event)"> No
+                    <br>
+                </div>
+            </div>
+            <br>
+            <div class="row">
+                <div class="col-xs-8 col-sm-8 col-md-8 col-lg-8 col-xlg-8">
+                    <label for="name">Can you travel if a job requires it?</label>
+                </div>
+                <div class="col-xs-2 col-sm-2 col-md-2 col-lg-2 col-xlg-2">
+                    <input type="checkbox" name="q8y" value="true" id="q8y" [(ngModel)]="applicant.q8y" (change)="checkYesQ8($event)"> Yes
+                    <br>
+                </div>
+                <div class="col-xs-2 col-sm-2 col-md-2 col-lg-2 col-xlg-2">
+                    <input type="checkbox" name="q8n" value="false" id="q8yn" [(ngModel)]="applicant.q8n" (change)="checkNoQ8($event)"> No
+                    <br>
+                </div>
+            </div>
+            <br>
+            <div class="row">
+                <div class="col-xs-8 col-sm-8 col-md-8 col-lg-8 col-xlg-8">
+                    <label for="name">Have you been convicted of a felony within the last 7 years?</label>
+                    <p style="color:black;font-family:'Times New Roman', Times, serif; font-size:9px; font-weight:bold">Conviction will not necessarily disqualify an applicant from employment.</p>
+                </div>
+                <div class="col-xs-2 col-sm-2 col-md-2 col-lg-2 col-xlg-2">
+                    <input type="checkbox" name="q9y" value="true" id="q9y" [(ngModel)]="applicant.q9y" (change)="checkYesQ9($event)"> Yes
+                    <br>
+                </div>
+                <div class="col-xs-2 col-sm-2 col-md-2 col-lg-2 col-xlg-2">
+                    <input type="checkbox" name="q9n" value="false" id="q9yn" [(ngModel)]="applicant.q9n" (change)="checkNoQ9($event)"> No
+                    <br>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 col-xlg-12" *ngIf="applicant.q9y">
+                    <label for="name">If Yes, please explain </label>
+                    <textarea rows="3" cols="100" [(ngModel)]="applicant.ifconvited" value="Explain" name="ifconvited">
+                              Explain ... 
+                              </textarea>
+                </div>
+            </div>
+
+            <br>
+            <h2>EDUCATION</h2>
+            <dir class="row">
+                <div class="table-responsive">
+                    <table class="table">
+                        <thead>
+                            <tr>
+                                <th></th>
+                                <th>Elementary School</th>
+                                <th>High School</th>
+                                <th>Undergraduate College/University</th>
+                                <th>Graduate/Professional</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>School Name and Location</td>
+                                <td>
+                                    <input type="type" name="elementaryname" id="elementaryname" [(ngModel)]="applicant.elementaryname">
+                                </td>
+                                <td>
+                                    <input type="type" name="hightschoolname" id="hightschoolname" [(ngModel)]="applicant.hightschoolname">
+                                </td>
+                                <td>
+                                    <input type="type" name="collegename" id="collegename" [(ngModel)]="applicant.collegename">
+                                </td>
+                                <td>
+                                    <input type="type" name="professionalname" id="professionalname" [(ngModel)]="applicant.professionalname">
+                                </td>
+                            </tr>
+
+                            <tr>
+                                <td>
+                                    Years Completed
+                                </td>
+                                <td>
+                                    <div class="form-group">
+                                        <select class="form-control" id="elementary" required (click)="OnElementarySchool($event)">
+                                            <option *ngFor="let elementary of elemantaryschoolyears" [value]="elementary">{{elementary}}</option>
+                                        </select>
+                                    </div>
+                                </td>
+                                <td>
+                                    <div class="form-group">
+                                        <select class="form-control" id="hightschool" required (click)="OnHightSchool($event)">
+                                            <option *ngFor="let higthschool of higthschoolyears " [value]="higthschool">{{higthschool}}</option>
+                                        </select>
+                                    </div>
+                                </td>
+                                <td>
+                                    <div class="form-group">
+                                        <select class="form-control" id="college" required (click)="OnCollege($event)">
+                                            <option *ngFor="let collegeyear of collegeschoolyears " [value]="collegeyear">{{collegeyear}}</option>
+                                        </select>
+                                    </div>
+                                </td>
+                                <td>
+                                    <div class="form-group">
+                                        <select class="form-control" id="professional" required (click)="OnProfessional($event)">
+                                            <option *ngFor="let professionalyear of  professionalschoolyears " [value]="professionalyear">{{professionalyear}}</option>
+                                        </select>
+                                    </div>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    Diploma/Degree
+                                </td>
+                                <td>
+                                    <div class="form-group">
+                                        <select class="form-control" id="diploma1" required (click)="OnDiploma1($event)">
+                                            <option *ngFor="let diploma1 of  diplomaodegree" [value]="diploma1">{{diploma1}}</option>
+                                        </select>
+                                    </div>
+                                </td>
+                                <td>
+                                    <div class="form-group">
+                                        <select class="form-control" id="diploma2" required (click)="OnDiploma2($event)">
+                                            <option *ngFor="let diploma2 of  diplomaodegree" [value]="diploma2">{{diploma2}}</option>
+                                        </select>
+                                    </div>
+                                </td>
+                                <td>
+                                    <div class="form-group">
+                                        <select class="form-control" id="degree1" required (click)="OnDegree1($event)">
+                                            <option *ngFor="let degree1 of  diplomaodegree" [value]="degree1">{{degree1}}</option>
+                                        </select>
+                                    </div>
+                                </td>
+                                <td>
+                                    <div class="form-group">
+                                        <select class="form-control" id="degree2" required (click)="OnDegree2($event)">
+                                            <option *ngFor="let degree2 of  diplomaodegree" [value]="degree2">{{degree2}}</option>
+                                        </select>
+                                    </div>
+                                </td>
+
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </dir>
+
+            <div class="row">
+                <div class="table-responsive">
+                    <table class="table">
+                        <thead>
+                            <tr>
+                                <th></th>
+                                <th></th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>Describe Course of Study</td>
+                                <td>
+                                    <textarea rows="4" cols="80" [(ngModel)]="applicant.courses" name="courses" id="courses" placeholder="Describe ..."></textarea>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    Describe any specialized training, apprenticeship, skills and extra-curricular activities
+                                </td>
+                                <td>
+                                    <textarea rows="4" cols="80" [(ngModel)]="applicant.trainings" name="trainings" id="trainings" placeholder="Describe ..."></textarea>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    Describe any honors you have received
+                                </td>
+                                <td>
+                                    <textarea rows="4" cols="80" [(ngModel)]="applicant.honors" name="honors" id="honors" placeholder="Describe ..."></textarea>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    State any additional information you feel may be helpfull to us in considering your application
+                                </td>
+                                <td>
+                                    <textarea rows="4" cols="80" [(ngModel)]="applicant.moreinfo" name="moreinfo" id="moreinfo" placeholder="Describe ..."></textarea>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+
+            <div class="row">
+
+                <table class="table table table-sm">
+                    <thead>
+                        <tr>
+                            <th></th>
+                            <th style="text-align: center">FLUENT</th>
+                            <th style="text-align: center">GOOD</th>
+                            <th style="text-align: center">FAIR</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>SPEAK </td>
+                            <td>
+                                <div class="form-group">
+                                    <input type="text" class="form-control" id="speakf" [(ngModel)]="applicant.speakfluent" name="speakf" #speakf="ngModel">
+                                </div>
+                            </td>
+                            <td>
+                                <div class="form-group">
+                                    <input type="text" class="form-control" id="speakg" [(ngModel)]="applicant.speakgood" name="speakg" #speakf="ngModel">
+                                </div>
+                            </td>
+                            <td>
+                                <div class="form-group">
+                                    <input type="text" class="form-control" id="speakfa" [(ngModel)]="applicant.speakfail" name="speakfa" #speakfa="ngModel">
+                                </div>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>READ</td>
+                            <td>
+                                <div class="form-group">
+                                    <input type="text" class="form-control" id="readf" [(ngModel)]="applicant.readfluent" name="readf" #readf="ngModel">
+                                </div>
+                            </td>
+                            <td>
+                                <div class="form-group">
+                                    <input type="text" class="form-control" id="readg" [(ngModel)]="applicant.readgood" name="readg" #readg="ngModel">
+                                </div>
+                            </td>
+                            <td>
+                                <div class="form-group">
+                                    <input type="text" class="form-control" id="readfa" [(ngModel)]="applicant.readfail" name="readfa" #readfa="ngModel">
+                                </div>
+                            </td>
+                            <tr>
+                                <td>WRITE</td>
+                                <td>
+                                    <div class="form-group">
+                                        <input type="text" class="form-control" id="writef" [(ngModel)]="applicant.writefluent" name="writef" #writef="ngModel">
+                                    </div>
+                                </td>
+                                <td>
+                                    <div class="form-group">
+                                        <input type="text" class="form-control" id="writeg" [(ngModel)]="applicant.writegood" name="writeg" #writeg="ngModel">
+                                    </div>
+                                </td>
+                                <td>
+                                    <div class="form-group">
+                                        <input type="text" class="form-control" id="writefa" [(ngModel)]="applicant.writefail" name="writefa" #writefa="ngModel">
+                                    </div>
+                                </td>
+
+                            </tr>
+
+
+
+                    </tbody>
+                </table>
+
+            </div>
+
+
+            <div class="row">
+                <h4>In Case of Emergency Please Notify</h4>
+
+                <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 col-xlg-12">
+                    <div class="form-group" style="text-align: right">
+                        <input type="text" placeholder="Name" class="form-control" id="ename" [(ngModel)]="applicant.emergencyname" name="ename"
+                            #ename="ngModel">
+                    </div>
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 col-xlg-12">
+                    <div class="form-group" style="text-align: right">
+                        <input type="text" placeholder="Address" class="form-control" id="address" [(ngModel)]="applicant.emergencyaddress" name="address"
+                            #ename="ngModel">
+                    </div>
+                </div>
+            </div>
+
+
+            <div class="row">
+                <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 col-xlg-12">
+                    <div class="form-group" style="text-align: right">
+                        <input type="text" placeholder="Telephone Number" class="form-control" id="fnumb" [(ngModel)]="applicant.emergencynumber"
+                            name="fnumber" #fnumber="ngModel">
+                    </div>
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="col-xs-8 col-sm-8 col-md-8 col-lg-8 col-xlg-8">
+                    <label for="name">Have you ever had any job-related training in United States military? </label>
+                </div>
+                <div class="col-xs-2 col-sm-2 col-md-2 col-lg-2 col-xlg-2">
+                    <input type="checkbox" name="tmy" value="true" id="tmy" [(ngModel)]="applicant.usamilitaryyes" (change)="checkYesTraininingMilitary($event)"> Yes
+                    <br>
+                </div>
+                <div class="col-xs-2 col-sm-2 col-md-2 col-lg-2 col-xlg-2">
+                    <input type="checkbox" name="tmn" value="true" id="tmn" [(ngModel)]="applicant.usamilitaryno" (change)="checkNoTraininingMilitary($event)"> No
+                    <br>
+                </div>
+            </div>
+            <br>
+            <div class="row">
+                <div class="col-xs-8 col-sm-8 col-md-8 col-lg-8 col-xlg-8" *ngIf="applicant.usamilitaryyes">
+                    <label for="name">If Yes, please describe: </label>
+                </div>
+            </div>
+            <div class="row" *ngIf="applicant.usamilitaryyes">
+                <textarea style="margin-left:20px;" class="col-xs-8 col-sm-8 col-md-8 col-lg-8 col-xlg-8" rows="3" cols="100" [(ngModel)]="applicant.usamilataryexplain"
+                    value="Explain" name="ifyestm">
+                                      Explain ... 
+                                      </textarea>
+            </div>
+
+            <hr>
+
+            <div class="row">
+                <h2>EMPLOYMENT EXPERIENCE</h2>
+
+                <br>
+                <div class="card">
+                    <br>
+                    <ul>
+                        <li>
+                            Start with your present or last job.
+                        </li>
+                        <li>
+                            List your employment experience for the past 5 years, explain any gaps between jobs.
+                        </li>
+                        <li>
+                            Include any job-related military service assignments and volunteer activities.
+                        </li>
+                        <li>
+                            You may exclude organizations which indicate race, color, religion, gender, national origin, disability or other protected
+                            status.
+                        </li>
+                    </ul>
+
+
+                </div>
+                <br>
+                <br>
+                <div class="row" style="padding: 3%;">
+                    <h1># 1</h1>
+                    <br>
+                    <table class="table-responsive">
+                        <thead>
+                        </thead>
+                        <tbody>
+
+                            <td style="width: 40%">
+                                <div class="form-group" style="text-align: right">
+                                    <input type="text" placeholder="Employer" class="form-control" id="emp1id" [(ngModel)]="applicant.employer1name" name="emp1name"
+                                        #emp1="ngModel">
+                                </div>
+                            </td>
+
+                            <tr>
+                                <td>
+                                    <div class="form-group" style="text-align: right">
+                                        <input type="text" placeholder="Address" class="form-control" id="empaddress1" [(ngModel)]="applicant.employer1address" name="emp1address"
+                                            #emp1address="ngModel">
+                                    </div>
+                                </td>
+                                <td style="width: 30%">
+                                    Date Employed
+                                    <table class="table-responsive">
+
+                                        <td>From</td>
+                                        <td>To</td>
+
+                                        <tr>
+                                            <td>
+                                                <div class="form-group">
+                                                    <!-- <input type="date" class="form-control" placeholder="date" aria-label="Today" aria-describedby="basic-addon1" [(ngModel)]="applicant.from1"
+                                        (change)="OnChangeDate()" name="from1"> -->
+                                                    <input type="text" class="form-control" placeholder="mm/year" [(ngModel)]="applicant.from1" name="from1">
+                                                </div>
+                                            </td>
+                                            <td>
+                                                <div class="form-group">
+                                                    <!-- <input type="date" class="form-control" placeholder="date" aria-label="Today" aria-describedby="basic-addon1" [(ngModel)]="applicant.to1"
+                                        (change)="OnChangeDate()" name="to1"> -->
+                                                    <input type="text" class="form-control" placeholder="mm/year" [(ngModel)]="applicant.to1" name="to1">
+                                                </div>
+                                            </td>
+                                        </tr>
+                                    </table>
+                                </td>
+                                <td>
+                                    <textarea style="margin-left:20px;" placeholder="Work Performed" class="col-xs-12 col-sm-12 col-md-12 col-lg-12 col-xlg-12"
+                                        rows="3" cols="200" [(ngModel)]="applicant.wperformed1" name="wp1"></textarea>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <div class="form-group" style="text-align: right">
+                                        <input type="text" placeholder="Telephone Number(s)" class="form-control" id="employernum1" [(ngModel)]="applicant.employer1number"
+                                            name="num1" #num1="ngModel" maxlength="13">
+                                    </div>
+                                </td>
+                                <td style="width: 30%">
+                                    Hourly Rate/Salary
+                                    <table class="table-responsive">
+                                        <td>Starting</td>
+                                        <td>Final</td>
+                                        <tr>
+                                            <td>
+                                                <div class="form-group">
+                                                    <input type="text" class="form-control" placeholder="$" [(ngModel)]="applicant.start1" name="start1">
+                                                </div>
+                                            </td>
+                                            <td>
+                                                <div class="form-group">
+                                                    <input type="text" class="form-control" placeholder="$" [(ngModel)]="applicant.final1" name="final1" >
+                                                </div>
+                                            </td>
+                                        </tr>
+                                    </table>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <div class="form-group">
+                                        <input type="text" class="form-control" placeholder="Job Title" [(ngModel)]="applicant.jobtitle1" name="jobtitle1">
+                                    </div>
+                                </td>
+                                <td>
+                                    <div class="form-group">
+                                        <input type="text" class="form-control" placeholder="Supervisor" [(ngModel)]="applicant.supervisor1" name="supervisor1">
+                                    </div>
+                                </td>
+                                <td>
+                                    <textarea style="margin-left:20px;" placeholder="Reason for Leaving" class="col-xs-12 col-sm-12 col-md-12 col-lg-12 col-xlg-12"
+                                        rows="3" cols="200" [(ngModel)]="applicant.reasonforleaving1" name="reasonforleaving1"></textarea>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                    <br>
+                    <h1># 2</h1>
+
+                    <table class="table-responsive">
+                        <thead>
+                        </thead>
+                        <tbody>
+
+                            <td style="width: 40%">
+                                <div class="form-group" style="text-align: right">
+                                    <input type="text" placeholder="Employer" class="form-control" id="emp2id" [(ngModel)]="applicant.employer2name" name="emp2name"
+                                        #emp2="ngModel">
+                                </div>
+                            </td>
+
+                            <tr>
+                                <td>
+                                    <div class="form-group" style="text-align: right">
+                                        <input type="text" placeholder="Address" class="form-control" id="empaddress2" [(ngModel)]="applicant.employer2address" name="emp2address"
+                                            #emp2address="ngModel">
+                                    </div>
+                                </td>
+                                <td style="width: 30%">
+                                    Date Employed
+                                    <table class="table-responsive">
+
+                                        <td>From</td>
+                                        <td>To</td>
+
+                                        <tr>
+                                            <td>
+                                                <div class="form-group">
+                                                    <input type="text" class="form-control" placeholder="mm/year" [(ngModel)]="applicant.from2" name="from2">
+                                                    <!-- <input type="date" class="form-control" placeholder="date" aria-label="Today" aria-describedby="basic-addon1" [(ngModel)]="applicant.from2"
+                                        (change)="OnChangeDate()" name="from2"> -->
+                                                </div>
+                                            </td>
+                                            <td>
+                                                <div class="form-group">
+                                                    <input type="text" class="form-control" placeholder="mm/year" [(ngModel)]="applicant.to2" name="to2">
+                                                    <!--  <input type="date" class="form-control" placeholder="date" aria-label="Today" aria-describedby="basic-addon1" [(ngModel)]="applicant.to2"
+                                        (change)="OnChangeDate()" name="to1"> -->
+                                                </div>
+                                            </td>
+                                        </tr>
+                                    </table>
+                                </td>
+                                <td>
+                                    <textarea style="margin-left:20px;" placeholder="Work Performed" class="col-xs-12 col-sm-12 col-md-12 col-lg-12 col-xlg-12"
+                                        rows="3" cols="200" [(ngModel)]="applicant.wperformed2" name="wp2"></textarea>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <div class="form-group" style="text-align: right">
+                                        <input type="text" placeholder="Telephone Number(s)" class="form-control" id="employernum2" [(ngModel)]="applicant.employer2number"
+                                            name="num2" #num2="ngModel" maxlength="13" >
+                                    </div>
+                                </td>
+                                <td style="width: 30%">
+                                    Hourly Rate/Salary
+                                    <table class="table-responsive">
+                                        <td>Starting</td>
+                                        <td>Final</td>
+                                        <tr>
+                                            <td>
+                                                <div class="form-group">
+                                                    <input type="text" class="form-control" placeholder="$" [(ngModel)]="applicant.start2" name="start2">
+                                                </div>
+                                            </td>
+                                            <td>
+                                                <div class="form-group">
+                                                    <input type="text" class="form-control" placeholder="$" [(ngModel)]="applicant.final2" name="final2">
+                                                </div>
+                                            </td>
+                                        </tr>
+                                    </table>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <div class="form-group">
+                                        <input type="text" class="form-control" placeholder="Job Title" [(ngModel)]="applicant.jobtitle2" name="jobtitle2">
+                                    </div>
+                                </td>
+                                <td>
+                                    <div class="form-group">
+                                        <input type="text" class="form-control" placeholder="Supervisor" [(ngModel)]="applicant.supervisor2" name="supervisor2">
+                                    </div>
+                                </td>
+                                <td>
+                                    <textarea style="margin-left:20px;" placeholder="Reason for Leaving" class="col-xs-12 col-sm-12 col-md-12 col-lg-12 col-xlg-12"
+                                        rows="3" cols="200" [(ngModel)]="applicant.reasonforleaving2" name="reasonforleaving2"></textarea>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+
+                    <br>
+                    <h1># 3</h1>
+                    <table class="table-responsive">
+                        <thead>
+                        </thead>
+                        <tbody>
+
+                            <td style="width: 40%">
+                                <div class="form-group" style="text-align: right">
+                                    <input type="text" placeholder="Employer" class="form-control" id="emp3id" [(ngModel)]="applicant.employer3name" name="emp3name"
+                                        #emp3="ngModel">
+                                </div>
+                            </td>
+
+                            <tr>
+                                <td>
+                                    <div class="form-group" style="text-align: right">
+                                        <input type="text" placeholder="Address" class="form-control" id="empaddress3" [(ngModel)]="applicant.employer3address" name="emp3address"
+                                            #emp3address="ngModel">
+                                    </div>
+                                </td>
+                                <td style="width: 30%">
+                                    Date Employed
+                                    <table class="table-responsive">
+
+                                        <td>From</td>
+                                        <td>To</td>
+
+                                        <tr>
+                                            <td>
+                                                <div class="form-group">
+                                                    <input type="text" class="form-control" placeholder="mm/year" [(ngModel)]="applicant.from3" name="from3">
+                                                    <!-- <input type="date" class="form-control" placeholder="date" aria-label="Today" aria-describedby="basic-addon1" [(ngModel)]="applicant.from2"
+                                        (change)="OnChangeDate()" name="from2"> -->
+                                                </div>
+                                            </td>
+                                            <td>
+                                                <div class="form-group">
+                                                    <input type="text" class="form-control" placeholder="mm/year" [(ngModel)]="applicant.to3" name="to3">
+                                                    <!--  <input type="date" class="form-control" placeholder="date" aria-label="Today" aria-describedby="basic-addon1" [(ngModel)]="applicant.to2"
+                                        (change)="OnChangeDate()" name="to1"> -->
+                                                </div>
+                                            </td>
+                                        </tr>
+                                    </table>
+                                </td>
+                                <td>
+                                    <textarea style="margin-left:20px;" placeholder="Work Performed" class="col-xs-12 col-sm-12 col-md-12 col-lg-12 col-xlg-12"
+                                        rows="3" cols="200" [(ngModel)]="applicant.wperformed3" name="wp3"></textarea>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <div class="form-group" style="text-align: right">
+                                        <input type="text" placeholder="Telephone Number(s)" class="form-control" id="employernum3" [(ngModel)]="applicant.employer3number"
+                                            name="num3" #num3="ngModel" maxlength="13" >
+                                    </div>
+                                </td>
+                                <td style="width: 30%">
+                                    Hourly Rate/Salary
+                                    <table class="table-responsive">
+                                        <td>Starting</td>
+                                        <td>Final</td>
+                                        <tr>
+                                            <td>
+                                                <div class="form-group">
+                                                    <input type="text" class="form-control" placeholder="$" [(ngModel)]="applicant.start3" name="start3" >
+                                                </div>
+                                            </td>
+                                            <td>
+                                                <div class="form-group">
+                                                    <input type="text" class="form-control" placeholder="$" [(ngModel)]="applicant.final3" name="final3" >
+                                                </div>
+                                            </td>
+                                        </tr>
+                                    </table>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <div class="form-group">
+                                        <input type="text" class="form-control" placeholder="Job Title" [(ngModel)]="applicant.jobtitle3" name="jobtitle3">
+                                    </div>
+                                </td>
+                                <td>
+                                    <div class="form-group">
+                                        <input type="text" class="form-control" placeholder="Supervisor" [(ngModel)]="applicant.supervisor3" name="supervisor3">
+                                    </div>
+                                </td>
+                                <td>
+                                    <textarea style="margin-left:20px;" placeholder="Reason for Leaving" class="col-xs-12 col-sm-12 col-md-12 col-lg-12 col-xlg-12"
+                                        rows="3" cols="200" [(ngModel)]="applicant.reasonforleaving3" name="reasonforleaving3"></textarea>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+
+                    <br>
+                    <h1># 4</h1>
+                    <table class="table-responsive">
+                        <thead>
+                        </thead>
+                        <tbody>
+
+                            <td style="width: 40%">
+                                <div class="form-group" style="text-align: right">
+                                    <input type="text" placeholder="Employer" class="form-control" id="emp4id" [(ngModel)]="applicant.employer4name" name="emp4name"
+                                        #emp4="ngModel">
+                                </div>
+                            </td>
+
+                            <tr>
+                                <td>
+                                    <div class="form-group" style="text-align: right">
+                                        <input type="text" placeholder="Address" class="form-control" id="empaddress4" [(ngModel)]="applicant.employer4address" name="emp4address"
+                                            #emp4address="ngModel">
+                                    </div>
+                                </td>
+                                <td style="width: 30%">
+                                    Date Employed
+                                    <table class="table-responsive">
+
+                                        <td>From</td>
+                                        <td>To</td>
+
+                                        <tr>
+                                            <td>
+                                                <div class="form-group">
+                                                    <input type="text" class="form-control" placeholder="mm/year" [(ngModel)]="applicant.from4" name="from4">
+                                                    <!-- <input type="date" class="form-control" placeholder="date" aria-label="Today" aria-describedby="basic-addon1" [(ngModel)]="applicant.from2"
+                                        (change)="OnChangeDate()" name="from2"> -->
+                                                </div>
+                                            </td>
+                                            <td>
+                                                <div class="form-group">
+                                                    <input type="text" class="form-control" placeholder="mm/year" [(ngModel)]="applicant.to4" name="to4">
+                                                    <!--  <input type="date" class="form-control" placeholder="date" aria-label="Today" aria-describedby="basic-addon1" [(ngModel)]="applicant.to2"
+                                        (change)="OnChangeDate()" name="to1"> -->
+                                                </div>
+                                            </td>
+                                        </tr>
+                                    </table>
+                                </td>
+                                <td>
+                                    <textarea style="margin-left:20px;" placeholder="Work Performed" class="col-xs-12 col-sm-12 col-md-12 col-lg-12 col-xlg-12"
+                                        rows="3" cols="200" [(ngModel)]="applicant.wperformed4" name="wp4"></textarea>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <div class="form-group" style="text-align: right">
+                                        <input type="text" placeholder="Telephone Number(s)" class="form-control" id="employernum2" [(ngModel)]="applicant.employer4number"
+                                            name="num4" #num4="ngModel" maxlength="13" >
+                                    </div>
+                                </td>
+                                <td style="width: 30%">
+                                    Hourly Rate/Salary
+                                    <table class="table-responsive">
+                                        <td>Starting</td>
+                                        <td>Final</td>
+                                        <tr>
+                                            <td>
+                                                <div class="form-group">
+                                                    <input type="text" class="form-control" placeholder="$" [(ngModel)]="applicant.start4" name="start4" >
+                                                </div>
+                                            </td>
+                                            <td>
+                                                <div class="form-group">
+                                                    <input type="text" class="form-control" placeholder="$" [(ngModel)]="applicant.final4" name="final4" >
+                                                </div>
+                                            </td>
+                                        </tr>
+                                    </table>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <div class="form-group">
+                                        <input type="text" class="form-control" placeholder="Job Title" [(ngModel)]="applicant.jobtitle4" name="jobtitle4">
+                                    </div>
+                                </td>
+                                <td>
+                                    <div class="form-group">
+                                        <input type="text" class="form-control" placeholder="Supervisor" [(ngModel)]="applicant.supervisor4" name="supervisor4">
+                                    </div>
+                                </td>
+                                <td>
+                                    <textarea style="margin-left:20px;" placeholder="Reason for Leaving" class="col-xs-12 col-sm-12 col-md-12 col-lg-12 col-xlg-12"
+                                        rows="3" cols="200" [(ngModel)]="applicant.reasonforleaving4" name="reasonforleaving4"></textarea>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                    <br>
+                    <h1># 5</h1>
+                    <table class="table-responsive">
+                        <thead>
+                        </thead>
+                        <tbody>
+
+                            <td style="width: 40%">
+                                <div class="form-group" style="text-align: right">
+                                    <input type="text" placeholder="Employer" class="form-control" id="emp5id" [(ngModel)]="applicant.employer5name" name="emp5name"
+                                        #emp5="ngModel">
+                                </div>
+                            </td>
+
+                            <tr>
+                                <td>
+                                    <div class="form-group" style="text-align: right">
+                                        <input type="text" placeholder="Address" class="form-control" id="empaddress5" [(ngModel)]="applicant.employer5address" name="emp5address"
+                                            #emp5address="ngModel">
+                                    </div>
+                                </td>
+                                <td style="width: 30%">
+                                    Date Employed
+                                    <table class="table-responsive">
+
+                                        <td>From</td>
+                                        <td>To</td>
+
+                                        <tr>
+                                            <td>
+                                                <div class="form-group">
+                                                    <input type="text" class="form-control" placeholder="mm/year" [(ngModel)]="applicant.from5" name="from5">
+                                                    <!-- <input type="date" class="form-control" placeholder="date" aria-label="Today" aria-describedby="basic-addon1" [(ngModel)]="applicant.from2"
+                                        (change)="OnChangeDate()" name="from2"> -->
+                                                </div>
+                                            </td>
+                                            <td>
+                                                <div class="form-group">
+                                                    <input type="text" class="form-control" placeholder="mm/year" [(ngModel)]="applicant.to5" name="to5">
+                                                    <!--  <input type="date" class="form-control" placeholder="date" aria-label="Today" aria-describedby="basic-addon1" [(ngModel)]="applicant.to2"
+                                        (change)="OnChangeDate()" name="to1"> -->
+                                                </div>
+                                            </td>
+                                        </tr>
+                                    </table>
+                                </td>
+                                <td>
+                                    <textarea style="margin-left:20px;" placeholder="Work Performed" class="col-xs-12 col-sm-12 col-md-12 col-lg-12 col-xlg-12"
+                                        rows="3" cols="200" [(ngModel)]="applicant.wperformed5" name="wp5"></textarea>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <div class="form-group" style="text-align: right">
+                                        <input type="text" placeholder="Telephone Number(s)" class="form-control" id="employernum5" [(ngModel)]="applicant.employer5number"
+                                            name="num5" #num5="ngModel" maxlength="13" >
+                                    </div>
+                                </td>
+                                <td style="width: 30%">
+                                    Hourly Rate/Salary
+                                    <table class="table-responsive">
+                                        <td>Starting</td>
+                                        <td>Final</td>
+                                        <tr>
+                                            <td>
+                                                <div class="form-group">
+                                                    <input type="text" class="form-control" placeholder="$" [(ngModel)]="applicant.start5" name="start5" >
+                                                </div>
+                                            </td>
+                                            <td>
+                                                <div class="form-group">
+                                                    <input type="text" class="form-control" placeholder="$" [(ngModel)]="applicant.final5" name="final5">
+                                                </div>
+                                            </td>
+                                        </tr>
+                                    </table>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <div class="form-group">
+                                        <input type="text" class="form-control" placeholder="Job Title" [(ngModel)]="applicant.jobtitle5" name="jobtitle5">
+                                    </div>
+                                </td>
+                                <td>
+                                    <div class="form-group">
+                                        <input type="text" class="form-control" placeholder="Supervisor" [(ngModel)]="applicant.supervisor5" name="supervisor5">
+                                    </div>
+                                </td>
+                                <td>
+                                    <textarea style="margin-left:20px;" placeholder="Reason for Leaving" class="col-xs-12 col-sm-12 col-md-12 col-lg-12 col-xlg-12"
+                                        rows="3" cols="200" [(ngModel)]="applicant.reasonforleaving5" name="reasonforleaving5"></textarea>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+
+                </div>
+            </div>
+            <br>
+            <h2>SKILLS AND QUALIFICATIONS</h2>
+
+            <div class="row">
+                <div class="card" id="grad1">
+                    <p>Sumarize especial job-related skills and qualifications acquired from employment or other experience.</p>
+
+                    <textarea style="margin-left:0px;" placeholder="Sumarize..." class="col-xs-12 col-sm-12 col-md-12 col-lg-12 col-xlg-12" rows="5"
+                        cols="300" [(ngModel)]="applicant.skillandqualifications" name="skillandqualifications"></textarea>
+                </div>
+            </div>
+
+            <br>
+            <hr>
+            <div class="row">
+
+
+                <div style="padding:40px; padding-right:0px; background-color:white; color: black; text-align:justify;">
+
+                    <h1 style="text-align: center">ARMELLINI INDUSTRIES, INC</h1>
+                    <H2 style="text-align: center"> EMPLOYMENT APPLICATION ACKNOWLEDGMENT AND RELEASE</H2>
+                    <br>
+                    <em>
+                        <p>I understand that this application for employment will be given consideration, but it is not a promise
+                            of employment.
+                        </p>
+                        <p>I certify that all of the information furnished on this application is true, complete and correct.
+                            I understand and agree that any falsification, misrepresentation, misleading statement, or omission
+                            of fact on either this application or during the pre-hire process will be sufficient reason for
+                            (1) my not being offered employment; or (2) dismissal at any time if I am employed.
+                        </p>
+                        <p>I understand and agree that If I am hired, my employment will be for no definite period of time and
+                            may, regardless of the time and manner of payment of my wages, be terminated at any time by me
+                            or the Company, with or without cause and without any previous notice. I also understand that
+                            the Company has the right to unilaterally modify and terminate any policies, practices, procedures,
+                            and standars it has adopted or implemented, to the extend not limited by law.
+                        </p>
+                        <p>
+                            In the event of my employment by the Company, I will comply all rules and regulations as set forth in the Company's policy
+                            manual or other communication distributed to employees.
+                        </p>
+                        <p>
+                            I understand that I must consent to and authorize a pre-employment verification of background information. I authorize the
+                            Company to (1) investigate the truthfulness of all statements made on my application or resume,
+                            or verbal statements made by me in the interview process; (2) conduct any verification of my
+                            education, employment, workers' compensation claims, personal, credit, and motor vehicle records,
+                            and to receive any criminal history record information relating to me which may be on file with
+                            any federal, state, or local agencies; and (3) disclose verbally or in writing, the results of
+                            any investigation with authorized employees or agents of Armellini Industries, Inc. & Subsidiaries
+                            involved in the hiring process. I understand that consideration for employment is contingent
+                            upon the results of this reference and background investigation.
+                        </p>
+
+                        <p>
+                            I also understand that a consumer credit report may be obtained from a consumer reporting agency in connection with this
+                            application, and if I request, I understand that I will be informed of the name and address of
+                            the agency.
+                        </p>
+                        <p>
+                            I authorize the Company to contact my previous employers for the purpose of checking muy employment history. My signature
+                            below constitutes my knowing and my voluntary waiver of any claims I may have against the Company
+                            for contacting my previous employers. I also waive and release my previous employers from any
+                            claims I may have against them based upon the information they furnish to the company.
+                        </p>
+                        <p>
+                            I authorize the Company to supply my employment record, in whole or in part, to any prospective employer, government agency,
+                            or other party with a legal interest, and I release all such parties from any liability for direct
+                            or consequential damages resulting from such release and disclosure.
+                        </p>
+                        <p>
+                            I understand that employment by the Company may be conditioned upon an acceptable fitness for duty medical and health evaluation
+                            that may include a physical examination paid for by the Company and conducted by a doctor selected
+                            by the Company. I also understand that employment with the Company may be conditioned upon a
+                            drug and/or alcohol screening test result administered by a medical organization selected by
+                            the Company. I further agree to submit, at any reasonable time during my employment, and without
+                            notice, to a drug and/or alcohol screening test. I understand that refusal to take a requested
+                            drug and/or alcohol screening may result in discharge. I further understand that, if employed,
+                            a positive test result in immediate discharge.
+                        </p>
+                        <p>
+                            I authorize the Company to supply my medical and health evaluation, including drug and/or alcohol screening test results,
+                            in whole or in part, to any prospective employer, government agency, or other party with a legal
+                            interest, and I release all such parties from any liability for direct or consequential damages
+                            resulting from such release and disclosure.
+                        </p>
+
+
+
+
+
+                        <div class="row">
+                            <signature-pad [options]="signaturePadOptions" (onBeginEvent)="drawStart()" (onEndEvent)="drawComplete()" #sigPad1></signature-pad>
+                        </div>
+
+                        <div class="row">
+
+                            <div class="col-xs-12 col-sm-12 col-md-8 col-lg-8 col-xlg-8">
+
+                                _______________________________________
+                                <p>
+                                    Signature of Applicant
+                                </p>
+
+                                <button type="button" class="btn btn-danger" (click)="OnClear()"> Clear</button>
+                            </div>
+                            <div class="col-xs-12 col-sm-12 col-md-4 col-lg-4 col-xlg-4">
+
+
+                                <p>
+                                    <span style="font-family:cursive; font-weight:bold; border-bottom:1px;  text-decoration: underline;">
+                                        {{applicant.dateapply }}
+                                    </span>
+                                </p>
+                                <p>
+                                    Date
+                                </p>
+                            </div>
+                        </div>
+
+                        <div class="row">
+                            <!--  <signature-pad (onEndEvent)="drawComplete2()" #sigPad2></signature-pad> -->
+                        </div>
+                        <div class="row">
+
+                            <div class="col-xs-12 col-sm-12 col-md-8 col-lg-8 col-xlg-8">
+
+                                _______________________________________
+                                <p>
+                                    Witness
+                                </p>
+
+
+                                <!--  <button (click)="sigPad2.clear()">Clear</button> -->
+                            </div>
+                            <div class="col-xs-12 col-sm-12 col-md-4 col-lg-4 col-xlg-4">
+                                <p>
+                                    <span style="font-family:cursive; font-weight:bold; border-bottom:1px;  text-decoration: underline;">
+
+                                    </span>
+                                </p>
+                                <p>
+                                    Date
+                                </p>
+                            </div>
+                        </div>
+                    </em>
+                </div>
+
+
+            </div>
+
+            <br>
+            <br>
+            <input type="submit" value="Submit" class="btn btn-primary btn-block">
+        </form>
+    </div>
+</div>
+
+<div class="row">
+    <div class="col-md-6">
+        <a (click)="onBack()" class="btn btn-link">
+            <i class="fa fa-arrow-circle-o-left"></i> Back
+        </a>
+    </div>
+    <div class="col-md-6">
+
+    </div>
+</div>

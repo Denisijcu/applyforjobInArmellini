@@ -1,0 +1,37 @@
+<h2>Positions Available</h2>
+
+<div *ngFor="let News of news">
+
+    <div class="card" style="text-align: center">
+        <div class="card-header">
+            <h2>{{News.title}}!!!</h2>
+        </div>
+
+        <div class="card-body">
+
+            <img [src]="News.url" alt="hiring" height="30%" width="30%">
+
+
+            <h3>{{News.subtitle}}</h3>
+            <p> Compensation: {{News.compensation}} </p>
+
+
+            <em>{{News.date |date:'fullDate'}}</em>
+
+
+            <h5 [@popOverState]="stateName" style="color:blue; text-align:center;" (click)="onApply()" *ngIf="si && myEmail != null">
+                <i class="fa fa-arrow-right"></i>
+                Apply here
+            </h5>
+
+        </div>
+        <div class="card-footer">
+            <h5>
+                <!--   <i class="fa fa-phone" style="color:green"></i> -->
+                <!--    Call Us: {{News.phone}}  -->
+
+            </h5>
+        </div>
+    </div>
+    <br>
+</div>

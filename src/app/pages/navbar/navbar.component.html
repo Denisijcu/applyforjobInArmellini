@@ -1,0 +1,137 @@
+<div class="container">
+  <h1>
+    <img src="assets/logo.png" width="25%" height="25%" />
+    <div class="lbl">
+      <p>
+        <span>P.O.BOX 678</span>
+        <span>PALM CITY, FL 34991</span>
+        <span>(772) 287-0575</span>
+      </p>
+    </div>
+
+
+  </h1>
+  <nav class="navbar navbar-expand-lg navbar-light bg-light">
+    <a routerLink="/" class="navbar-brand">EMPLOYMENT</a>
+
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent"
+      aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav mr-auto">
+        <li class="nav-item active" *ngIf="isLoggedIn">
+          <a class="nav-link" routerLink="">
+            <i class="fa fa-home"></i> Home</a>
+          <!-- <a routerLink="/clock"><i class="fa fa-clock-o"></i>Clock In/Out</a> -->
+        </li>
+
+        <li class="nav-item" *ngIf="isLoggedIn  && !hr">
+          <a class="nav-link" (click)="onApply()">
+            <i class="fa fa-briefcase"></i> Apply</a>
+        </li>
+        <li class="nav-item dropdown" *ngIf="isLoggedIn">
+          <a class="nav-link dropdown-toggle" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+            Actions
+          </a>
+          <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+            <a class="dropdown-item" (click)="onNews()">Positions Available</a>
+            <div class="dropdown-divider"></div>
+            <a class="dropdown-item" (click)="onMyapplication()" *ngIf="loogedInUser!=null">
+              <i class="fa fa-user"></i>My Application</a>
+          </div>
+        </li>
+        <li class="nav-item" *ngIf="isLoggedIn">
+          <a class="nav-link" (click)="onSendEmail()">
+            <i class="fa fa-envelope"></i> Contact Us</a>
+        </li>
+
+
+        <li class="nav-item dropdown" *ngIf="isLoggedIn && hr ">
+          <a class="nav-link dropdown-toggle" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+            Manager
+          </a>
+          <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+            <a class="dropdown-item" routerLink="/applicants">
+              <i class="fa fa-users"></i>
+              Applicants</a>
+            <div class="dropdown-divider"></div>
+            <a class="dropdown-item" routerLink="/emails">
+              <i class="fa fa-envelope"></i> Emails</a>
+          </div>
+        </li>
+
+        <li class="nav-item dropdown" *ngIf="isLoggedIn && hr">
+          <a class="nav-link dropdown-toggle" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+            Post
+          </a>
+          <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+
+            <a class="dropdown-item" routerLink="/positions">
+              <i class="fa fa-briefcase"></i>
+              Positions Available</a>
+            <div class="dropdown-divider"></div>
+            <a class="dropdown-item" (click)="onNewshr()">
+              <i class="fa fa-info"></i> News</a>
+          </div>
+        </li>
+
+
+      </ul>
+      <ul class="nav justify-content-right">
+        <li class="nav-item" *ngIf="isLoggedIn">
+          <a id="user" class="nav-link">{{ loogedInUser}}</a>
+        </li>
+        <li class="nav-item" *ngIf="!isLoggedIn">
+          <a class="nav-link disabled" routerLink="/login">
+            <i class="fa fa-sign-in"></i>Login</a>
+        </li>
+        <li class="nav-item" *ngIf="isLoggedIn">
+          <a class="nav-link disabled" (click)="logout()">
+            <i class="fa fa-sign-out"></i>Logout</a>
+        </li>
+      </ul>
+
+    </div>
+  </nav>
+
+  <h1 [@popOverState]="stateName" style="color:blue; text-align:center;" (click)="onApply()" *ngIf="si && !hr  && loogedInUser != null">
+    <i class="fa fa-arrow-right"></i>
+    Apply here
+  </h1>
+
+  <router-outlet></router-outlet>
+  <br>
+
+  <div *ngIf="isLoggedIn && !hr ">
+    <app-foot></app-foot>
+  </div>
+
+
+  <br>
+  <!-- <div [innerHtml]="iframe_html" style="text-align:center;"> -->
+  <br>
+
+
+
+
+
+  <div class="LimitationOfGuest" *ngIf="guestShow">
+    <div class="card">
+      <div class="card-header" style="background-color:red; color:white;">Guest no allowed to Apply</div>
+      <div class="card-body">
+        <p>
+          You have entered with the guest account. The system  needs a valid account to process your application.
+        </p>
+        <p>Do you want to register now?</p>
+      </div>
+      <div class="card-footer">
+        <button class="btn btn-primary" (click)="onRegister()">Accept</button>
+        <button class="btn btn-danger" (click)="onBack()">Cancel</button>
+
+      </div>
+    </div>
+
+  </div>
+</div>

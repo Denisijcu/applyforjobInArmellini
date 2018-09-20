@@ -1,0 +1,182 @@
+<div class="container">
+
+  <div class="base">
+    <ngb-tabset>
+      <ngb-tab title="Login">
+        <ng-template ngbTabContent id="Tb1">
+
+          <br>
+          <h1 style="margin-left:30px">
+            <i class="fa fa-lock" style="color: royalblue;"></i>
+          </h1>
+
+
+
+          <p>Log in with ...</p>
+          <p class="mt-4">
+            <!--
+                <button type="button" class="btn btn-primary" placement="bottom" ngbPopover="Log in with Facebook account" popoverTitle="Facebook">
+                  Facebook
+                </button>
+              -->
+            <br>
+            <button type="button" (click)="login()" class="btn btn-danger" placement="bottom" ngbPopover="Log in with Google account"
+              popoverTitle="Google">
+              Google
+            </button>
+            <br>
+            <button type="button" (click)="guest()" class="btn btn-secundary" placement="bottom" ngbPopover="Log in like a guest" popoverTitle="Annonymous">
+              Guest
+            </button>
+          </p>
+          <hr>
+          <label for='hr'>or</label>
+          <p>Do you have an account? </p>
+          <div class="container">
+            <div class="marco">
+
+              <form #loginForm="ngForm">
+
+                <div class="row">
+                  <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 col-xlg-12">
+                    <div class="form-group">
+                      <label> Email</label>
+                      <input class="form-control" #emailControl="ngModel" placeholder="Email" [(ngModel)]="email" name="email" maxlength="70" email
+                        required>
+                    </div>
+                  </div>
+                </div>
+
+                <div class="row">
+                  <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 col-xlg-12">
+                    <div class="form-group">
+                      <label> Password</label>
+                      <input class="form-control" #passwordControl="ngModel" placeholder="Password" [(ngModel)]="password" name="password" maxlength="70"
+                        type="password" required>
+                    </div>
+                  </div>
+                </div>
+
+                <div class="row">
+                  <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 col-xlg-12">
+                    <button [disabled]="!loginForm.form.valid" type="submit" class="btn btn-primary col-sm-12" (click)="signIn()">Sign In </button>
+                  </div>
+                </div>
+
+
+
+
+                <p *ngIf="msg" class="text-danger">{{msg}}</p>
+
+              </form>
+            </div>
+
+            <!--
+                <div *ngIf="afAuth.authState | async as user; else showLogin">
+                  <h1>Hello {{ user.displayName }}!</h1>
+                  <button (click)="logout()">Logout</button>
+                </div>
+                <ng-template #showLogin>
+                  <p>Please login.</p>
+                  <button (click)="login()">Login with Google</button>
+                </ng-template>
+              </div>
+        
+            -->
+          </div>
+
+        </ng-template>
+      </ngb-tab>
+      <ngb-tab title="Register">
+        <ng-template ngbTabContent>
+          <br>
+
+          <h1 style="margin-left:30px">
+            <i class="fa fa-user-plus" style="color: royalblue;"></i>
+          </h1>
+          <div class="container">
+
+            <form #loginForm="ngForm" class="col-sm-12">
+              <div class="form-group">
+                <label> Email</label>
+                <input id="email" name="email" class="form-control" required minlength="4" [(ngModel)]="email" placeholder="Email" #emai="ngModel">
+                <div *ngIf="emai.invalid && (emai.dirty || emai.touched)" class="alert alert-danger">
+
+                  <div *ngIf=emai.errors.required>
+                    Email is required.
+                  </div>
+                  <div *ngIf="emai.errors.minlength">
+                    Name must be at least 4 characters long.
+                  </div>
+                </div>
+              </div>
+
+
+
+
+
+              <div class="form-group">
+                <label> Password</label>
+                <input name="password" class="form-control" type="password" required minlength="4" [(ngModel)]="password" placeholder="Password"
+                  #passwordControl="ngModel">
+
+                <div *ngIf="passwordControl.invalid && (passwordControl.dirty || passwordControl.touched)" class="alert alert-danger">
+
+                  <div *ngIf=passwordControl.errors.required>
+                    Password is required.
+                  </div>
+                  <div *ngIf="passwordControl.errors.minlength">
+                    Name must be at least 4 characters long.
+                  </div>
+                </div>
+              </div>
+
+              <div class="form-group">
+                <label> Confirme</label>
+                <input name="confirmation" class="form-control" type="password" required minlength="4" [(ngModel)]="confirme" placeholder="Password"
+                  #passwordConfirme="ngModel" (change)="OnChange()">
+
+                <div *ngIf="passwordConfirme.invalid && (passwordConfirme.dirty || passwordConfirme.touched)" class="alert alert-danger">
+
+                  <div *ngIf=passwordConfirme.errors.required>
+                    Password is required.
+                  </div>
+                  <div *ngIf="passwordConfirme.errors.minlength">
+                    Name must be at least 4 characters long.
+                  </div>
+
+
+
+                </div>
+
+
+
+              </div>
+
+
+              <div *ngIf="!match">
+                Password No Match. Start again.
+              </div>
+
+
+
+
+
+
+
+              <button [disabled]="!loginForm.form.valid || !match" type="submit" class="btn btn-primary col-sm-12" (click)="onSubmit()">Sign In </button>
+
+              <!--<p *ngIf="msg" class="text-danger">{{msg}}</p> -->
+
+            </form>
+
+          </div>
+
+
+        </ng-template>
+      </ngb-tab>
+
+    </ngb-tabset>
+  </div>
+
+</div>

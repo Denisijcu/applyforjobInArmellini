@@ -1,0 +1,68 @@
+<div class="container">
+  <h1>
+    <img src="assets/logo.png" width="25%" height="25%" />
+    <div class="lbl">
+      <p>
+        <span>P.O.BOX 678</span>
+        <span>PALM CITY, FL 34991</span>
+        <span>(772) 287-0575</span>
+      </p>
+    </div>
+
+
+  </h1>
+  <nav class="navbar navbar-expand-lg navbar-light bg-light">
+    <a class="navbar-brand" href="#">EMPLOYMENT</a>
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent"
+      aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav mr-auto">
+        <li class="nav-item active" *ngIf="isLoggedIn">
+          <a class="nav-link" routerLink="/home">
+            <i class="fa fa-home"></i> Home</a>
+          <!-- <a routerLink="/clock"><i class="fa fa-clock-o"></i>Clock In/Out</a> -->
+        </li>
+
+        <li class="nav-item" *ngIf="isLoggedIn">
+          <a class="nav-link" routerLink="/apply">
+            <i class="fa fa-briefcase"></i> Apply</a>
+        </li>
+        <li class="nav-item dropdown" *ngIf="isLoggedIn">
+          <a class="nav-link dropdown-toggle" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+            Actions
+          </a>
+          <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+            <a class="dropdown-item">Open Position</a>
+            <a class="dropdown-item">News</a>
+            <a class="dropdown-item" routerLink="/dashboard">Human Resources</a>
+            <div class="dropdown-divider"></div>
+            <a class="dropdown-item">
+              <i class="fa fa-user"></i>My Account</a>
+          </div>
+        </li>
+      </ul>
+      <ul class="nav justify-content-right">
+        <li class="nav-item" *ngIf="isLoggedIn">
+          <a class="nav-link" href="#">{{ loogedInUser}}</a>
+        </li>
+        <li class="nav-item" *ngIf="!isLoggedIn">
+          <a class="nav-link disabled" routerLink="/login">
+            <i class="fa fa-sign-in"></i>Login</a>
+        </li>
+        <li class="nav-item" *ngIf="isLoggedIn">
+          <a class="nav-link disabled" (click)="logout()">
+            <i class="fa fa-sign-out"></i>Logout</a>
+        </li>
+      </ul>
+
+    </div>
+  </nav>
+
+  <h1 [@popOverState]="stateName" style="color:blue; text-align:center;" (click)="onApply()" *ngIf="si">
+    <i class="fa fa-arrow-right"></i>
+    Apply here
+  </h1>
+</div>

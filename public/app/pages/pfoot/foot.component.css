@@ -1,0 +1,10 @@
+.picture {
+    width: 70%;
+    height: 60%;
+    text-align: center;
+    margin-left: 15%;
+    border-bottom-left-radius: 5%;
+    border-bottom-right-radius: 5%;
+    border-top-left-radius: 5%;
+    border-top-right-radius: 5%;
+}

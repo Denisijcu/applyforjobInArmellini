@@ -1,0 +1,97 @@
+<div class="container" id="grad1">
+    <h1 class="brand">
+        <span>HR- </span>ARMELLINI</h1>
+    <div class="wrapper animated bounceInLeft">
+        <div class="company-info">
+            <h2>Express Lines. Inc.</h2>
+            <ul>
+
+                <li>
+                    <i class="fa fa-road"></i>P.O.BOX 678 PALM CITY, FL 34991 </li>
+                <li>
+                    <i class="fa fa-phone"></i> (772) 287-0575</li>
+                <li>
+                    <i class="fa fa-envelope"></i> hr@armellini.com</li>
+            </ul>
+        </div>
+        <div class="contact">
+            <h3>Email Us</h3>
+            <form #frm="ngForm" (ngSubmit)="sendMsg(frm)">
+                <div class="form-group">
+                    <p>
+                        <label>Name</label>
+                        <input type="text" class="form-control" name="emailName" #emailxName="ngModel" [(ngModel)]="email.name" minlength="2" required
+                            [ngClass]="{'is-invalid':emailxName.errors && emailxName.touched}">
+                    </p>
+                    <div [hidden]="!emailxName.errors?.required" class="invalid-feedback">
+                        Name required
+                    </div>
+                    <div [hidden]="!emailxName.errors?.minlength" class="invalid-feedback">
+                        Must be at least 2 characters
+                    </div>
+                </div>
+
+
+                <div class="form-group">
+                    <p>
+
+
+                        <label>Email Address</label>
+                        <input type="text" class="form-control" name="email" #emailEmail="ngModel"
+                        placeholder="&#xf1fa;" style="font-family:Arial, FontAwesome"
+                         [(ngModel)]="email.email" pattern="[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\.[A-Za-z]{1,63}$"
+                            required [ngClass]="{'is-invalid':emailEmail.errors && emailEmail.touched}">
+                    </p>
+                    <div [hidden]="!emailEmail.errors?.required" class="invalid-feedback">
+                        Email Name required
+                    </div>
+
+                </div>
+
+
+                <div class="form-group">
+                    <p>
+
+                        <label>Phone Number</label>
+                        <input type="text" class="form-control" 
+                        name="phone" #emailPhone="ngModel" [(ngModel)]="email.phone" minlength="10" required
+                        paren = "\d{3}[\-]\d{3}[\-]\d{4}" style="font-family:Arial, FontAwesome"
+                        placeholder="&#xF10b;  123-456-7890" 
+                            [ngClass]="{'is-invalid':emailPhone.errors && emailPhone.touched}"> 
+                    </p>
+                    <div [hidden]="!emailPhone.errors?.required" class="invalid-feedback">
+                        Phone Number required
+                    </div>
+                    <div [hidden]="!emailPhone.errors?.minlength" class="invalid-feedback">
+                        Must be at least 10 characters
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <p>
+                        <label>Message</label>
+                        <textarea name="message" rows="5" class="form-control" name="message" #emailMessage="ngModel" [(ngModel)]="email.message"
+                            minlength="25"
+                            style="font-family:Arial, FontAwesome"
+                        placeholder="&#xF15c;  Must be at least 25  characters " 
+                            
+                            required [ngClass]="{'is-invalid':emailMessage.errors && emailMessage.touched}">
+                                    </textarea>
+
+                    </p>
+                    <div [hidden]="!emailMessage.errors?.required" class="invalid-feedback">
+                        Message Text required
+                    </div>
+                    <div [hidden]="!emailMessage.errors?.minlength" class="invalid-feedback">
+                        Must be at least 25  characters
+                    </div>
+                </div>
+                <p class="full">
+
+                    <button type="submit" name="button" class="btn btn-success" [disabled]="frm.invalid"> Send </button>
+                </p>
+
+            </form>
+        </div>
+    </div>
+</div>

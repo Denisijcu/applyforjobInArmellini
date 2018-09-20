@@ -1,0 +1,6 @@
+
+  #grad1 {
+    height: 90%;
+    background: royalblue; /* For browsers that do not support gradients */
+    background: linear-gradient(to right, royalblue, white); /* Standard syntax (must be last) */
+  }

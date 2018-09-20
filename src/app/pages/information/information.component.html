@@ -1,0 +1,32 @@
+<div id="demo" class="carousel slide" data-ride="carousel" *ngFor="let new of news">
+    <ul class="carousel-indicators">
+        <li data-target="#demo" data-slide-to="0" class="active"></li>
+        <li data-target="#demo" data-slide-to="1"></li>
+        <li data-target="#demo" data-slide-to="2"></li>
+    </ul>
+    <div class="carousel-inner" style="text-align: center">
+        <div class="carousel-item active">
+            <p  [@informationState]="stateNews">
+                 {{ new.news1 }}
+            </p>
+        </div>
+        <div class="carousel-item">
+            <p  [@informationState]="stateNews">
+                {{ new.news2 }}
+            </p>
+
+        </div>
+        <div class="carousel-item">
+            <p  [@informationState]="stateNews">
+             {{ new.news3 }}
+            </p>
+
+        </div>
+    </div>
+    <a class="carousel-control-prev" href="#demo" data-slide="prev">
+        <span class="carousel-control-prev-icon"></span>
+    </a>
+    <a class="carousel-control-next" href="#demo" data-slide="next">
+        <span class="carousel-control-next-icon"></span>
+    </a>
+</div>

@@ -1,0 +1,72 @@
+
+<div id="demo" class="carousel slide" data-ride="carousel" *ngFor="let new of news">
+    <ul class="carousel-indicators">
+        <li data-target="#demo" data-slide-to="0" class="active"></li>
+        <li data-target="#demo" data-slide-to="1"></li>
+        <li data-target="#demo" data-slide-to="2"></li>
+    </ul>
+    <div class="carousel-inner" style="text-align: center">
+        <div class="carousel-item active">
+            {{ new.news1 }}
+        </div>
+        <div class="carousel-item">
+            {{ new.news2 }}
+        </div>
+        <div class="carousel-item">
+            {{ new.news3 }}
+        </div>
+    </div>
+    <a class="carousel-control-prev" href="#demo" data-slide="prev">
+        <span class="carousel-control-prev-icon"></span>
+    </a>
+    <a class="carousel-control-next" href="#demo" data-slide="next">
+        <span class="carousel-control-next-icon"></span>
+    </a>
+</div>
+
+<div class="row">
+        <div class="col-md-6">
+            <h2>
+                <i class="fa fa-info" style="color:royalblue"></i> Post News</h2>
+        </div>
+        <div class="col-md-6">
+          
+        </div>
+      </div>
+      
+      <table *ngIf="news?.length> 0; else noNews" class="table table-striped">
+        <thead class= "thead-inverse">
+            <tr>
+                <th>News 1</th>
+                <th>News 2</th>
+                <th>News 3</th>
+                <th>Date</th>
+              
+            </tr>
+        </thead>
+        <tbody>
+            <tr *ngFor="let new of news">
+
+                <td> {{new.news1}}</td>
+                <td> {{new.news2}} </td>
+                <td> {{new.news3}}</td>
+                <td> {{new.date |date:'fullDate'}}</td>
+                <td> <a routerLink="../edit-news/{{new.id}}" class="btn btn-secondary btn-sm"><i class="fa fa-edit"></i> Edit</a></td>
+      
+            </tr>
+        </tbody>
+      
+      
+      </table>
+    
+      <div class="card">
+        <div class="btn-group">
+            <button type="button" class="btn btn-primary" (click)="onBack()">Back</button>
+          </div>
+      </div>
+      
+      <ng-template #noNews>
+        <hr>
+        <h5>There are no news post in the system</h5>
+      </ng-template>
+      

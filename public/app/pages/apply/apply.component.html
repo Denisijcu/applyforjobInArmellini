@@ -1,0 +1,2817 @@
+<div class="container">
+  <div class="form-group" style="position: absolute;left:75%; ">
+    <label class="right-block"> Page {{pagina}} of 10</label>
+    <br>
+  </div>
+
+  <form #applicantForm="ngForm" (ngSubmit)="onSubmit(applicantForm)">
+ <!--<form (ngSubmit)="onSubmit()" #applyForm="ngForm">-->
+
+    <ngb-tabset>
+
+      <ngb-tab id="tab1" title="BASIC QUESTIONS" *ngIf="page1">
+        <ng-template ngbTabContent>
+          <br>
+          <div class="card-body" id="grad1">
+            <div class="row">
+              <div class="col-xs-6 col-sm-6 col-md-6 col-lg-4 col-xlg-4">
+                <div class="form-group">
+                  <label for="power">Position(s) Applied For</label>
+                  <select class="form-control" id="position" required (change)="Onchange($event)">
+                    <option *ngFor="let pos of positions" [value]="pos">{{pos}}</option>
+                  </select>
+                </div>
+              </div>
+              <div class="col-xs-6 col-sm-6 col-md-6 col-lg-4 col-xlg-4">
+                <div class="form-group">
+                  <label for="name">Date of Application</label>
+                  <div class="input-group-prepend">
+                    <span class="input-group-text" id="basic" style="font-size:12px" name="basic">Today: {{today |date:fullyear}}</span>
+                  </div>
+                  <input type="date" class="form-control" placeholder="date" aria-label="Today" aria-describedby="basic-addon1" [(ngModel)]="dateOfApplication"
+                    (change)="OnChangeDate()" name="dateofapply">
+                </div>
+              </div>
+            </div>
+            <div class="row">
+              <div class="col-xs-6 col-sm-6 col-md-6 col-lg-4 col-xlg-4">
+                <div class="form-group">
+                  <label for="alterEgo">How Did You Learn About Us?</label>
+                  <select class="form-control" id="learnedaboutUs" required (click)="OnHeard($event)">
+                    <option *ngFor="let learn of learnedabouts" [value]="learn">{{learn}}</option>
+                  </select>
+                  <br>
+                  <textarea rows="4" cols="50" *ngIf="other" [(ngModel)]="explain" name="explain" id="explain">
+                  Explain ... 
+                  </textarea>
+                </div>
+              </div>
+            </div>
+          </div>
+
+        </ng-template>
+      </ngb-tab>
+      <ngb-tab id="tab2" title="PERSONAL" *ngIf="page2">
+        <ng-template ngbTabContent>
+
+          <br>
+          <div class="card" id="grad1">
+
+            <!--style="margin: 5px; padding: 20px">-->
+
+
+            <div class="row">
+              <div class="col-xs-4 col-sm-4 col-md-4 col-lg-4 col-xlg-4">
+                <img class="rounded-circle" [src]="photo" width="100px" height="100px" alt="Photo" *ngIf="photo !=''">
+                <div class="form-group">
+                  <label for="photo" style="font-size: 14px">
+                    <i class="fa fa-upload"></i>Upload Photo</label>
+                  <input type="file" (change)="handleFiles($event)" [src]="url" name="photo" style="font-size: 12px">
+                </div>
+              </div>
+              <div class="col-xs-8 col-sm-8 col-md-8 col-lg-8 col-xlg-8" style="text-align: center">
+
+
+
+
+                <h4>Employment Opportunities</h4>
+                <p style="font-size: 8px">Employee satisfaction is the reason our company is the number one choice with shippers and employees for
+                  over 60 years.</p>
+
+
+              </div>
+            </div>
+
+
+            <div class="card-body">
+              <div class="row">
+                <div class="col-xs-4 col-sm-4 col-md-6 col-lg-4 col-xlg-4">
+                  <div class="form-group">
+                    <label for="name">Last Name</label>
+                    <input type="text" class="form-control" id="lname" required [(ngModel)]="applicant.lastName" name="xlname" #lname="ngModel">
+                    <div [hidden]="lname.valid || lname.pristine" class="alert alert-danger">
+                      Last Name is required
+                    </div>
+                  </div>
+                </div>
+                <div class="col-xs-4 col-sm-4 col-md-6 col-lg-4 col-xlg-4">
+                  <div class="form-group">
+                    <label for="name">First Name</label>
+                    <input type="text" class="form-control" id="fname" required [(ngModel)]="applicant.firstName" name="xfname" #fname="ngModel">
+                    <div [hidden]="fname.valid || fname.pristine" class="alert alert-danger">
+                      First Name is required
+                    </div>
+                  </div>
+                </div>
+                <div class="col-xs-4 col-sm-4 col-md-6 col-lg-4 col-xlg-4">
+                  <div class="form-group">
+                    <label for="name">Middle Name</label>
+                    <input type="text" class="form-control" id="mname" [(ngModel)]="applicant.middleName" name="xmname" #mname="ngModel">
+                  </div>
+                </div>
+              </div>
+              <label for="name"> ADDRESS</label>
+              <div class="row">
+                <div class="col-xs-4 col-sm-4 col-md-4 col-lg-4 col-xlg-4">
+                  <div class="form-group">
+                    <label for="name"> Number</label>
+                    <input type="text" class="form-control" id="addressn" required [(ngModel)]="address.number" name="xaddressnumber" #adressn="ngModel">
+                    <div [hidden]="adressn.valid || adressn.pristine" class="alert alert-danger">
+                      Address number is required
+                    </div>
+                  </div>
+                </div>
+                <div class="col-xs-4 col-sm-4 col-md-4 col-lg-4 col-xlg-4">
+                  <div class="form-group">
+                    <label for="name">Street</label>
+                    <input type="text" class="form-control" id="street" required [(ngModel)]="address.street" name="xstreet" #calle="ngModel">
+                    <div [hidden]="calle.valid || calle.pristine" class="alert alert-danger">
+                      Street is required
+                    </div>
+                  </div>
+                </div>
+                <div class="col-xs-4 col-sm-4 col-md-4 col-lg-4 col-xlg-4">
+                  <div class="form-group">
+                    <label for="name">City</label>
+                    <input type="text" class="form-control" id="city" required [(ngModel)]="address.city" name="xcity" #city="ngModel">
+                    <div [hidden]="city.valid || city.pristine" class="alert alert-danger">
+                      City is required
+                    </div>
+                  </div>
+                </div>
+
+              </div>
+
+              <div class="row">
+
+                <div class="col-xs-4 col-sm-4 col-md-4 col-lg-4 col-xlg-4">
+                  <div class="form-group">
+                    <label for="name">County</label>
+                    <input type="text" class="form-control" id="county" required [(ngModel)]="address.county" name="xcounty" #county="ngModel">
+                    <div [hidden]="county.valid || county.pristine" class="alert alert-danger">
+                      County is required
+                    </div>
+                  </div>
+                </div>
+
+
+                <div class="col-xs-4 col-sm-4 col-md-4 col-lg-4 col-xlg-4">
+                  <div class="form-group">
+                    <label for="name">State</label>
+                    <input type="text" class="form-control" id="state" required [(ngModel)]="address.state" name="xstate" #state="ngModel">
+                    <div [hidden]="state.valid || state.pristine" class="alert alert-danger">
+                      State is required
+                    </div>
+                  </div>
+                </div>
+
+                <div class="col-xs-4 col-sm-4 col-md-4 col-lg-4 col-xlg-4">
+                  <div class="form-group">
+                    <label for="name">Zip Code</label>
+                    <input type="text" class="form-control" id="zcode" required [(ngModel)]="address.zipcode" name="xzipcode" #zipcode="ngModel">
+                    <div [hidden]="zipcode.valid || zipcode.pristine" class="alert alert-danger">
+                      Zip Code is required
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              <div class="row">
+                <div class="col-xs-6 col-sm-6 col-md-6 col-lg-6 col-xlg-6">
+                  <div class="form-group">
+                    <label for="name">Phone Number(s)</label>
+                    <input type="text" class="form-control" (change)="onKeyPHONE($event)" placeholder="" id="phone" maxlength="14" required [(ngModel)]="applicant.phone"
+                      name="xphone" #phone="ngModel">
+                    <div [hidden]="phone.valid || phone.pristine" class="alert alert-danger">
+                      Phone Number is required
+                    </div>
+                  </div>
+                </div>
+                <div class="col-xs-6 col-sm-6 col-md-6 col-lg-6 col-xlg-6">
+                  <div class="form-group">
+                    <label for="name">S S N</label>
+                    <input type="text" class="form-control" (change)="onKeySSN($event)" placeholder="" minlength="4" maxlength="13" id="ssn"
+                      required [(ngModel)]="applicant.ssn" name="xssn" #ssn="ngModel">
+
+                    <div *ngIf="ssn.invalid && (ssn.dirty || ssn.touched)" class="alert alert-danger">
+
+                      <div *ngIf="ssn.errors.required">
+                        SSN is required.
+                      </div>
+                      <div *ngIf="ssn.errors.minlength">
+                        SSN must be at least 4 characters long.
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </ng-template>
+
+
+      </ngb-tab>
+      <ngb-tab id="tab3" title="PROOF OF STATUS" *ngIf="page3">
+        <ng-template ngbTabContent>
+          <br>
+
+          <div id="grad2" class="card" style="padding: 40px; color: black; font-weight:bold; font-family:'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif">
+            <div class="row">
+              <div class="col-xs-8 col-sm-8 col-md-8 col-lg-8 col-xlg-8">
+                <label for="name">If you are under 18 years of age, can you provide required proof of your eligibility to work?</label>
+              </div>
+              <div class="col-xs-2 col-sm-2 col-md-2 col-lg-2 col-xlg-2">
+                <input type="checkbox" name="q1y" value="true" id="q1y" [(ngModel)]="applicant.q1y" (change)="checkYesQ1($event)"> Yes
+                <br>
+              </div>
+              <div class="col-xs-2 col-sm-2 col-md-2 col-lg-2 col-xlg-2">
+                <input type="checkbox" name="q1n" value="false" id="q1yn" [(ngModel)]="applicant.q1n" (change)="checkNoQ1($event)"> No
+                <br>
+              </div>
+            </div>
+            <br>
+            <div class="row">
+              <div class="col-xs-8 col-sm-8 col-md-8 col-lg-8 col-xlg-8">
+                <label for="name">Have you ever filed an application with us before?</label>
+              </div>
+              <div class="col-xs-2 col-sm-2 col-md-2 col-lg-2 col-xlg-2">
+                <input type="checkbox" name="q2y" value="true" id="q2y" [(ngModel)]="applicant.q2y" (change)="checkYesQ2($event)"> Yes
+                <br>
+              </div>
+              <div class="col-xs-2 col-sm-2 col-md-2 col-lg-2 col-xlg-2">
+                <input type="checkbox" name="q2n" value="false" id="q2yn" [(ngModel)]="applicant.q2n" (change)="checkNoQ2($event)"> No
+                <br>
+              </div>
+            </div>
+            <br>
+            <div class="row">
+              <div class="col-xs-2 col-sm-2 col-md-2 col-lg-2 col-xlg-2">
+
+              </div>
+              <div class="col-xs-5 col-sm-5 col-md-5 col-lg-5 col-xlg-5" *ngIf="applicant.q2y">
+                <label for="name">If Yes, give date: </label>
+              </div>
+              <div class="col-xs-5 col-sm-5 col-md-5 col-lg-5 col-xlg-5" *ngIf="applicant.q2y">
+                <input type="text" name="ifyes" placeholder="mm/dd/year" id="ifyes" [(ngModel)]="applicant.ifyes">
+              </div>
+            </div>
+            <br>
+            <div class="row">
+              <div class="col-xs-8 col-sm-8 col-md-8 col-lg-8 col-xlg-8">
+                <label for="name">Have you ever been employed with us before?</label>
+              </div>
+              <div class="col-xs-2 col-sm-2 col-md-2 col-lg-2 col-xlg-2">
+                <input type="checkbox" name="q3y" value="true" id="q3y" [(ngModel)]="applicant.q3y" (change)="checkYesQ3($event)"> Yes
+                <br>
+              </div>
+              <div class="col-xs-2 col-sm-2 col-md-2 col-lg-2 col-xlg-2">
+                <input type="checkbox" name="q3n" value="false" id="q3yn" [(ngModel)]="applicant.q3n" (change)="checkNoQ3($event)"> No
+                <br>
+              </div>
+            </div>
+            <br>
+            <div class="row">
+              <div class="col-xs-2 col-sm-2 col-md-2 col-lg-2 col-xlg-2">
+              </div>
+              <div class="col-xs-5 col-sm-5 col-md-5 col-lg-5 col-xlg-5" *ngIf="applicant.q3y">
+                <label for="name">If Yes, give date and location: </label>
+              </div>
+              <div class="col-xs-5 col-sm-5 col-md-5 col-lg-5 col-xlg-5" *ngIf="applicant.q3y">
+                <input type="text" name="ifyeswhenandwhere" placeholder="Explain..." id="ifyeswhenwhere" [(ngModel)]="applicant.ifemployedwhenandwhere">
+              </div>
+            </div>
+            <br>
+            <div class="row">
+              <div class="col-xs-8 col-sm-8 col-md-8 col-lg-8 col-xlg-8">
+                <label for="name">Are you currently employed?</label>
+              </div>
+              <div class="col-xs-2 col-sm-2 col-md-2 col-lg-2 col-xlg-2">
+                <input type="checkbox" name="q4y" value="true" id="q4y" [(ngModel)]="applicant.q4y" (change)="checkYesQ4($event)"> Yes
+                <br>
+              </div>
+              <div class="col-xs-2 col-sm-2 col-md-2 col-lg-2 col-xlg-2">
+                <input type="checkbox" name="q4n" value="false" id="q4yn" [(ngModel)]="applicant.q4n" (change)="checkNoQ4($event)"> No
+                <br>
+              </div>
+            </div>
+            <br>
+            <div class="row">
+              <div class="col-xs-8 col-sm-8 col-md-8 col-lg-8 col-xlg-8">
+                <label for="name">May we contact your present employer?</label>
+              </div>
+              <div class="col-xs-2 col-sm-2 col-md-2 col-lg-2 col-xlg-2">
+                <input type="checkbox" name="q5y" value="true" id="q5y" [(ngModel)]="applicant.q5y" (change)="checkYesQ5($event)"> Yes
+                <br>
+              </div>
+              <div class="col-xs-2 col-sm-2 col-md-2 col-lg-2 col-xlg-2">
+                <input type="checkbox" name="q5n" value="false" id="q5yn" [(ngModel)]="applicant.q5n" (change)="checkNoQ5($event)"> No
+                <br>
+              </div>
+            </div>
+            <br>
+            <div class="row">
+              <div class="col-xs-8 col-sm-8 col-md-8 col-lg-8 col-xlg-8">
+                <label for="name">Are you prevented from lawfully becoming employed in this country because of Visa or Immigration Status?</label>
+                <p style="color:black;font-family:'Times New Roman', Times, serif; font-size:9px; font-weight:bold">Proof of Citizenship or immigration status will be required upon employment.</p>
+              </div>
+              <div class="col-xs-2 col-sm-2 col-md-2 col-lg-2 col-xlg-2">
+                <input type="checkbox" name="q6y" value="true" id="q6y" [(ngModel)]="applicant.q6y" (change)="checkYesQ6($event)"> Yes
+                <br>
+              </div>
+              <div class="col-xs-2 col-sm-2 col-md-2 col-lg-2 col-xlg-2">
+                <input type="checkbox" name="q6n" value="false" id="q6yn" [(ngModel)]="applicant.q6n" (change)="checkNoQ6($event)"> No
+                <br>
+              </div>
+            </div>
+            <br>
+            <div class="row">
+              <div class="col-xs-8 col-sm-8 col-md-8 col-lg-8 col-xlg-8">
+                <label for="name">On What date would you be available for work?</label>
+              </div>
+              <div class="col-xs-4 col-sm-4 col-md-4 col-lg-4 col-xlg-4">
+
+                <div class="form-group">
+                  <input type="date" class="form-control" placeholder="date" aria-label="Today" aria-describedby="basic-addon1" [(ngModel)]="applicant.availabetowork"
+                    (change)="OnChangeDate()" name="dateofapply">
+                </div>
+                <br>
+              </div>
+
+            </div>
+            <br>
+            <div class="row">
+              <div class="col-xs-4 col-sm-4 col-md-4 col-lg-4 col-xlg-4">
+                <label for="name">Are you available to work?</label>
+              </div>
+              <div class="col-xs-2 col-sm-2 col-md-2 col-lg-2 col-xlg-2">
+                <input type="checkbox" name="fulltime" id="fulltime" [(ngModel)]="applicant.fulltime" style="font-size:9px"> Full Time
+              </div>
+              <div class="col-xs-2 col-sm-2 col-md-2 col-lg-2 col-xlg-2">
+                <input type="checkbox" name="partime" id="partime" [(ngModel)]="applicant.partime" style="font-size:9px"> Part Time
+              </div>
+              <div class="col-xs-2 col-sm-2 col-md-2 col-lg-2 col-xlg-2">
+                <input type="checkbox" name="shiftwork" id="shiftwork" [(ngModel)]="applicant.shiftwork" style="font-size:9px"> Shift Work
+              </div>
+              <div class="col-xs-2 col-sm-2 col-md-2 col-lg-2 col-xlg-2">
+                <input type="checkbox" name="temporary" id="temporary" [(ngModel)]="applicant.temporary" style="font-size:9px"> Temporary
+              </div>
+            </div>
+
+            <br>
+            <div class="row">
+              <div class="col-xs-8 col-sm-8 col-md-8 col-lg-8 col-xlg-8">
+                <label for="name">Are you currently on "lay-off" status and subject to recall?</label>
+              </div>
+              <div class="col-xs-2 col-sm-2 col-md-2 col-lg-2 col-xlg-2">
+                <input type="checkbox" name="q7y" value="true" id="q7y" [(ngModel)]="applicant.q7y" (change)="checkYesQ7($event)"> Yes
+                <br>
+              </div>
+              <div class="col-xs-2 col-sm-2 col-md-2 col-lg-2 col-xlg-2">
+                <input type="checkbox" name="q7n" value="false" id="q5yn" [(ngModel)]="applicant.q7n" (change)="checkNoQ7($event)"> No
+                <br>
+              </div>
+            </div>
+            <br>
+            <div class="row">
+              <div class="col-xs-8 col-sm-8 col-md-8 col-lg-8 col-xlg-8">
+                <label for="name">Can you travel if a job requires it?</label>
+              </div>
+              <div class="col-xs-2 col-sm-2 col-md-2 col-lg-2 col-xlg-2">
+                <input type="checkbox" name="q8y" value="true" id="q8y" [(ngModel)]="applicant.q8y" (change)="checkYesQ8($event)"> Yes
+                <br>
+              </div>
+              <div class="col-xs-2 col-sm-2 col-md-2 col-lg-2 col-xlg-2">
+                <input type="checkbox" name="q8n" value="false" id="q8yn" [(ngModel)]="applicant.q8n" (change)="checkNoQ8($event)"> No
+                <br>
+              </div>
+            </div>
+            <br>
+            <div class="row">
+              <div class="col-xs-8 col-sm-8 col-md-8 col-lg-8 col-xlg-8">
+                <label for="name">Have you been convicted of a felony within the last 7 years?</label>
+                <p style="color:black;font-family:'Times New Roman', Times, serif; font-size:9px; font-weight:bold">Conviction will not necessarily disqualify an applicant from employment.</p>
+              </div>
+              <div class="col-xs-2 col-sm-2 col-md-2 col-lg-2 col-xlg-2">
+                <input type="checkbox" name="q9y" value="true" id="q9y" [(ngModel)]="applicant.q9y" (change)="checkYesQ9($event)"> Yes
+                <br>
+              </div>
+              <div class="col-xs-2 col-sm-2 col-md-2 col-lg-2 col-xlg-2">
+                <input type="checkbox" name="q9n" value="false" id="q9yn" [(ngModel)]="applicant.q9n" (change)="checkNoQ9($event)"> No
+                <br>
+              </div>
+            </div>
+            <div class="row">
+              <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 col-xlg-12" *ngIf="applicant.q9y">
+                <label for="name">If Yes, please explain </label>
+                <textarea rows="3" cols="100" [(ngModel)]="applicant.ifconvited" value="Explain" name="ifconvited">
+                              Explain ... 
+                              </textarea>
+              </div>
+            </div>
+          </div>
+
+        </ng-template>
+      </ngb-tab>
+
+      <ngb-tab id="tab4" title="EDUCATION" *ngIf="page4">
+        <ng-template ngbTabContent>
+          <br>
+          <div class="card" style="padding:25px;" id="grad2">
+
+            <div class="table-responsive">
+              <table class="table">
+                <thead>
+                  <tr>
+                    <th></th>
+                    <th>Elementary School</th>
+                    <th>High School</th>
+                    <th>Undergraduate College/University</th>
+                    <th>Graduate/Professional</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td>School Name and Location</td>
+                    <td>
+                      <input type="type" name="elementaryname" id="elementaryname" [(ngModel)]="applicant.elementaryname">
+                    </td>
+                    <td>
+                      <input type="type" name="hightschoolname" id="hightschoolname" [(ngModel)]="applicant.hightschoolname">
+                    </td>
+                    <td>
+                      <input type="type" name="collegename" id="collegename" [(ngModel)]="applicant.collegename">
+                    </td>
+                    <td>
+                      <input type="type" name="professionalname" id="professionalname" [(ngModel)]="applicant.professionalname">
+                    </td>
+                  </tr>
+
+                  <tr>
+                    <td>
+                      Years Completed
+                    </td>
+                    <td>
+                      <div class="form-group">
+                        <select class="form-control" id="elementary" required (click)="OnElementarySchool($event)">
+                          <option *ngFor="let elementary of elemantaryschoolyears" [value]="elementary">{{elementary}}</option>
+                        </select>
+                      </div>
+                    </td>
+                    <td>
+                      <div class="form-group">
+                        <select class="form-control" id="hightschool" required (click)="OnHightSchool($event)">
+                          <option *ngFor="let higthschool of higthschoolyears " [value]="higthschool">{{higthschool}}</option>
+                        </select>
+                      </div>
+                    </td>
+                    <td>
+                      <div class="form-group">
+                        <select class="form-control" id="college" required (click)="OnCollege($event)">
+                          <option *ngFor="let collegeyear of collegeschoolyears " [value]="collegeyear">{{collegeyear}}</option>
+                        </select>
+                      </div>
+                    </td>
+                    <td>
+                      <div class="form-group">
+                        <select class="form-control" id="professional" required (click)="OnProfessional($event)">
+                          <option *ngFor="let professionalyear of  professionalschoolyears " [value]="professionalyear">{{professionalyear}}</option>
+                        </select>
+                      </div>
+                    </td>
+                  </tr>
+                  <tr>
+                    <td>
+                      Diploma/Degree
+                    </td>
+                    <td>
+                      <div class="form-group">
+                        <select class="form-control" id="diploma1" required (click)="OnDiploma1($event)">
+                          <option *ngFor="let diploma1 of  diplomaodegree" [value]="diploma1">{{diploma1}}</option>
+                        </select>
+                      </div>
+                    </td>
+                    <td>
+                      <div class="form-group">
+                        <select class="form-control" id="diploma2" required (click)="OnDiploma2($event)">
+                          <option *ngFor="let diploma2 of  diplomaodegree" [value]="diploma2">{{diploma2}}</option>
+                        </select>
+                      </div>
+                    </td>
+                    <td>
+                      <div class="form-group">
+                        <select class="form-control" id="degree1" required (click)="OnDegree1($event)">
+                          <option *ngFor="let degree1 of  diplomaodegree" [value]="degree1">{{degree1}}</option>
+                        </select>
+                      </div>
+                    </td>
+                    <td>
+                      <div class="form-group">
+                        <select class="form-control" id="degree2" required (click)="OnDegree2($event)">
+                          <option *ngFor="let degree2 of  diplomaodegree" [value]="degree2">{{degree2}}</option>
+                        </select>
+                      </div>
+                    </td>
+
+                  </tr>
+                </tbody>
+              </table>
+
+            </div>
+
+            <div class="table-responsive">
+              <table class="table">
+                <thead>
+                  <tr>
+                    <th></th>
+                    <th></th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td>Describe Course of Study</td>
+                    <td>
+                      <textarea rows="4" cols="80" [(ngModel)]="applicant.courses" name="courses" id="courses" placeholder="Describe ..."></textarea>
+                    </td>
+                  </tr>
+                  <tr>
+                    <td>
+                      Describe any specialized training, apprenticeship, skills and extra-curricular activities
+                    </td>
+                    <td>
+                      <textarea rows="4" cols="80" [(ngModel)]="applicant.trainings" name="trainings" id="trainings" placeholder="Describe ..."></textarea>
+                    </td>
+                  </tr>
+                  <tr>
+                    <td>
+                      Describe any honors you have received
+                    </td>
+                    <td>
+                      <textarea rows="4" cols="80" [(ngModel)]="applicant.honors" name="honors" id="honors" placeholder="Describe ..."></textarea>
+                    </td>
+                  </tr>
+                  <tr>
+                    <td>
+                      State any additional information you feel may be helpfull to us in considering your application
+                    </td>
+                    <td>
+                      <textarea rows="4" cols="80" [(ngModel)]="applicant.moreinfo" name="moreinfo" id="moreinfo" placeholder="Describe ..."></textarea>
+                    </td>
+                  </tr>
+
+                </tbody>
+              </table>
+
+            </div>
+
+          </div>
+
+          <br>
+
+        </ng-template>
+      </ngb-tab>
+
+
+      <ngb-tab id="tab5" title="LANGUAGES" *ngIf="page5">
+        <ng-template ngbTabContent>
+          <br>
+          <div id="grad2" class="card" style="padding-left: 30px;">
+            <p style="text-align: center">Indicate any foreign languages you can speak, read and/or write</p>
+          
+            <table class="table table table-sm">
+              <thead>
+                <tr>
+                  <th></th>
+                  <th style="text-align: center">FLUENT</th>
+                  <th style="text-align: center">GOOD</th>
+                  <th style="text-align: center">FAIR</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td>SPEAK </td>
+                  <td>
+                    <div class="form-group">
+                      <input type="text" class="form-control" id="speakf" [(ngModel)]="applicant.speakfluent" name="speakf" #speakf="ngModel">
+                    </div>
+                  </td>
+                  <td>
+                    <div class="form-group">
+                      <input type="text" class="form-control" id="speakg" [(ngModel)]="applicant.speakgood" name="speakg" #speakf="ngModel">
+                    </div>
+                  </td>
+                  <td>
+                    <div class="form-group">
+                      <input type="text" class="form-control" id="speakfa" [(ngModel)]="applicant.speakfail" name="speakfa" #speakfa="ngModel">
+                    </div>
+                  </td>
+                </tr>
+                <tr>
+                  <td>READ</td>
+                  <td>
+                    <div class="form-group">
+                      <input type="text" class="form-control" id="readf" [(ngModel)]="applicant.readfluent" name="readf" #readf="ngModel">
+                    </div>
+                  </td>
+                  <td>
+                    <div class="form-group">
+                      <input type="text" class="form-control" id="readg" [(ngModel)]="applicant.readgood" name="readg" #readg="ngModel">
+                    </div>
+                  </td>
+                  <td>
+                    <div class="form-group">
+                      <input type="text" class="form-control" id="readfa" [(ngModel)]="applicant.readfail" name="readfa" #readfa="ngModel">
+                    </div>
+                  </td>
+
+
+                  <tr>
+                    <td>WRITE</td>
+                    <td>
+                      <div class="form-group">
+                        <input type="text" class="form-control" id="writef" [(ngModel)]="applicant.writefluent" name="writef" #writef="ngModel">
+                      </div>
+                    </td>
+                    <td>
+                      <div class="form-group">
+                        <input type="text" class="form-control" id="writeg" [(ngModel)]="applicant.writegood" name="writeg" #writeg="ngModel">
+                      </div>
+                    </td>
+                    <td>
+                      <div class="form-group">
+                        <input type="text" class="form-control" id="writefa" [(ngModel)]="applicant.writefail" name="writefa" #writefa="ngModel">
+                      </div>
+                    </td>
+
+                  </tr>
+
+
+              </tbody>
+            </table>
+          </div>
+        </ng-template>
+      </ngb-tab>
+
+      <ngb-tab id="tab6" title="IN EMERGENCY" *ngIf="page6">
+        <ng-template ngbTabContent>
+          <br>
+          <div class="card" id="grad1">
+
+            <h4>In Case of Emergency Please Notify</h4>
+
+            <div class="row">
+              <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 col-xlg-12">
+                <div class="form-group" style="text-align: right">
+                  <input type="text" placeholder="Name" class="form-control" id="ename" [(ngModel)]="applicant.emergencyname" name="ename"
+                    #ename="ngModel">
+                </div>
+              </div>
+            </div>
+            <div class="row">
+              <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 col-xlg-12">
+                <div class="form-group" style="text-align: right">
+                  <input type="text" placeholder="Address" class="form-control" id="address" [(ngModel)]="applicant.emergencyaddress" name="address"
+                    #ename="ngModel">
+                </div>
+              </div>
+            </div>
+            <div class="row">
+              <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 col-xlg-12">
+                <div class="form-group" style="text-align: right">
+                  <input type="text" placeholder="Telephone Number" class="form-control" id="fnumb" [(ngModel)]="applicant.emergencynumber"
+                    name="fnumber" #fnumber="ngModel" maxlength="13" (change)="onKeyEmergencyPHONE($event)">
+                </div>
+              </div>
+            </div>
+          </div>
+        </ng-template>
+      </ngb-tab>
+
+
+      <ngb-tab id="tab7" title="USA MILITARY" *ngIf="page7">
+
+        <ng-template ngbTabContent>
+          <br>
+          <div class="card" id="grad1">
+            <br>
+            <div class="row">
+              <div class="col-xs-8 col-sm-8 col-md-8 col-lg-8 col-xlg-8">
+                <label for="name">Have you ever had any job-related training in United States military? </label>
+              </div>
+              <div class="col-xs-2 col-sm-2 col-md-2 col-lg-2 col-xlg-2">
+                <input type="checkbox" name="tmy" value="true" id="tmy" [(ngModel)]="applicant.usamilitaryyes" (change)="checkYesTraininingMilitary($event)"> Yes
+                <br>
+              </div>
+              <div class="col-xs-2 col-sm-2 col-md-2 col-lg-2 col-xlg-2">
+                <input type="checkbox" name="tmn" value="true" id="tmn" [(ngModel)]="applicant.usamilitaryno" (change)="checkNoTraininingMilitary($event)"> No
+                <br>
+              </div>
+            </div>
+            <br>
+            <div class="row">
+              <div class="col-xs-8 col-sm-8 col-md-8 col-lg-8 col-xlg-8" *ngIf="applicant.usamilitaryyes">
+                <label for="name">If Yes, please describe: </label>
+              </div>
+            </div>
+            <div class="row" *ngIf="applicant.usamilitaryyes">
+              <textarea style="margin-left:20px;" class="col-xs-8 col-sm-8 col-md-8 col-lg-8 col-xlg-8" rows="3" cols="100" [(ngModel)]="applicant.usamilataryexplain"
+                value="Explain" name="ifyestm">
+                                Explain ... 
+                                </textarea>
+            </div>
+
+
+          </div>
+
+
+        </ng-template>
+      </ngb-tab>
+      <ngb-tab id="tab8" title="EMPLOYMENT EXPERIENCE" *ngIf="page8">
+        <ng-template ngbTabContent>
+          <br>
+          <div class="card" id="grad1">
+            <br>
+            <ul>
+              <li>
+                Start with your present or last job.
+              </li>
+              <li>
+                List your employment experience for the past 5 years, explain any gaps between jobs.
+              </li>
+              <li>
+                Include any job-related military service assignments and volunteer activities.
+              </li>
+              <li>
+                You may exclude organizations which indicate race, color, religion, gender, national origin, disability or other protected
+                status.
+              </li>
+            </ul>
+            <h1># 5</h1>
+
+
+            <div class="card" style="background-color: white">
+
+              <table class="table-responsive">
+                <thead>
+                </thead>
+                <tbody>
+
+                  <td style="width: 40%">
+                    <div class="form-group" style="text-align: right">
+                      <input type="text" placeholder="Employer" class="form-control" id="emp1id" [(ngModel)]="applicant.employer1name" name="emp1name"
+                        #emp1="ngModel">
+                    </div>
+                  </td>
+
+                  <tr>
+                    <td>
+                      <div class="form-group" style="text-align: right">
+                        <input type="text" placeholder="Address" class="form-control" id="empaddress1" [(ngModel)]="applicant.employer1address" name="emp1address"
+                          #emp1address="ngModel">
+                      </div>
+                    </td>
+                    <td style="width: 30%">
+                      Date Employed
+                      <table class="table-responsive">
+
+                        <td>From</td>
+                        <td>To</td>
+
+                        <tr>
+                          <td>
+                            <div class="form-group">
+                              <!-- <input type="date" class="form-control" placeholder="date" aria-label="Today" aria-describedby="basic-addon1" [(ngModel)]="applicant.from1"
+                                (change)="OnChangeDate()" name="from1"> -->
+                              <input type="text" class="form-control" placeholder="mm/year" [(ngModel)]="applicant.from1" name="from1">
+                            </div>
+                          </td>
+                          <td>
+                            <div class="form-group">
+                              <!-- <input type="date" class="form-control" placeholder="date" aria-label="Today" aria-describedby="basic-addon1" [(ngModel)]="applicant.to1"
+                                (change)="OnChangeDate()" name="to1"> -->
+                              <input type="text" class="form-control" placeholder="mm/year" [(ngModel)]="applicant.to1" name="to1">
+                            </div>
+                          </td>
+                        </tr>
+                      </table>
+                    </td>
+                    <td>
+                      <textarea style="margin-left:20px;" placeholder="Work Performed" class="col-xs-12 col-sm-12 col-md-12 col-lg-12 col-xlg-12"
+                        rows="3" cols="200" [(ngModel)]="applicant.wperformed1" name="wp1"></textarea>
+                    </td>
+                  </tr>
+                  <tr>
+                    <td>
+                      <div class="form-group" style="text-align: right">
+                        <input type="text" placeholder="Telephone Number(s)" class="form-control" id="employernum1" [(ngModel)]="applicant.employer1number"
+                          name="num1" #num1="ngModel" maxlength="13" (change)="onKeyEmloyerPHONE($event)">
+                      </div>
+                    </td>
+                    <td style="width: 30%">
+                      Hourly Rate/Salary
+                      <table class="table-responsive">
+                        <td>Starting</td>
+                        <td>Final</td>
+                        <tr>
+                          <td>
+                            <div class="form-group">
+                              <input type="text" class="form-control" placeholder="$" [(ngModel)]="applicant.start1" name="start1" (change)="onKeyStart1($event)">
+                            </div>
+                          </td>
+                          <td>
+                            <div class="form-group">
+                              <input type="text" class="form-control" placeholder="$" [(ngModel)]="applicant.final1" name="final1" (change)="onKeyFinal1($event)">
+                            </div>
+                          </td>
+                        </tr>
+                      </table>
+                    </td>
+                  </tr>
+                  <tr>
+                    <td>
+                      <div class="form-group">
+                        <input type="text" class="form-control" placeholder="Job Title" [(ngModel)]="applicant.jobtitle1" name="jobtitle1">
+                      </div>
+                    </td>
+                    <td>
+                      <div class="form-group">
+                        <input type="text" class="form-control" placeholder="Supervisor" [(ngModel)]="applicant.supervisor1" name="supervisor1">
+                      </div>
+                    </td>
+                    <td>
+                      <textarea style="margin-left:20px;" placeholder="Reason for Leaving" class="col-xs-12 col-sm-12 col-md-12 col-lg-12 col-xlg-12"
+                        rows="3" cols="200" [(ngModel)]="applicant.reasonforleaving1" name="reasonforleaving1"></textarea>
+                    </td>
+                  </tr>
+                </tbody>
+              </table>
+
+            </div>
+
+
+            <h1># 4</h1>
+            <div class="card" style="background-color: white">
+
+              <table class="table-responsive">
+                <thead>
+                </thead>
+                <tbody>
+
+                  <td style="width: 40%">
+                    <div class="form-group" style="text-align: right">
+                      <input type="text" placeholder="Employer" class="form-control" id="emp2id" [(ngModel)]="applicant.employer2name" name="emp2name"
+                        #emp2="ngModel">
+                    </div>
+                  </td>
+
+                  <tr>
+                    <td>
+                      <div class="form-group" style="text-align: right">
+                        <input type="text" placeholder="Address" class="form-control" id="empaddress2" [(ngModel)]="applicant.employer2address" name="emp2address"
+                          #emp2address="ngModel">
+                      </div>
+                    </td>
+                    <td style="width: 30%">
+                      Date Employed
+                      <table class="table-responsive">
+
+                        <td>From</td>
+                        <td>To</td>
+
+                        <tr>
+                          <td>
+                            <div class="form-group">
+                              <input type="text" class="form-control" placeholder="mm/year" [(ngModel)]="applicant.from2" name="from2">
+                              <!-- <input type="date" class="form-control" placeholder="date" aria-label="Today" aria-describedby="basic-addon1" [(ngModel)]="applicant.from2"
+                                (change)="OnChangeDate()" name="from2"> -->
+                            </div>
+                          </td>
+                          <td>
+                            <div class="form-group">
+                              <input type="text" class="form-control" placeholder="mm/year" [(ngModel)]="applicant.to2" name="to2">
+                              <!--  <input type="date" class="form-control" placeholder="date" aria-label="Today" aria-describedby="basic-addon1" [(ngModel)]="applicant.to2"
+                                (change)="OnChangeDate()" name="to1"> -->
+                            </div>
+                          </td>
+                        </tr>
+                      </table>
+                    </td>
+                    <td>
+                      <textarea style="margin-left:20px;" placeholder="Work Performed" class="col-xs-12 col-sm-12 col-md-12 col-lg-12 col-xlg-12"
+                        rows="3" cols="200" [(ngModel)]="applicant.wperformed2" name="wp2"></textarea>
+                    </td>
+                  </tr>
+                  <tr>
+                    <td>
+                      <div class="form-group" style="text-align: right">
+                        <input type="text" placeholder="Telephone Number(s)" class="form-control" id="employernum2" [(ngModel)]="applicant.employer2number"
+                          name="num2" #num2="ngModel" maxlength="13" (change)="onKeyEmloyerPHONE2($event)">
+                      </div>
+                    </td>
+                    <td style="width: 30%">
+                      Hourly Rate/Salary
+                      <table class="table-responsive">
+                        <td>Starting</td>
+                        <td>Final</td>
+                        <tr>
+                          <td>
+                            <div class="form-group">
+                              <input type="text" class="form-control" placeholder="$" [(ngModel)]="applicant.start2" name="start2" (change)="onKeyStart2($event)">
+                            </div>
+                          </td>
+                          <td>
+                            <div class="form-group">
+                              <input type="text" class="form-control" placeholder="$" [(ngModel)]="applicant.final2" name="final2" (change)="onKeyFinal2($event)">
+                            </div>
+                          </td>
+                        </tr>
+                      </table>
+                    </td>
+                  </tr>
+                  <tr>
+                    <td>
+                      <div class="form-group">
+                        <input type="text" class="form-control" placeholder="Job Title" [(ngModel)]="applicant.jobtitle2" name="jobtitle2">
+                      </div>
+                    </td>
+                    <td>
+                      <div class="form-group">
+                        <input type="text" class="form-control" placeholder="Supervisor" [(ngModel)]="applicant.supervisor2" name="supervisor2">
+                      </div>
+                    </td>
+                    <td>
+                      <textarea style="margin-left:20px;" placeholder="Reason for Leaving" class="col-xs-12 col-sm-12 col-md-12 col-lg-12 col-xlg-12"
+                        rows="3" cols="200" [(ngModel)]="applicant.reasonforleaving2" name="reasonforleaving2"></textarea>
+                    </td>
+                  </tr>
+                </tbody>
+              </table>
+
+            </div>
+            <h1># 3</h1>
+            <div class="card" style="background-color: white">
+
+              <table class="table-responsive">
+                <thead>
+                </thead>
+                <tbody>
+
+                  <td style="width: 40%">
+                    <div class="form-group" style="text-align: right">
+                      <input type="text" placeholder="Employer" class="form-control" id="emp3id" [(ngModel)]="applicant.employer3name" name="emp3name"
+                        #emp3="ngModel">
+                    </div>
+                  </td>
+
+                  <tr>
+                    <td>
+                      <div class="form-group" style="text-align: right">
+                        <input type="text" placeholder="Address" class="form-control" id="empaddress3" [(ngModel)]="applicant.employer3address" name="emp3address"
+                          #emp3address="ngModel">
+                      </div>
+                    </td>
+                    <td style="width: 30%">
+                      Date Employed
+                      <table class="table-responsive">
+
+                        <td>From</td>
+                        <td>To</td>
+
+                        <tr>
+                          <td>
+                            <div class="form-group">
+                              <input type="text" class="form-control" placeholder="mm/year" [(ngModel)]="applicant.from3" name="from3">
+                              <!-- <input type="date" class="form-control" placeholder="date" aria-label="Today" aria-describedby="basic-addon1" [(ngModel)]="applicant.from2"
+                                (change)="OnChangeDate()" name="from2"> -->
+                            </div>
+                          </td>
+                          <td>
+                            <div class="form-group">
+                              <input type="text" class="form-control" placeholder="mm/year" [(ngModel)]="applicant.to3" name="to3">
+                              <!--  <input type="date" class="form-control" placeholder="date" aria-label="Today" aria-describedby="basic-addon1" [(ngModel)]="applicant.to2"
+                                (change)="OnChangeDate()" name="to1"> -->
+                            </div>
+                          </td>
+                        </tr>
+                      </table>
+                    </td>
+                    <td>
+                      <textarea style="margin-left:20px;" placeholder="Work Performed" class="col-xs-12 col-sm-12 col-md-12 col-lg-12 col-xlg-12"
+                        rows="3" cols="200" [(ngModel)]="applicant.wperformed3" name="wp3"></textarea>
+                    </td>
+                  </tr>
+                  <tr>
+                    <td>
+                      <div class="form-group" style="text-align: right">
+                        <input type="text" placeholder="Telephone Number(s)" class="form-control" id="employernum3" [(ngModel)]="applicant.employer3number"
+                          name="num3" #num3="ngModel" maxlength="13" (change)="onKeyEmloyerPHONE3($event)">
+                      </div>
+                    </td>
+                    <td style="width: 30%">
+                      Hourly Rate/Salary
+                      <table class="table-responsive">
+                        <td>Starting</td>
+                        <td>Final</td>
+                        <tr>
+                          <td>
+                            <div class="form-group">
+                              <input type="text" class="form-control" placeholder="$" [(ngModel)]="applicant.start3" name="start3" (change)="onKeyStart3($event)">
+                            </div>
+                          </td>
+                          <td>
+                            <div class="form-group">
+                              <input type="text" class="form-control" placeholder="$" [(ngModel)]="applicant.final3" name="final3" (change)="onKeyFinal3($event)">
+                            </div>
+                          </td>
+                        </tr>
+                      </table>
+                    </td>
+                  </tr>
+                  <tr>
+                    <td>
+                      <div class="form-group">
+                        <input type="text" class="form-control" placeholder="Job Title" [(ngModel)]="applicant.jobtitle3" name="jobtitle3">
+                      </div>
+                    </td>
+                    <td>
+                      <div class="form-group">
+                        <input type="text" class="form-control" placeholder="Supervisor" [(ngModel)]="applicant.supervisor3" name="supervisor3">
+                      </div>
+                    </td>
+                    <td>
+                      <textarea style="margin-left:20px;" placeholder="Reason for Leaving" class="col-xs-12 col-sm-12 col-md-12 col-lg-12 col-xlg-12"
+                        rows="3" cols="200" [(ngModel)]="applicant.reasonforleaving3" name="reasonforleaving3"></textarea>
+                    </td>
+                  </tr>
+                </tbody>
+              </table>
+
+            </div>
+
+            <h1># 2</h1>
+            <div class="card" style="background-color: white">
+
+              <table class="table-responsive">
+                <thead>
+                </thead>
+                <tbody>
+
+                  <td style="width: 40%">
+                    <div class="form-group" style="text-align: right">
+                      <input type="text" placeholder="Employer" class="form-control" id="emp4id" [(ngModel)]="applicant.employer4name" name="emp4name"
+                        #emp4="ngModel">
+                    </div>
+                  </td>
+
+                  <tr>
+                    <td>
+                      <div class="form-group" style="text-align: right">
+                        <input type="text" placeholder="Address" class="form-control" id="empaddress4" [(ngModel)]="applicant.employer4address" name="emp4address"
+                          #emp4address="ngModel">
+                      </div>
+                    </td>
+                    <td style="width: 30%">
+                      Date Employed
+                      <table class="table-responsive">
+
+                        <td>From</td>
+                        <td>To</td>
+
+                        <tr>
+                          <td>
+                            <div class="form-group">
+                              <input type="text" class="form-control" placeholder="mm/year" [(ngModel)]="applicant.from4" name="from4">
+                              <!-- <input type="date" class="form-control" placeholder="date" aria-label="Today" aria-describedby="basic-addon1" [(ngModel)]="applicant.from2"
+                                (change)="OnChangeDate()" name="from2"> -->
+                            </div>
+                          </td>
+                          <td>
+                            <div class="form-group">
+                              <input type="text" class="form-control" placeholder="mm/year" [(ngModel)]="applicant.to4" name="to4">
+                              <!--  <input type="date" class="form-control" placeholder="date" aria-label="Today" aria-describedby="basic-addon1" [(ngModel)]="applicant.to2"
+                                (change)="OnChangeDate()" name="to1"> -->
+                            </div>
+                          </td>
+                        </tr>
+                      </table>
+                    </td>
+                    <td>
+                      <textarea style="margin-left:20px;" placeholder="Work Performed" class="col-xs-12 col-sm-12 col-md-12 col-lg-12 col-xlg-12"
+                        rows="3" cols="200" [(ngModel)]="applicant.wperformed4" name="wp4"></textarea>
+                    </td>
+                  </tr>
+                  <tr>
+                    <td>
+                      <div class="form-group" style="text-align: right">
+                        <input type="text" placeholder="Telephone Number(s)" class="form-control" id="employernum2" [(ngModel)]="applicant.employer4number"
+                          name="num4" #num4="ngModel" maxlength="13" (change)="onKeyEmloyerPHONE4($event)">
+                      </div>
+                    </td>
+                    <td style="width: 30%">
+                      Hourly Rate/Salary
+                      <table class="table-responsive">
+                        <td>Starting</td>
+                        <td>Final</td>
+                        <tr>
+                          <td>
+                            <div class="form-group">
+                              <input type="text" class="form-control" placeholder="$" [(ngModel)]="applicant.start4" name="start4" (change)="onKeyStart4($event)">
+                            </div>
+                          </td>
+                          <td>
+                            <div class="form-group">
+                              <input type="text" class="form-control" placeholder="$" [(ngModel)]="applicant.final4" name="final4" (change)="onKeyFinal4($event)">
+                            </div>
+                          </td>
+                        </tr>
+                      </table>
+                    </td>
+                  </tr>
+                  <tr>
+                    <td>
+                      <div class="form-group">
+                        <input type="text" class="form-control" placeholder="Job Title" [(ngModel)]="applicant.jobtitle4" name="jobtitle4">
+                      </div>
+                    </td>
+                    <td>
+                      <div class="form-group">
+                        <input type="text" class="form-control" placeholder="Supervisor" [(ngModel)]="applicant.supervisor4" name="supervisor4">
+                      </div>
+                    </td>
+                    <td>
+                      <textarea style="margin-left:20px;" placeholder="Reason for Leaving" class="col-xs-12 col-sm-12 col-md-12 col-lg-12 col-xlg-12"
+                        rows="3" cols="200" [(ngModel)]="applicant.reasonforleaving4" name="reasonforleaving4"></textarea>
+                    </td>
+                  </tr>
+                </tbody>
+              </table>
+
+            </div>
+
+            <h1># 1</h1>
+            <div class="card" style="background-color: white">
+
+              <table class="table-responsive">
+                <thead>
+                </thead>
+                <tbody>
+
+                  <td style="width: 40%">
+                    <div class="form-group" style="text-align: right">
+                      <input type="text" placeholder="Employer" class="form-control" id="emp5id" [(ngModel)]="applicant.employer5name" name="emp5name"
+                        #emp5="ngModel">
+                    </div>
+                  </td>
+
+                  <tr>
+                    <td>
+                      <div class="form-group" style="text-align: right">
+                        <input type="text" placeholder="Address" class="form-control" id="empaddress5" [(ngModel)]="applicant.employer5address" name="emp5address"
+                          #emp5address="ngModel">
+                      </div>
+                    </td>
+                    <td style="width: 30%">
+                      Date Employed
+                      <table class="table-responsive">
+
+                        <td>From</td>
+                        <td>To</td>
+
+                        <tr>
+                          <td>
+                            <div class="form-group">
+                              <input type="text" class="form-control" placeholder="mm/year" [(ngModel)]="applicant.from5" name="from5">
+                              <!-- <input type="date" class="form-control" placeholder="date" aria-label="Today" aria-describedby="basic-addon1" [(ngModel)]="applicant.from2"
+                                (change)="OnChangeDate()" name="from2"> -->
+                            </div>
+                          </td>
+                          <td>
+                            <div class="form-group">
+                              <input type="text" class="form-control" placeholder="mm/year" [(ngModel)]="applicant.to5" name="to5">
+                              <!--  <input type="date" class="form-control" placeholder="date" aria-label="Today" aria-describedby="basic-addon1" [(ngModel)]="applicant.to2"
+                                (change)="OnChangeDate()" name="to1"> -->
+                            </div>
+                          </td>
+                        </tr>
+                      </table>
+                    </td>
+                    <td>
+                      <textarea style="margin-left:20px;" placeholder="Work Performed" class="col-xs-12 col-sm-12 col-md-12 col-lg-12 col-xlg-12"
+                        rows="3" cols="200" [(ngModel)]="applicant.wperformed5" name="wp5"></textarea>
+                    </td>
+                  </tr>
+                  <tr>
+                    <td>
+                      <div class="form-group" style="text-align: right">
+                        <input type="text" placeholder="Telephone Number(s)" class="form-control" id="employernum5" [(ngModel)]="applicant.employer5number"
+                          name="num5" #num5="ngModel" maxlength="13" (change)="onKeyEmloyerPHONE5($event)">
+                      </div>
+                    </td>
+                    <td style="width: 30%">
+                      Hourly Rate/Salary
+                      <table class="table-responsive">
+                        <td>Starting</td>
+                        <td>Final</td>
+                        <tr>
+                          <td>
+                            <div class="form-group">
+                              <input type="text" class="form-control" placeholder="$" [(ngModel)]="applicant.start5" name="start5" (change)="onKeyStart5($event)">
+                            </div>
+                          </td>
+                          <td>
+                            <div class="form-group">
+                              <input type="text" class="form-control" placeholder="$" [(ngModel)]="applicant.final5" name="final5" (change)="onKeyFinal5($event)">
+                            </div>
+                          </td>
+                        </tr>
+                      </table>
+                    </td>
+                  </tr>
+                  <tr>
+                    <td>
+                      <div class="form-group">
+                        <input type="text" class="form-control" placeholder="Job Title" [(ngModel)]="applicant.jobtitle5" name="jobtitle5">
+                      </div>
+                    </td>
+                    <td>
+                      <div class="form-group">
+                        <input type="text" class="form-control" placeholder="Supervisor" [(ngModel)]="applicant.supervisor5" name="supervisor5">
+                      </div>
+                    </td>
+                    <td>
+                      <textarea style="margin-left:20px;" placeholder="Reason for Leaving" class="col-xs-12 col-sm-12 col-md-12 col-lg-12 col-xlg-12"
+                        rows="3" cols="200" [(ngModel)]="applicant.reasonforleaving5" name="reasonforleaving5"></textarea>
+                    </td>
+                  </tr>
+                </tbody>
+              </table>
+
+            </div>
+
+          </div>
+        </ng-template>
+      </ngb-tab>
+      <ngb-tab id="tab9" title="SKILLS AND QUALIFICATIONS" *ngIf="page9">
+        <ng-template ngbTabContent>
+          <br>
+          <div class="card" id="grad1">
+            <p>Sumarize especial job-related skills and qualifications acquired from employment or other experience.</p>
+
+            <textarea style="margin-left:0px;" placeholder="Sumarize..." class="col-xs-12 col-sm-12 col-md-12 col-lg-12 col-xlg-12" rows="10"
+              cols="300" [(ngModel)]="applicant.skillandqualifications" name="skillandqualifications"></textarea>
+          </div>
+
+        </ng-template>
+      </ngb-tab>
+
+      <ngb-tab id="tab10" title="ACKNOLEDGMENT AND RELEASE" *ngIf="page10">
+        <ng-template ngbTabContent>
+
+          <br>
+          <div class="card" id="grad1">
+
+            <div style="padding:40px; padding-right:0px; background-color:white; color: black; text-align:justify;">
+                
+              <h1 style="text-align: center">ARMELLINI INDUSTRIES, INC</h1>
+              <H2 style="text-align: center"> EMPLOYMENT APPLICATION ACKNOWLEDGMENT AND RELEASE</H2>
+              <br>
+              <em>
+                <p>I understand that this application for employment will be given consideration, but it is not a promise of
+                  employment.
+                </p>
+                <p>I certify that all of the information furnished on this application is true, complete and correct. I understand
+                  and agree that any falsification, misrepresentation, misleading statement, or omission of fact on either
+                  this application or during the pre-hire process will be sufficient reason for (1) my not being offered
+                  employment; or (2) dismissal at any time if I am employed.
+                </p>
+                <p>I understand and agree that If I am hired, my employment will be for no definite period of time and may,
+                  regardless of the time and manner of payment of my wages, be terminated at any time by me or the Company,
+                  with or without cause and without any previous notice. I also understand that the Company has the right
+                  to unilaterally modify and terminate any policies, practices, procedures, and standars it has adopted or
+                  implemented, to the extend not limited by law.
+                </p>
+                <p>
+                  In the event of my employment by the Company, I will comply all rules and regulations as set forth in the Company's policy
+                  manual or other communication distributed to employees.
+                </p>
+                <p>
+                  I understand that I must consent to and authorize a pre-employment verification of background information. I authorize the
+                  Company to (1) investigate the truthfulness of all statements made on my application or resume, or verbal
+                  statements made by me in the interview process; (2) conduct any verification of my education, employment,
+                  workers' compensation claims, personal, credit, and motor vehicle records, and to receive any criminal
+                  history record information relating to me which may be on file with any federal, state, or local agencies;
+                  and (3) disclose verbally or in writing, the results of any investigation with authorized employees or
+                  agents of Armellini Industries, Inc. & Subsidiaries involved in the hiring process. I understand that consideration
+                  for employment is contingent upon the results of this reference and background investigation.
+                </p>
+
+                <p>
+                  I also understand that a consumer credit report may be obtained from a consumer reporting agency in connection with this
+                  application, and if I request, I understand that I will be informed of the name and address of the agency.
+                </p>
+                <p>
+                  I authorize the Company to contact my previous employers for the purpose of checking muy employment history. My signature
+                  below constitutes my knowing and my voluntary waiver of any claims I may have against the Company for contacting
+                  my previous employers. I also waive and release my previous employers from any claims I may have against
+                  them based upon the information they furnish to the company.
+                </p>
+                <p>
+                  I authorize the Company to supply my employment record, in whole or in part, to any prospective employer, government agency,
+                  or other party with a legal interest, and I release all such parties from any liability for direct or consequential
+                  damages resulting from such release and disclosure.
+                </p>
+                <p>
+                  I understand that employment by the Company may be conditioned upon an acceptable fitness for duty medical and health evaluation
+                  that may include a physical examination paid for by the Company and conducted by a doctor selected by the
+                  Company. I also understand that employment with the Company may be conditioned upon a drug and/or alcohol
+                  screening test result administered by a medical organization selected by the Company. I further agree to
+                  submit, at any reasonable time during my employment, and without notice, to a drug and/or alcohol screening
+                  test. I understand that refusal to take a requested drug and/or alcohol screening may result in discharge.
+                  I further understand that, if employed, a positive test result in immediate discharge.
+                </p>
+                <p>
+                  I authorize the Company to supply my medical and health evaluation, including drug and/or alcohol screening test results,
+                  in whole or in part, to any prospective employer, government agency, or other party with a legal interest,
+                  and I release all such parties from any liability for direct or consequential damages resulting from such
+                  release and disclosure.
+                </p>
+
+
+
+
+
+                <div class="row">
+                  <signature-pad [options]="signaturePadOptions" (onBeginEvent)="drawStart()" (onEndEvent)="drawComplete()" #sigPad1></signature-pad>
+                </div>
+
+                <div class="row">
+
+                  <div class="col-xs-12 col-sm-12 col-md-8 col-lg-8 col-xlg-8">
+
+                    _______________________________________
+                    <p>
+                      Signature of Applicant
+                    </p>
+
+
+
+                    <button (click)="sigPad1.clear()">Clear</button>
+                  </div>
+                  <div class="col-xs-12 col-sm-12 col-md-4 col-lg-4 col-xlg-4">
+
+
+                    <p>
+                      <span style="font-family:cursive; font-weight:bold; border-bottom:1px;  text-decoration: underline;">
+                        {{dateapply |date:fullyear}}
+                      </span>
+                    </p>
+                    <p>
+                      Date
+                    </p>
+                  </div>
+                </div>
+
+                <div class="row">
+                  <!--  <signature-pad (onEndEvent)="drawComplete2()" #sigPad2></signature-pad> -->
+                </div>
+                <div class="row">
+
+                  <div class="col-xs-12 col-sm-12 col-md-8 col-lg-8 col-xlg-8">
+
+                    _______________________________________
+                    <p>
+                      Witness
+                    </p>
+
+
+                    <!--  <button (click)="sigPad2.clear()">Clear</button> -->
+                  </div>
+                  <div class="col-xs-12 col-sm-12 col-md-4 col-lg-4 col-xlg-4">
+                    <p>
+                      <span style="font-family:cursive; font-weight:bold; border-bottom:1px;  text-decoration: underline;">
+                        {{dateapply |date:fullyear}}
+                      </span>
+                    </p>
+                    <p>
+                      Date
+                    </p>
+                  </div>
+                </div>
+              </em>
+            </div>
+
+            <div class="row">
+
+              <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 col-xlg-12">
+                <br>
+                <p>You almost finish your application. Just Click the button below  and Check if everything is Ok and then Submit
+                  it otherwise come back and fix any errors...</p>
+                <div style="text-align: center">
+                  <button type="button" class="btn btn-primary" (click)="OnShowForm()" aria-controls="collapseExample" style="text-align: center">
+                    Show/Hide Preview Form Application
+                  </button>
+                </div>
+              </div>
+            </div>
+          </div>
+        </ng-template>
+      </ngb-tab>
+    </ngb-tabset>
+    <br>
+    <hr class="rayadivisora">
+    <div class="btn-group">
+      <button type="button" class="btn btn-default" (click)="OnClickBtnBack()">Back</button>
+      <button type="button" class="btn btn-primary" (click)="OnClickBtnNext()">Next</button>
+    </div>
+    <br>
+    <br>
+
+    <!-- *** THIS IS THE APPLICATION FORM TO PRINT  -->
+
+    <div *ngIf="showForm">
+      <div class="forma2">
+        <div class="row">
+          <div class="col-sm-6">
+            <h2 style="font-size: 200%">Application For Employment</h2>
+
+          </div>
+          <div class="col-sm-6" style="text-align: center">
+            <address>
+              <span style="font-weight: bold">ARMELLINI INDUSTRIES, INC.</span>
+              <br> P.O.BOX 678
+              <br> PALM CITY, FL 34991
+              <br> (772) 2287-0575
+            </address>
+          </div>
+        </div>
+      </div>
+      <div class="row">
+
+        <div class="card-body" style="background-color:white;">
+          We consider applicants for all positions without regard to race, color, religion, sex, national origin, age, marital or veteran
+          status, the presence of a non-job-related medical condition or disability, or any other legally protected status
+        </div>
+
+      </div>
+      <div class="row">
+        <div class="col-sm-12 col-md-12 col-lg-12">
+          <h3 style="text-align: center; left:50%"></h3>
+        </div>
+      </div>
+
+      <div class="row">
+
+        <div class="card-body" style="background-color:white;">
+          <div class="col-sm-7 col-md-7 col-lg-7">
+            Position(s) Applied For:
+            <h4 style="margin-left: 50px; font-family:cursive; font-weight:bold">
+              {{applyf }}
+            </h4>
+          </div>
+          <div class="col-sm-5 col-md-5 col-lg-5" style="border-left: groove;">
+            Date of Appplications:
+            <h4 style="margin-left: 50px; font-family:cursive; font-weight:bold">
+              {{ dateOfApplication |date:fullyear}}
+            </h4>
+          </div>
+        </div>
+      </div>
+
+      <div class="row">
+        <h5 style="margin-left: 30px;">How Did You Learn About Us? </h5>
+        <h4 style="margin-left: 10px; font-family:cursive; font-weight:bold">
+          {{learnabout}}
+        </h4>
+      </div>
+      <div class="row">
+      </div>
+      <div class="row">
+        <div class="col-sm-12 col-md-12 col-lg-12">
+          <img class="img-thumbnail" [src]="photo" width="130px" height="130px" alt="Photo" *ngIf="photo !=''">
+        </div>
+      </div>
+
+      <div class="card-body" style="background-color:white;">
+        <div class="row">
+          <div class="col-sm-4 col-md-4 col-lg-4">
+            <h5>Last Name</h5>
+            <h4 style="margin-left: 50px; font-family:cursive; font-weight:bold">
+              {{lapellido}}
+            </h4>
+          </div>
+          <div class="col-sm-4 col-md-4 col-lg-4">
+            <h5>First Name</h5>
+            <h4 style="margin-left: 50px; font-family:cursive; font-weight:bold">
+              {{fnombre}}
+            </h4>
+          </div>
+          <div class="col-sm-4 col-md-4 col-lg-4">
+            <h5>Middle Name</h5>
+            <h4 style="margin-left: 50px; font-family:cursive; font-weight:bold">
+              {{mnombre}}
+            </h4>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-sm-3 col-md-3 col-lg-3">
+            <h5>Address Number</h5>
+            <h4 style="margin-left: 50px; font-family:cursive; font-weight:bold">
+              {{numberH}}
+            </h4>
+          </div>
+          <div class="col-sm-3 col-md-3 col-lg-3">
+            <h5>Street</h5>
+            <h4 style="margin-left: 50px; font-family:cursive; font-weight:bold">
+              {{street}}
+            </h4>
+          </div>
+          <div class="col-sm-3 col-md-3 col-lg-3">
+            <h5>City</h5>
+            <h4 style="margin-left: 50px; font-family:cursive; font-weight:bold">
+              {{ciudad}}
+            </h4>
+          </div>
+          <div class="col-sm-1 col-md-1 col-lg-1">
+            <h5>State</h5>
+            <h4 style="margin-left: 50px; font-family:cursive; font-weight:bold">
+              {{estado}}
+            </h4>
+          </div>
+          <div class="col-sm-2 col-md-2 col-lg-2">
+            <h5>Zip Code</h5>
+            <h4 style="margin-left: 50px; font-family:cursive; font-weight:bold">
+              {{codigpostal}}
+            </h4>
+          </div>
+
+        </div>
+
+        <div class="row">
+          <div class="col-sm-6 col-md-6 col-lg-6">
+            <h5> Phone Number</h5>
+            <h4 style="margin-left: 50px; font-family:cursive; font-weight:bold">
+              {{phonenumber}}
+            </h4>
+          </div>
+          <div class="col-sm-6 col-md-6 col-lg-6">
+            <h5>SSN</h5>
+            <h4 style="margin-left: 50px; font-family:cursive; font-weight:bold">
+              {{ssnnumber}}
+            </h4>
+          </div>
+        </div>
+      </div>
+      <br>
+      <div class="card" style="padding-left: 15px; background-color:white">
+        <br>
+        <div class="row">
+          <div class="col-xs-8 col-sm-8 col-md-8 col-lg-8 col-xlg-8">
+            <label for="name">If you are under 18 years of age, can you provide required proof of your eligibility to work?</label>
+          </div>
+          <div class="col-xs-2 col-sm-2 col-md-2 col-lg-2 col-xlg-2">
+            <span style="font-family:cursive; font-weight:bold; color:blue;">
+              {{applicant.q1y |yesiandno}}
+            </span>
+            Yes
+          </div>
+          <div class="col-xs-2 col-sm-2 col-md-2 col-lg-2 col-xlg-2">
+            <span style="font-family:cursive; font-weight:bold; color:blue;">
+              {{applicant.q1n |yesiandno}}
+            </span>
+            No
+          </div>
+        </div>
+        <br>
+        <div class="row">
+          <div class="col-xs-8 col-sm-8 col-md-8 col-lg-8 col-xlg-8">
+            <label for="name">Have you ever filed an application with us before?</label>
+          </div>
+          <div class="col-xs-2 col-sm-2 col-md-2 col-lg-2 col-xlg-2">
+            <span style="font-family:cursive; font-weight:bold; color:blue;">
+              {{applicant.q2y |yesiandno}}
+            </span>
+            Yes
+          </div>
+          <div class="col-xs-2 col-sm-2 col-md-2 col-lg-2 col-xlg-2">
+            <span style="font-family:cursive; font-weight:bold; color:blue;">
+              {{applicant.q2n |yesiandno}}
+            </span>
+            No
+          </div>
+        </div>
+        <br>
+        <div class="row">
+          <div class="col-xs-8 col-sm-8 col-md-8 col-lg-8 col-xlg-8">
+          </div>
+          <div class="col-xs-2 col-sm-2 col-md-2 col-lg-2 col-xlg-2">
+            <label for="name" *ngIf="applicant.q2y">If Yes, give date: </label>
+          </div>
+          <div class="col-xs-2 col-sm-2 col-md-2 col-lg-2 col-xlg-2">
+            <p style="font-family:cursive; font-weight:bold;" *ngIf="applicant.q2y">
+              {{applicant.ifyes}}
+            </p>
+          </div>
+        </div>
+        <br>
+        <div class="row">
+          <div class="col-xs-8 col-sm-8 col-md-8 col-lg-8 col-xlg-8">
+            <label for="name">Have you ever been employed with us before?</label>
+          </div>
+          <div class="col-xs-2 col-sm-2 col-md-2 col-lg-2 col-xlg-2">
+            <span style="font-family:cursive; font-weight:bold; color:blue;">
+              {{applicant.q3y |yesiandno}}
+            </span>
+            Yes
+          </div>
+          <div class="col-xs-2 col-sm-2 col-md-2 col-lg-2 col-xlg-2">
+            <span style="font-family:cursive; font-weight:bold; color:blue;">
+              {{applicant.q3n |yesiandno}}
+            </span>
+            No
+          </div>
+        </div>
+
+        <br>
+        <div class="row">
+          <div class="col-xs-2 col-sm-2 col-md-2 col-lg-2 col-xlg-2">
+
+          </div>
+          <div class="col-xs-5 col-sm-5 col-md-5 col-lg-5 col-xlg-5">
+            <label for="name" *ngIf="applicant.q3y">If Yes, give date and location: </label>
+          </div>
+          <div class="col-xs-5 col-sm-5 col-md-5 col-lg-5 col-xlg-5">
+            <p style="font-family:cursive; font-weight:bold;" *ngIf="applicant.q3y">
+              {{ applicant.ifemployedwhenandwhere }}
+            </p>
+          </div>
+        </div>
+
+        <br>
+        <div class="row">
+          <div class="col-xs-8 col-sm-8 col-md-8 col-lg-8 col-xlg-8">
+            <label for="name">Are you currently employed?</label>
+          </div>
+          <div class="col-xs-2 col-sm-2 col-md-2 col-lg-2 col-xlg-2">
+            <span style="font-family:cursive; font-weight:bold; color:blue;">
+              {{applicant.q4y |yesiandno}}
+            </span>
+            Yes
+          </div>
+          <div class="col-xs-2 col-sm-2 col-md-2 col-lg-2 col-xlg-2">
+            <span style="font-family:cursive; font-weight:bold; color:blue;">
+              {{applicant.q4n |yesiandno}}
+            </span>
+            No
+          </div>
+        </div>
+
+        <br>
+        <div class="row">
+          <div class="col-xs-8 col-sm-8 col-md-8 col-lg-8 col-xlg-8">
+            <label for="name">May we contact your present employer?</label>
+          </div>
+          <div class="col-xs-2 col-sm-2 col-md-2 col-lg-2 col-xlg-2">
+            <span style="font-family:cursive; font-weight:bold; color:blue;">
+              {{applicant.q5y |yesiandno}}
+            </span>
+            Yes
+          </div>
+          <div class="col-xs-2 col-sm-2 col-md-2 col-lg-2 col-xlg-2">
+            <span style="font-family:cursive; font-weight:bold; color:blue;">
+              {{applicant.q5n |yesiandno}}
+            </span>
+            No
+          </div>
+        </div>
+
+        <br>
+        <div class="row">
+          <div class="col-xs-8 col-sm-8 col-md-8 col-lg-8 col-xlg-8">
+            <label for="name">Are you prevented from lawfully becoming employed in this country because of Visa or Immigration Status?</label>
+            <p style="font-family:'Times New Roman', Times, serif; font-size:9px; font-weight:bold">Proof of Citizenship or immigration status will be required upon employment.</p>
+
+          </div>
+          <div class="col-xs-2 col-sm-2 col-md-2 col-lg-2 col-xlg-2">
+            <span style="font-family:cursive; font-weight:bold; color:blue;">
+              {{applicant.q6y |yesiandno}}
+            </span>
+            Yes
+          </div>
+          <div class="col-xs-2 col-sm-2 col-md-2 col-lg-2 col-xlg-2">
+            <span style="font-family:cursive; font-weight:bold; color:blue;">
+              {{applicant.q6n |yesiandno}}
+            </span>
+            No
+          </div>
+        </div>
+
+        <br>
+        <div class="row">
+          <div class="col-xs-8 col-sm-8 col-md-8 col-lg-8 col-xlg-8">
+            <label for="name">On What date would you be available for work?</label>
+          </div>
+          <div class="col-xs-4 col-sm-4 col-md-4 col-lg-4 col-xlg-4">
+            <span style="font-family:cursive; font-weight:bold;">
+              {{applicant.availabetowork |date:fullyear}}
+            </span>
+          </div>
+        </div>
+
+        <br>
+        <div class="row">
+          <div class="col-xs-4 col-sm-4 col-md-4 col-lg-4 col-xlg-4">
+            <label for="name">Are you available to work?</label>
+          </div>
+          <div class="col-xs-2 col-sm-2 col-md-2 col-lg-2 col-xlg-2">
+            <span style="font-family:cursive; font-weight:bold; color:blue;">
+              {{applicant.fulltime |yesiandno}}
+            </span>
+            Full Time
+          </div>
+          <div class="col-xs-2 col-sm-2 col-md-2 col-lg-2 col-xlg-2">
+            <span style="font-family:cursive; font-weight:bold; color:blue;">
+              {{applicant.partime |yesiandno}}
+            </span>
+            Part Time
+          </div>
+          <div class="col-xs-2 col-sm-2 col-md-2 col-lg-2 col-xlg-2">
+            <span style="font-family:cursive; font-weight:bold; color:blue;">
+              {{applicant.shiftwork |yesiandno}}
+            </span>
+            Shift Work
+          </div>
+          <div class="col-xs-2 col-sm-2 col-md-2 col-lg-2 col-xlg-2">
+            <span style="font-family:cursive; font-weight:bold; color:blue;">
+              {{applicant.temporary |yesiandno}}
+            </span>
+            Temporary
+          </div>
+        </div>
+        <br>
+        <div class="row">
+          <div class="col-xs-8 col-sm-8 col-md-8 col-lg-8 col-xlg-8">
+            <label for="name">Are you currently on "lay-off" status and subject to recall?</label>
+          </div>
+          <div class="col-xs-2 col-sm-2 col-md-2 col-lg-2 col-xlg-2">
+            <span style="font-family:cursive; font-weight:bold; color:blue;">
+              {{applicant.q7y |yesiandno}}
+            </span>
+            Yes
+          </div>
+          <div class="col-xs-2 col-sm-2 col-md-2 col-lg-2 col-xlg-2">
+            <span style="font-family:cursive; font-weight:bold; color:blue;">
+              {{applicant.q7n |yesiandno}}
+            </span>
+            No
+          </div>
+        </div>
+        <br>
+        <div class="row">
+          <div class="col-xs-8 col-sm-8 col-md-8 col-lg-8 col-xlg-8">
+            <label for="name">Can you travel if a job requires it?</label>
+          </div>
+          <div class="col-xs-2 col-sm-2 col-md-2 col-lg-2 col-xlg-2">
+            <span style="font-family:cursive; font-weight:bold; color:blue;">
+              {{applicant.q8y |yesiandno}}
+            </span>
+            Yes
+          </div>
+          <div class="col-xs-2 col-sm-2 col-md-2 col-lg-2 col-xlg-2">
+            <span style="font-family:cursive; font-weight:bold; color:blue;">
+              {{applicant.q8n |yesiandno}}
+            </span>
+            No
+          </div>
+        </div>
+        <br>
+        <div class="row">
+          <div class="col-xs-8 col-sm-8 col-md-8 col-lg-8 col-xlg-8">
+            <label for="name">Have you been convicted of a felony within the last 7 years?</label>
+            <p style="font-family:'Times New Roman', Times, serif; font-size:9px; font-weight:bold">Conviction will not necessarily disqualify an applicant from employment.</p>
+          </div>
+          <div class="col-xs-2 col-sm-2 col-md-2 col-lg-2 col-xlg-2">
+            <span style="font-family:cursive; font-weight:bold; color:blue;">
+              {{applicant.q9y |yesiandno}}
+            </span>
+            Yes
+          </div>
+          <div class="col-xs-2 col-sm-2 col-md-2 col-lg-2 col-xlg-2">
+            <span style="font-family:cursive; font-weight:bold; color:blue;">
+              {{applicant.q9n |yesiandno}}
+            </span>
+            No
+          </div>
+        </div>
+        <br>
+        <div class="row" *ngIf="applicant.q9y">
+          <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 col-xlg-12" *ngIf="applicant.q9y">
+            <label for="name">If Yes, please explain </label>
+
+            <p style="font-family:cursive; font-weight:bold; margin-left: 20px;">
+              {{applicant.ifconvited}}
+            </p>
+
+          </div>
+        </div>
+      </div>
+      <br>
+
+
+      <div class="row">
+        <H1 style="margin-left: 20px;"> EDUCATION</H1>
+      </div>
+
+      <div class="card" style="background-color:white;">
+        <div class="row">
+
+          <div class="col-xs-4 col-sm-4 col-md-4 col-lg-4 col-xlg-4">
+
+          </div>
+          <div class="col-xs-2 col-sm-2 col-md-2 col-lg-2 col-xlg-2">
+            <label for="name" style="font-size:70%">Elementary School </label>
+          </div>
+          <div class="col-xs-2 col-sm-2 col-md-2 col-lg-2 col-xlg-2">
+            <label for="name" style="font-size:70%">Higth School </label>
+          </div>
+          <div class="col-xs-2 col-sm-2 col-md-2 col-lg-2 col-xlg-2">
+            <label for="name" style="font-size:70%">Undergraduate College/University </label>
+          </div>
+          <div class="col-xs-2 col-sm-2 col-md-2 col-lg-2 col-xlg-2">
+            <label for="name" style="font-size:70%">Graduate/Professional </label>
+          </div>
+        </div>
+
+        <br>
+        <div class="row">
+
+          <div class="col-xs-4 col-sm-4 col-md-4 col-lg-4 col-xlg-4">
+            <label for="name" style="margin-left: 20px;">School Name and Location </label>
+          </div>
+          <div class="col-xs-2 col-sm-2 col-md-2 col-lg-2 col-xlg-2">
+            <p style="font-family:cursive; font-weight:bold; margin-left: 20px;">
+              {{applicant.elementaryname}}
+            </p>
+          </div>
+          <div class="col-xs-2 col-sm-2 col-md-2 col-lg-2 col-xlg-2">
+            <p style="font-family:cursive; font-weight:bold; margin-left: 20px;">
+              {{applicant.hightschoolname}}
+            </p>
+          </div>
+          <div class="col-xs-2 col-sm-2 col-md-2 col-lg-2 col-xlg-2">
+            <p style="font-family:cursive; font-weight:bold; margin-left: 20px;">
+              {{applicant.collegename}}
+            </p>
+          </div>
+          <div class="col-xs-2 col-sm-2 col-md-2 col-lg-2 col-xlg-2">
+            <p style="font-family:cursive; font-weight:bold; margin-left: 20px;">
+              {{applicant.professionalname}}
+            </p>
+          </div>
+        </div>
+
+        <div class="row">
+
+          <div class="col-xs-4 col-sm-4 col-md-4 col-lg-4 col-xlg-4">
+            <label for="name" style="margin-left: 20px;">Years Completed</label>
+          </div>
+          <div class="col-xs-2 col-sm-2 col-md-2 col-lg-2 col-xlg-2">
+
+            <p style="font-family:cursive; font-weight:bold; margin-left: 20px;">
+              {{applicant.yearscompleted1}}
+            </p>
+
+          </div>
+          <div class="col-xs-2 col-sm-2 col-md-2 col-lg-2 col-xlg-2">
+            <p style="font-family:cursive; font-weight:bold; margin-left: 20px;">
+              {{applicant.yearscompleted2}}
+            </p>
+          </div>
+          <div class="col-xs-2 col-sm-2 col-md-2 col-lg-2 col-xlg-2">
+            <p style="font-family:cursive; font-weight:bold; margin-left: 20px;">
+              {{applicant.yearscompleted3}}
+            </p>
+          </div>
+          <div class="col-xs-2 col-sm-2 col-md-2 col-lg-2 col-xlg-2">
+            <p style="font-family:cursive; font-weight:bold; margin-left: 20px;">
+              {{applicant.yearscompleted4}}
+            </p>
+          </div>
+        </div>
+        <br>
+
+        <div class="row">
+
+          <div class="col-xs-4 col-sm-4 col-md-4 col-lg-4 col-xlg-4">
+            <label for="name" style="margin-left: 20px;">Diploma/Degree</label>
+          </div>
+          <div class="col-xs-2 col-sm-2 col-md-2 col-lg-2 col-xlg-2">
+
+            <p style="font-family:cursive; font-weight:bold; margin-left: 20px;">
+              {{applicant.diplomadegree1}}
+            </p>
+
+          </div>
+          <div class="col-xs-2 col-sm-2 col-md-2 col-lg-2 col-xlg-2">
+            <p style="font-family:cursive; font-weight:bold; margin-left: 20px;">
+              {{applicant.diplomadegree2}}
+            </p>
+          </div>
+          <div class="col-xs-2 col-sm-2 col-md-2 col-lg-2 col-xlg-2">
+            <p style="font-family:cursive; font-weight:bold; margin-left: 20px;">
+              {{applicant.diplomadegree3}}
+            </p>
+          </div>
+          <div class="col-xs-2 col-sm-2 col-md-2 col-lg-2 col-xlg-2">
+            <p style="font-family:cursive; font-weight:bold; margin-left: 20px;">
+              {{applicant.diplomadegree4}}
+            </p>
+          </div>
+        </div>
+        <br>
+
+        <div class="row">
+          <div class="col-xs-4 col-sm-4 col-md-4 col-lg-4 col-xlg-4">
+            <label for="name" style="margin-left: 20px;">Describe Course of Study</label>
+          </div>
+          <div class="col-xs-8 col-sm-8 col-md-8 col-lg-8 col-xlg-8">
+            <p style="font-family:cursive; font-weight:bold; margin-left: 20px;">
+              {{applicant.courses}}
+            </p>
+          </div>
+        </div>
+        <br>
+        <div class="row">
+          <div class="col-xs-4 col-sm-4 col-md-4 col-lg-4 col-xlg-4">
+            <label for="name" style="margin-left: 20px;">Describe any specialized training, apprenticeship, skills and extra-curricular activities</label>
+          </div>
+          <div class="col-xs-8 col-sm-8 col-md-8 col-lg-8 col-xlg-8">
+            <p style="font-family:cursive; font-weight:bold; margin-left: 20px;">
+              {{applicant.trainings}}
+            </p>
+          </div>
+        </div>
+        <br>
+        <div class="row">
+          <div class="col-xs-4 col-sm-4 col-md-4 col-lg-4 col-xlg-4">
+            <label for="name" style="margin-left: 20px;">Describe any honors you have received</label>
+          </div>
+          <div class="col-xs-8 col-sm-8 col-md-8 col-lg-8 col-xlg-8">
+            <p style="font-family:cursive; font-weight:bold; margin-left: 20px;">
+              {{applicant.honors}}
+            </p>
+          </div>
+        </div>
+        <br>
+        <div class="row">
+          <div class="col-xs-4 col-sm-4 col-md-4 col-lg-4 col-xlg-4">
+            <label for="name" style="margin-left: 20px;">State any additional information you feel may be helpfull to us in considering your application</label>
+          </div>
+          <div class="col-xs-8 col-sm-8 col-md-8 col-lg-8 col-xlg-8">
+            <p style="font-family:cursive; font-weight:bold; margin-left: 20px;">
+              {{applicant.moreinfo}}
+            </p>
+          </div>
+        </div>
+        <br>
+      </div>
+
+      <br>
+      <div class="card" style="padding-left: 30px; background-color:white">
+        <p style="text-align: center">Indicate any foreign languages you can speak, read and/or write</p>
+        <table class="table table table-sm">
+          <thead>
+            <tr>
+              <th></th>
+              <th style="text-align: center">FLUENT</th>
+              <th style="text-align: center">GOOD</th>
+              <th style="text-align: center">FAIR</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>SPEAK </td>
+              <td>
+                <p style="font-family:cursive; font-weight:bold; margin-left: 20px;">
+                  {{ applicant.speakfluent }}
+                </p>
+              </td>
+              <td>
+                <p style="font-family:cursive; font-weight:bold; margin-left: 20px;">
+                  {{ applicant.speakgood }}
+                </p>
+              </td>
+              <td>
+                <p style="font-family:cursive; font-weight:bold; margin-left: 20px;">
+                  {{ applicant.speakfail }}
+                </p>
+              </td>
+            </tr>
+            <tr>
+              <td>READ</td>
+              <td>
+                <p style="font-family:cursive; font-weight:bold; margin-left: 20px;">
+                  {{ applicant.readfluent }}
+                </p>
+              </td>
+              <td>
+                <p style="font-family:cursive; font-weight:bold; margin-left: 20px;">
+                  {{ applicant.readgood }}
+                </p>
+              </td>
+              <td>
+                <p style="font-family:cursive; font-weight:bold; margin-left: 20px;">
+                  {{ applicant.readfail }}
+                </p>
+              </td>
+            </tr>
+            <tr>
+              <td>WRITE</td>
+              <td>
+                <p style="font-family:cursive; font-weight:bold; margin-left: 20px;">
+                  {{ applicant.writefluent }}
+                </p>
+              </td>
+              <td>
+                <p style="font-family:cursive; font-weight:bold; margin-left: 20px;">
+                  {{ applicant.writegood }}
+                </p>
+              </td>
+              <td>
+                <p style="font-family:cursive; font-weight:bold; margin-left: 20px;">
+                  {{ applicant.writefail }}
+                </p>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+
+      <br>
+      <div class="card" style="padding-left: 30px; background-color:white">
+        <h5>In Case of Emergency Please Notify</h5>
+
+        <div class="row">
+          <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 col-xlg-12">
+            Name
+            <p style="font-family:cursive; font-weight:bold; margin-left: 20px;">
+              {{ applicant.emergencyname}}
+            </p>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 col-xlg-12">
+            Addrress
+            <p style="font-family:cursive; font-weight:bold; margin-left: 20px;">
+              {{ applicant.emergencyaddress }}
+            </p>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 col-xlg-12">
+            Telephone Number
+            <p style="font-family:cursive; font-weight:bold; margin-left: 20px;">
+              {{ applicant.emergencynumber }}
+            </p>
+          </div>
+        </div>
+      </div>
+
+      <br>
+      <div class="card" style="padding-left: 30px; background-color:white">
+        <div class="row">
+          <div class="col-xs-8 col-sm-8 col-md-8 col-lg-8 col-xlg-8">
+            <h5>Have you ever had any job-related training in United States military? </h5>
+          </div>
+          <div class="col-xs-2 col-sm-2 col-md-2 col-lg-2 col-xlg-2">
+            {{ applicant.usamilitaryyes |yesiandno }} Yes
+            <br>
+          </div>
+          <div class="col-xs-2 col-sm-2 col-md-2 col-lg-2 col-xlg-2">
+            {{ applicant.usamilitaryno |yesiandno }} No
+            <br>
+          </div>
+
+          <br>
+          <div class="row">
+            <div *ngIf="applicant.usamilitaryyes">
+              <label for="name" style="margin-left: 30px;">If Yes, please describe: </label>
+              <br>
+            </div>
+          </div>
+          <div class="row">
+            <div *ngIf="applicant.usamilitaryyes">
+              <br>
+              <p style="font-family:cursive; font-weight:bold; margin-left: 30px;">
+                {{ applicant.usamilataryexplain }}
+              </p>
+            </div>
+          </div>
+
+
+        </div>
+
+      </div>
+
+      <br>
+
+      <div class="card" style="padding-left: 30px; background-color:white">
+        <br>
+        <h5> Employment Experience</h5>
+        <ul>
+          <li>
+            Start with your present or last job.
+          </li>
+          <li>
+            List your employment experience for the past 5 years, explain any gaps between jobs.
+          </li>
+          <li>
+            Include any job-related military service assignments and volunteer activities.
+          </li>
+          <li>
+            You may exclude organizations which indicate race, color, religion, gender, national origin, disability or other protected
+            status.
+          </li>
+        </ul>
+        <h1># 5</h1>
+
+        <div class="card" style="background-color: white">
+
+          <table class="table-responsive">
+
+            <tbody>
+              <tr>
+                <td style="width: 40%">
+                  Employer
+                  <p style="font-family:cursive; font-weight:bold;">
+                    {{ applicant.employer1name }}
+                  </p>
+                </td>
+              </tr>
+
+
+              <tr>
+                <td style="width: 40%">
+                  Address
+                  <p style="font-family:cursive; font-weight:bold;">
+                    {{ applicant.employer1address}}
+                  </p>
+                </td>
+                <td style="width: 30%">
+                  Date Employed
+                  <table class="table-responsive">
+                    <td style="width: 15%">From</td>
+                    <td style="width: 15%">To</td>
+                    <tr>
+                      <td style="width: 15%">
+                        <p style="font-family:cursive; font-weight:bold;">
+                          {{ applicant.from1 }}
+                        </p>
+                      </td>
+                      <td style="width: 15%">
+                        <p style="font-family:cursive; font-weight:bold;">
+                          {{ applicant.to1 }}
+                        </p>
+                      </td>
+                    </tr>
+                  </table>
+                </td>
+                <td style="width: 40%">
+                  Work Performed
+                  <p style="font-family:cursive; font-weight:bold;">
+                    {{ applicant.wperformed1 }}
+                  </p>
+                </td>
+              </tr>
+              <tr>
+                <td style="width: 40%">
+                  Telephone Number(s)
+                  <p style="font-family:cursive; font-weight:bold;">
+                    {{ applicant.employer1number }}
+                  </p>
+                </td>
+                <td style="width: 30%">
+                  Hourly Rate/Salary
+                  <table class="table-responsive">
+                    <td style="width: 15%">Starting</td>
+                    <td style="width: 15%">Final</td>
+                    <tr>
+                      <td style="width: 15%">
+                        <p style="font-family:cursive; font-weight:bold;">
+                          {{ applicant.start1 }}
+                        </p>
+                      </td>
+                      <td style="width: 15%">
+                        <p style="font-family:cursive; font-weight:bold;">
+                          {{ applicant.final1 }}
+                        </p>
+                      </td>
+                    </tr>
+                  </table>
+                </td>
+              </tr>
+              <tr>
+                <td style="width: 40%">
+                  Job Title
+                  <p style="font-family:cursive; font-weight:bold;">
+                    {{applicant.jobtitle1}}
+                  </p>
+
+                </td>
+                <td style="width: 40%">
+                  Supervisor
+                  <p style="font-family:cursive; font-weight:bold;">
+                    {{ applicant.supervisor1}}
+                  </p>
+                </td>
+              </tr>
+              <tr>
+                <td style="width: 40%">
+                  Reason for Leaving
+                  <p style="font-family:cursive; font-weight:bold;">
+                    {{ applicant.reasonforleaving1}}
+                  </p>
+
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+
+        <h1># 4</h1>
+        <div class="card" style="background-color: white">
+
+          <table class="table-responsive">
+
+            <tbody>
+              <tr>
+                <td style="width: 40%">
+                  Employer
+                  <p style="font-family:cursive; font-weight:bold;">
+                    {{ applicant.employer2name }}
+                  </p>
+                </td>
+              </tr>
+
+
+              <tr>
+                <td style="width: 40%">
+                  Address
+                  <p style="font-family:cursive; font-weight:bold;">
+                    {{ applicant.employer2address}}
+                  </p>
+                </td>
+                <td style="width: 30%">
+                  Date Employed
+                  <table class="table-responsive">
+                    <td style="width: 15%">From</td>
+                    <td style="width: 15%">To</td>
+                    <tr>
+                      <td style="width: 15%">
+                        <p style="font-family:cursive; font-weight:bold;">
+                          {{ applicant.from2 }}
+                        </p>
+                      </td>
+                      <td style="width: 15%">
+                        <p style="font-family:cursive; font-weight:bold;">
+                          {{ applicant.to2 }}
+                        </p>
+                      </td>
+                    </tr>
+                  </table>
+                </td>
+                <td style="width: 40%">
+                  Work Performed
+                  <p style="font-family:cursive; font-weight:bold;">
+                    {{ applicant.wperformed2 }}
+                  </p>
+                </td>
+              </tr>
+              <tr>
+                <td style="width: 40%">
+                  Telephone Number(s)
+                  <p style="font-family:cursive; font-weight:bold;">
+                    {{ applicant.employer2number }}
+                  </p>
+                </td>
+                <td style="width: 30%">
+                  Hourly Rate/Salary
+                  <table class="table-responsive">
+                    <td style="width: 15%">Starting</td>
+                    <td style="width: 15%">Final</td>
+                    <tr>
+                      <td style="width: 15%">
+                        <p style="font-family:cursive; font-weight:bold;">
+                          {{ applicant.start2 }}
+                        </p>
+                      </td>
+                      <td style="width: 15%">
+                        <p style="font-family:cursive; font-weight:bold;">
+                          {{ applicant.final2 }}
+                        </p>
+                      </td>
+                    </tr>
+                  </table>
+                </td>
+              </tr>
+              <tr>
+                <td style="width: 40%">
+                  Job Title
+                  <p style="font-family:cursive; font-weight:bold;">
+                    {{applicant.jobtitle2}}
+                  </p>
+
+                </td>
+                <td style="width: 40%">
+                  Supervisor
+                  <p style="font-family:cursive; font-weight:bold;">
+                    {{ applicant.supervisor2}}
+                  </p>
+                </td>
+              </tr>
+              <tr>
+                <td style="width: 40%">
+                  Reason for Leaving
+                  <p style="font-family:cursive; font-weight:bold;">
+                    {{ applicant.reasonforleaving2}}
+                  </p>
+
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+
+
+        <h1># 3</h1>
+        <div class="card" style="background-color: white">
+
+          <table class="table-responsive">
+
+            <tbody>
+              <tr>
+                <td style="width: 40%">
+                  Employer
+                  <p style="font-family:cursive; font-weight:bold;">
+                    {{ applicant.employer3name }}
+                  </p>
+                </td>
+              </tr>
+              <tr>
+                <td style="width: 40%">
+                  Address
+                  <p style="font-family:cursive; font-weight:bold;">
+                    {{ applicant.employer3address}}
+                  </p>
+                </td>
+                <td style="width: 30%">
+                  Date Employed
+                  <table class="table-responsive">
+                    <td style="width: 15%">From</td>
+                    <td style="width: 15%">To</td>
+                    <tr>
+                      <td style="width: 15%">
+                        <p style="font-family:cursive; font-weight:bold;">
+                          {{ applicant.from3 }}
+                        </p>
+                      </td>
+                      <td style="width: 15%">
+                        <p style="font-family:cursive; font-weight:bold;">
+                          {{ applicant.to3 }}
+                        </p>
+                      </td>
+                    </tr>
+                  </table>
+                </td>
+                <td style="width: 40%">
+                  Work Performed
+                  <p style="font-family:cursive; font-weight:bold;">
+                    {{ applicant.wperformed3 }}
+                  </p>
+                </td>
+              </tr>
+              <tr>
+                <td style="width: 40%">
+                  Telephone Number(s)
+                  <p style="font-family:cursive; font-weight:bold;">
+                    {{ applicant.employer3number }}
+                  </p>
+                </td>
+                <td style="width: 30%">
+                  Hourly Rate/Salary
+                  <table class="table-responsive">
+                    <td style="width: 15%">Starting</td>
+                    <td style="width: 15%">Final</td>
+                    <tr>
+                      <td style="width: 15%">
+                        <p style="font-family:cursive; font-weight:bold;">
+                          {{ applicant.start3 }}
+                        </p>
+                      </td>
+                      <td style="width: 15%">
+                        <p style="font-family:cursive; font-weight:bold;">
+                          {{ applicant.final3 }}
+                        </p>
+                      </td>
+                    </tr>
+                  </table>
+                </td>
+              </tr>
+              <tr>
+                <td style="width: 40%">
+                  Job Title
+                  <p style="font-family:cursive; font-weight:bold;">
+                    {{applicant.jobtitle3}}
+                  </p>
+
+                </td>
+                <td style="width: 40%">
+                  Supervisor
+                  <p style="font-family:cursive; font-weight:bold;">
+                    {{ applicant.supervisor3}}
+                  </p>
+                </td>
+              </tr>
+              <tr>
+                <td style="width: 40%">
+                  Reason for Leaving
+                  <p style="font-family:cursive; font-weight:bold;">
+                    {{ applicant.reasonforleaving3}}
+                  </p>
+
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+
+        <h1># 2</h1>
+        <div class="card" style="background-color: white">
+
+          <table class="table-responsive">
+
+            <tbody>
+              <tr>
+                <td style="width: 40%">
+                  Employer
+                  <p style="font-family:cursive; font-weight:bold;">
+                    {{ applicant.employer4name }}
+                  </p>
+                </td>
+              </tr>
+
+
+              <tr>
+                <td style="width: 40%">
+                  Address
+                  <p style="font-family:cursive; font-weight:bold;">
+                    {{ applicant.employer4address}}
+                  </p>
+                </td>
+                <td style="width: 30%">
+                  Date Employed
+                  <table class="table-responsive">
+                    <td style="width: 15%">From</td>
+                    <td style="width: 15%">To</td>
+                    <tr>
+                      <td style="width: 15%">
+                        <p style="font-family:cursive; font-weight:bold;">
+                          {{ applicant.from4 }}
+                        </p>
+                      </td>
+                      <td style="width: 15%">
+                        <p style="font-family:cursive; font-weight:bold;">
+                          {{ applicant.to4 }}
+                        </p>
+                      </td>
+                    </tr>
+                  </table>
+                </td>
+                <td style="width: 40%">
+                  Work Performed
+                  <p style="font-family:cursive; font-weight:bold;">
+                    {{ applicant.wperformed4 }}
+                  </p>
+                </td>
+              </tr>
+              <tr>
+                <td style="width: 40%">
+                  Telephone Number(s)
+                  <p style="font-family:cursive; font-weight:bold;">
+                    {{ applicant.employer4number }}
+                  </p>
+                </td>
+                <td style="width: 30%">
+                  Hourly Rate/Salary
+                  <table class="table-responsive">
+                    <td style="width: 15%">Starting</td>
+                    <td style="width: 15%">Final</td>
+                    <tr>
+                      <td style="width: 15%">
+                        <p style="font-family:cursive; font-weight:bold;">
+                          {{ applicant.start4 }}
+                        </p>
+                      </td>
+                      <td style="width: 15%">
+                        <p style="font-family:cursive; font-weight:bold;">
+                          {{ applicant.final4 }}
+                        </p>
+                      </td>
+                    </tr>
+                  </table>
+                </td>
+              </tr>
+              <tr>
+                <td style="width: 40%">
+                  Job Title
+                  <p style="font-family:cursive; font-weight:bold;">
+                    {{applicant.jobtitle4}}
+                  </p>
+
+                </td>
+                <td style="width: 40%">
+                  Supervisor
+                  <p style="font-family:cursive; font-weight:bold;">
+                    {{ applicant.supervisor4}}
+                  </p>
+                </td>
+              </tr>
+              <tr>
+                <td style="width: 40%">
+                  Reason for Leaving
+                  <p style="font-family:cursive; font-weight:bold;">
+                    {{ applicant.reasonforleaving4}}
+                  </p>
+
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+        <h1># 1</h1>
+        <div class="card" style="background-color: white">
+
+          <table class="table-responsive">
+
+            <tbody>
+              <tr>
+                <td style="width: 40%">
+                  Employer
+                  <p style="font-family:cursive; font-weight:bold;">
+                    {{ applicant.employer5name }}
+                  </p>
+                </td>
+              </tr>
+
+
+              <tr>
+                <td style="width: 40%">
+                  Address
+                  <p style="font-family:cursive; font-weight:bold;">
+                    {{ applicant.employer5address}}
+                  </p>
+                </td>
+                <td style="width: 30%">
+                  Date Employed
+                  <table class="table-responsive">
+                    <td style="width: 15%">From</td>
+                    <td style="width: 15%">To</td>
+                    <tr>
+                      <td style="width: 15%">
+                        <p style="font-family:cursive; font-weight:bold;">
+                          {{ applicant.from5 }}
+                        </p>
+                      </td>
+                      <td style="width: 15%">
+                        <p style="font-family:cursive; font-weight:bold;">
+                          {{ applicant.to5 }}
+                        </p>
+                      </td>
+                    </tr>
+                  </table>
+                </td>
+                <td style="width: 40%">
+                  Work Performed
+                  <p style="font-family:cursive; font-weight:bold;">
+                    {{ applicant.wperformed5 }}
+                  </p>
+                </td>
+              </tr>
+              <tr>
+                <td style="width: 40%">
+                  Telephone Number(s)
+                  <p style="font-family:cursive; font-weight:bold;">
+                    {{ applicant.employer5number }}
+                  </p>
+                </td>
+                <td style="width: 30%">
+                  Hourly Rate/Salary
+                  <table class="table-responsive">
+                    <td style="width: 15%">Starting</td>
+                    <td style="width: 15%">Final</td>
+                    <tr>
+                      <td style="width: 15%">
+                        <p style="font-family:cursive; font-weight:bold;">
+                          {{ applicant.start5 }}
+                        </p>
+                      </td>
+                      <td style="width: 15%">
+                        <p style="font-family:cursive; font-weight:bold;">
+                          {{ applicant.final5 }}
+                        </p>
+                      </td>
+                    </tr>
+                  </table>
+                </td>
+              </tr>
+              <tr>
+                <td style="width: 40%">
+                  Job Title
+                  <p style="font-family:cursive; font-weight:bold;">
+                    {{applicant.jobtitle5}}
+                  </p>
+
+                </td>
+                <td style="width: 40%">
+                  Supervisor
+                  <p style="font-family:cursive; font-weight:bold;">
+                    {{ applicant.supervisor5}}
+                  </p>
+                </td>
+              </tr>
+              <tr>
+                <td style="width: 40%">
+                  Reason for Leaving
+                  <p style="font-family:cursive; font-weight:bold;">
+                    {{ applicant.reasonforleaving5}}
+                  </p>
+
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+      <br>
+      <div class="card" style="background-color: white">
+        <h5>Special Skills and Qualifications </h5>
+        <p>Sumarize especial job-related skills and qualifications acquired from employment or other experience.</p>
+
+        <p style="font-family:cursive; font-weight:bold;">
+          {{ applicant.skillandqualifications}}
+        </p>
+
+      </div>
+
+      <br>
+      <h5 style="text-align: center">ACKNOLEDGMENT AND RELEASE</h5>
+      <div class="card" style="background-color: white">
+
+        <div style="padding-left:25px; background-color:white; color: black; text-align:justify;">
+
+          <h1 style="text-align: center">ARMELLINI INDUSTRIES, INC</h1>
+          <H2 style="text-align: center"> EMPLOYMENT APPLICATION ACKNOWLEDGMENT AND RELEASE</H2>
+          <br>
+          <em>
+            <p>I understand that this application for employment will be given consideration, but it is not a promise of employment.
+            </p>
+            <p>I certify that all of the information furnished on this application is true, complete and correct. I understand
+              and agree that any falsification, misrepresentation, misleading statement, or omission of fact on either this
+              application or during the pre-hire process will be sufficient reason for (1) my not being offered employment;
+              or (2) dismissal at any time if I am employed.
+            </p>
+            <p>I understand and agree that If I am hired, my employment will be for no definite period of time and may, regardless
+              of the time and manner of payment of my wages, be terminated at any time by me or the Company, with or without
+              cause and without any previous notice. I also understand that the Company has the right to unilaterally modify
+              and terminate any policies, practices, procedures, and standars it has adopted or implemented, to the extend
+              not limited by law.
+            </p>
+            <p>
+              In the event of my employment by the Company, I will comply all rules and regulations as set forth in the Company's policy
+              manual or other communication distributed to employees.
+            </p>
+            <p>
+              I understand that I must consent to and authorize a pre-employment verification of background information. I authorize the
+              Company to (1) investigate the truthfulness of all statements made on my application or resume, or verbal statements
+              made by me in the interview process; (2) conduct any verification of my education, employment, workers' compensation
+              claims, personal, credit, and motor vehicle records, and to receive any criminal history record information
+              relating to me which may be on file with any federal, state, or local agencies; and (3) disclose verbally or
+              in writing, the results of any investigation with authorized employees or agents of Armellini Industries, Inc.
+              & Subsidiaries involved in the hiring process. I understand that consideration for employment is contingent
+              upon the results of this reference and background investigation.
+            </p>
+
+            <p>
+              I also understand that a consumer credit report may be obtained from a consumer reporting agency in connection with this
+              application, and if I request, I understand that I will be informed of the name and address of the agency.
+            </p>
+            <p>
+              I authorize the Company to contact my previous employers for the purpose of checking muy employment history. My signature
+              below constitutes my knowing and my voluntary waiver of any claims I may have against the Company for contacting
+              my previous employers. I also waive and release my previous employers from any claims I may have against them
+              based upon the information they furnish to the company.
+            </p>
+            <p>
+              I authorize the Company to supply my employment record, in whole or in part, to any prospective employer, government agency,
+              or other party with a legal interest, and I release all such parties from any liability for direct or consequential
+              damages resulting from such release and disclosure.
+            </p>
+            <p>
+              I understand that employment by the Company may be conditioned upon an acceptable fitness for duty medical and health evaluation
+              that may include a physical examination paid for by the Company and conducted by a doctor selected by the Company.
+              I also understand that employment with the Company may be conditioned upon a drug and/or alcohol screening
+              test result administered by a medical organization selected by the Company. I further agree to submit, at any
+              reasonable time during my employment, and without notice, to a drug and/or alcohol screening test. I understand
+              that refusal to take a requested drug and/or alcohol screening may result in discharge. I further understand
+              that, if employed, a positive test result in immediate discharge.
+            </p>
+            <p>
+              I authorize the Company to supply my medical and health evaluation, including drug and/or alcohol screening test results,
+              in whole or in part, to any prospective employer, government agency, or other party with a legal interest,
+              and I release all such parties from any liability for direct or consequential damages resulting from such release
+              and disclosure.
+            </p>
+
+
+
+
+
+            <div class="row">
+
+            </div>
+
+            <div class="row">
+
+              <div class="col-xs-12 col-sm-12 col-md-8 col-lg-8 col-xlg-8">
+
+
+                <div style="width:50%; height:50%">
+                  <img [src]="applicant.signatureofapplicant" alt="picture" *ngIf="applicant.signatureofapplicant" />
+                  <p>
+                    _______________________________________
+                  </p>
+                  <p>
+                    Signature of Applicant
+                  </p>
+                </div>
+
+
+              </div>
+              <div class="col-xs-12 col-sm-12 col-md-4 col-lg-4 col-xlg-4">
+
+
+                <p>
+                  <span style="font-family:cursive; font-weight:bold; border-bottom:1px;  text-decoration: underline;">
+                    {{dateapply |date:fullyear}}
+                  </span>
+                </p>
+                <p>
+                  Date
+                </p>
+              </div>
+            </div>
+
+            <div class="row">
+
+            </div>
+            <div class="row">
+
+              <div class="col-xs-12 col-sm-12 col-md-8 col-lg-8 col-xlg-8">
+
+
+                _______________________________________
+                <p>
+                  Witness
+                </p>
+
+              </div>
+              <div class="col-xs-12 col-sm-12 col-md-4 col-lg-4 col-xlg-4">
+                <p>
+                  <span style="font-family:cursive; font-weight:bold; border-bottom:1px;  text-decoration: underline;">
+                    {{dateapply |date:fullyear}}
+                  </span>
+                </p>
+                <p>
+                  Date
+                </p>
+              </div>
+            </div>
+          </em>
+
+        </div>
+      </div>
+
+
+
+      <br>
+      <div class="card" id="grad1">
+        <p> If everything is fine Submit your application. After that should go to home page. If not something wrong happened. Go back and fix the errors. </p>
+       <!-- <input type = "submit" value = "Submit" class = "btn btn- primary btn-block"> -->
+        
+        <button type="submit"   [disabled]="bad" class="btn btn-success">Submit</button>
+        <button type="submit"  class="btn btn-danger" (click)="onBack()">Back</button>
+      </div>
+
+    </div>
+
+  </form>
+
+</div>

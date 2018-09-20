@@ -1,0 +1,2496 @@
+<div class="container" *ngIf="cantidad > 0; else noData">
+
+    <hr>
+    <div class="row">
+        <div class="col-sm-0 col-md-0 col-lg-0">
+        </div>
+
+        <div class="btn-group btn-group-lg">
+            <div class="col-sm-12 col-md-12 col-lg-12" style="text-align:right">
+                <button type="button" class="btn btn-primary" routerLink="/singn/{{applicant.id}}">
+                    <i class="fa fa-pencil"></i>
+                </button>
+                <button type="button" class="btn btn-primary" (click)="onPrint()">
+                    <i class="fa fa-print"></i>
+                </button>
+                <button type="button" class="btn btn-primary" (click)="donwloadPdf()">
+                    <i class="fa fa-download"></i>
+                </button>
+
+                <button type="button" class="btn btn-info" (click)="onEdit()">
+                    <i class="fa fa-edit"></i>
+                </button>
+                <button type="button" class="btn btn-danger">
+                    <i class="fa fa-remove" (click)="onDelete()"></i>
+                </button>
+            </div>
+        </div>
+    </div>
+    <hr style="border: 1px solid royalblue">
+
+    <div id="contenido">
+        <!-- *** THIS IS THE APPLICATION FORM TO PRINT  -->
+
+
+        <div>
+            <div class="row">
+                <div class="col-sm-6 col-md-6 col-lg-6">
+                    <h1>Application For Employment</h1>
+                </div>
+                <div class="col-sm-6 col-md-6 col-lg-6">
+                    <div class="col-sm-6" style="text-align: center">
+                        <address>
+                            <span style="font-weight: bold">ARMELLINI INDUSTRIES, INC.</span>
+                            <br> P.O.BOX 678
+                            <br> PALM CITY, FL 34991
+                            <br> (772) 2287-0575
+                        </address>
+                    </div>
+                </div>
+            </div>
+
+
+
+
+
+            <div class="row">
+                <div class="col-sm-12 col-md-12 col-lg-12">
+                    <div class="card" style="background-color:white;">
+                        We consider applicants for all positions without regard to race, color, religion, sex, national origin, age, marital or veteran
+                        status, the presence of a non-job-related medical condition or disability, or any other legally protected
+                        status
+                    </div>
+                </div>
+            </div>
+            <br>
+            <br>
+
+            <br>
+            <div class="card" style="background-color:white;">
+                <div class="row">
+
+                    <div class="col-sm-6 col-md-6 col-lg-6">
+                        <p>
+                            Position(s) Applied For:
+                        </p>
+                        <h4>
+                            {{applicant.applyfor}}
+                        </h4>
+                    </div>
+                    <div class="col-sm-6 col-md-6 col-lg-6">
+                        <p>
+                            Date of Appplications:
+                        </p>
+                        <h4>
+                            {{ applicant.dateapply }}
+                        </h4>
+                    </div>
+                </div>
+                <hr>
+
+                <dir class="row">
+
+
+                    <div class="col-sm-6 col-md-6 col-lg-6">
+                        <p>
+                            How Did You Learn About Us?
+                        </p>
+                        <h4>
+                            {{applicant.heardabouts}}
+                        </h4>
+                    </div>
+                    <div class="col-sm-6 col-md-6 col-lg-6">
+
+                        <p>
+                            Where Do You Want to Work?
+                        </p>
+                        <h4>
+                            {{applicant.wherewanttowork}}
+                        </h4>
+                    </div>
+
+
+                </dir>
+                <br>
+                <hr>
+
+
+
+
+                <div class="row">
+                    <div class="col-sm-4 col-md-4 col-lg-4">
+                        <p>
+                            Last Name
+                        </p>
+                        <h4>
+                            {{applicant.lastName}}
+                        </h4>
+                    </div>
+                    <div class="col-sm-4 col-md-4 col-lg-4">
+                        <p>
+                            First Name
+                        </p>
+                        <h4>
+                            {{applicant.firstName}}
+                        </h4>
+                    </div>
+                    <div class="col-sm-4 col-md-4 col-lg-4">
+                        <p>
+                            Middle Name
+                        </p>
+                        <h4>
+                            {{applicant.middleName}}
+                        </h4>
+                    </div>
+                </div>
+                <hr>
+                <div class="row">
+
+
+                    <div class="col-sm-2 col-md-2 col-lg-2">
+                        <p>
+                            Address Number
+                        </p>
+                        <h4>
+                            {{applicant.number}}
+                        </h4>
+                    </div>
+                    <div class="col-sm-3 col-md-3 col-lg-3">
+                        <p>
+                            Street
+                        </p>
+                        <h4>
+                            {{applicant.street}}
+                        </h4>
+                    </div>
+                    <div class="col-sm-3 col-md-3 col-lg-3">
+                        <p>
+                            City
+                        </p>
+                        <h4>
+                            {{applicant.city}}
+                        </h4>
+                    </div>
+                    <div class="col-sm-1 col-md-1 col-lg-1">
+                        <p>
+                            State
+                        </p>
+                        <h4>
+                            {{applicant.state}}
+                        </h4>
+                    </div>
+                    <div class="col-sm-3 col-md-3 col-lg-3">
+                        <p>
+                            Zip Code
+                        </p>
+                        <h4>
+                            {{applicant.zipcode}}
+                        </h4>
+                    </div>
+                </div>
+
+                <div class="row">
+                    <div class="col-sm-4 col-md-4 col-lg-4">
+                        <p>
+                            Telephone Number(s)
+                        </p>
+                        <h4>
+                            {{applicant.phone}}
+                        </h4>
+                    </div>
+                    <div class="col-sm-4 col-md-4 col-lg-4">
+                        <p>
+                            County
+                        </p>
+                        <h4>
+                            {{applicant.county}}
+                        </h4>
+                    </div>
+                    <div class="col-sm-4 col-md-4 col-lg-4">
+                        <p>
+                            Social Security Number
+                        </p>
+                        <h4>
+                            {{applicant.ssn}}
+                        </h4>
+                    </div>
+
+
+                </div>
+
+                <br>
+                <br>
+                <br>
+                <div style="border: 1px solid black; padding: 15px; background-color:white;">
+                    <div class="row">
+                        <div class="col-xs-8 col-sm-8 col-md-8 col-lg-8 col-xlg-8">
+                            <label for="name">If you are under 18 years of age, can you provide required proof of your eligibility to work?</label>
+                        </div>
+                        <div class="col-xs-2 col-sm-2 col-md-2 col-lg-2 col-xlg-2">
+                            <span style="font-family:cursive; font-weight:bold; color:blue;">
+                                {{applicant.q1y |yesiandno}}
+                            </span>
+                            Yes
+                        </div>
+                        <div class="col-xs-2 col-sm-2 col-md-2 col-lg-2 col-xlg-2">
+                            <span style="font-family:cursive; font-weight:bold; color:blue;">
+                                {{applicant.q1n |yesiandno}}
+                            </span>
+                            No
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        <div class="col-xs-8 col-sm-8 col-md-8 col-lg-8 col-xlg-8">
+                            <label for="name">Have you ever filed an application with us before?</label>
+                        </div>
+                        <div class="col-xs-2 col-sm-2 col-md-2 col-lg-2 col-xlg-2">
+                            <span style="font-family:cursive; font-weight:bold; color:blue;">
+                                {{applicant.q2y |yesiandno}}
+                            </span>
+                            Yes
+                        </div>
+                        <div class="col-xs-2 col-sm-2 col-md-2 col-lg-2 col-xlg-2">
+                            <span style="font-family:cursive; font-weight:bold; color:blue;">
+                                {{applicant.q2n |yesiandno}}
+                            </span>
+                            No
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        <div class="col-xs-8 col-sm-8 col-md-8 col-lg-8 col-xlg-8">
+                        </div>
+                        <div class="col-xs-2 col-sm-2 col-md-2 col-lg-2 col-xlg-2">
+                            <label for="name" *ngIf="applicant.q2y">If Yes, give date: </label>
+                        </div>
+                        <div class="col-xs-2 col-sm-2 col-md-2 col-lg-2 col-xlg-2">
+                            <p style="font-family:cursive; font-weight:bold;" *ngIf="applicant.q2y">
+                                {{applicant.ifyes}}
+                            </p>
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        <div class="col-xs-8 col-sm-8 col-md-8 col-lg-8 col-xlg-8">
+                            <label for="name">Have you ever been employed with us before?</label>
+                        </div>
+                        <div class="col-xs-2 col-sm-2 col-md-2 col-lg-2 col-xlg-2">
+                            <span style="font-family:cursive; font-weight:bold; color:blue;">
+                                {{applicant.q3y |yesiandno}}
+                            </span>
+                            Yes
+                        </div>
+                        <div class="col-xs-2 col-sm-2 col-md-2 col-lg-2 col-xlg-2">
+                            <span style="font-family:cursive; font-weight:bold; color:blue;">
+                                {{applicant.q3n |yesiandno}}
+                            </span>
+                            No
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        <div class="col-xs-2 col-sm-2 col-md-2 col-lg-2 col-xlg-2">
+
+                        </div>
+                        <div class="col-xs-5 col-sm-5 col-md-5 col-lg-5 col-xlg-5">
+                            <label for="name" *ngIf="applicant.q3y">If Yes, give date and location: </label>
+                        </div>
+                        <div class="col-xs-5 col-sm-5 col-md-5 col-lg-5 col-xlg-5">
+                            <p style="font-family:cursive; font-weight:bold;" *ngIf="applicant.q3y">
+                                {{ applicant.ifemployedwhenandwhere }}
+                            </p>
+                        </div>
+                    </div>
+
+
+                    <div class="row">
+                        <div class="col-xs-8 col-sm-8 col-md-8 col-lg-8 col-xlg-8">
+                            <label for="name">Are you currently employed?</label>
+                        </div>
+                        <div class="col-xs-2 col-sm-2 col-md-2 col-lg-2 col-xlg-2">
+                            <span style="font-family:cursive; font-weight:bold; color:blue;">
+                                {{applicant.q4y |yesiandno}}
+                            </span>
+                            Yes
+                        </div>
+                        <div class="col-xs-2 col-sm-2 col-md-2 col-lg-2 col-xlg-2">
+                            <span style="font-family:cursive; font-weight:bold; color:blue;">
+                                {{applicant.q4n |yesiandno}}
+                            </span>
+                            No
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        <div class="col-xs-8 col-sm-8 col-md-8 col-lg-8 col-xlg-8">
+                            <label for="name">May we contact your present employer?</label>
+                        </div>
+                        <div class="col-xs-2 col-sm-2 col-md-2 col-lg-2 col-xlg-2">
+                            <span style="font-family:cursive; font-weight:bold; color:blue;">
+                                {{applicant.q5y |yesiandno}}
+                            </span>
+                            Yes
+                        </div>
+                        <div class="col-xs-2 col-sm-2 col-md-2 col-lg-2 col-xlg-2">
+                            <span style="font-family:cursive; font-weight:bold; color:blue;">
+                                {{applicant.q5n |yesiandno}}
+                            </span>
+                            No
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        <div class="col-xs-8 col-sm-8 col-md-8 col-lg-8 col-xlg-8">
+                            <label for="name">Are you prevented from lawfully becoming employed in this country because of Visa or Immigration
+                                Status?</label>
+                            <p style="font-family:'Times New Roman', Times, serif; font-size:9px; font-weight:bold">Proof of Citizenship or immigration status will be required upon employment.</p>
+
+                        </div>
+                        <div class="col-xs-2 col-sm-2 col-md-2 col-lg-2 col-xlg-2">
+                            <span style="font-family:cursive; font-weight:bold; color:blue;">
+                                {{applicant.q6y |yesiandno}}
+                            </span>
+                            Yes
+                        </div>
+                        <div class="col-xs-2 col-sm-2 col-md-2 col-lg-2 col-xlg-2">
+                            <span style="font-family:cursive; font-weight:bold; color:blue;">
+                                {{applicant.q6n |yesiandno}}
+                            </span>
+                            No
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        <div class="col-xs-8 col-sm-8 col-md-8 col-lg-8 col-xlg-8">
+                            <label for="name">On What date would you be available for work?</label>
+                        </div>
+                        <div class="col-xs-4 col-sm-4 col-md-4 col-lg-4 col-xlg-4">
+                            <span style="font-family:cursive; font-weight:bold;">
+                                {{applicant.availabetowork }}
+                            </span>
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        <div class="col-xs-4 col-sm-4 col-md-4 col-lg-4 col-xlg-4">
+                            <label for="name">Are you available to work?</label>
+                        </div>
+                        <div class="col-xs-2 col-sm-2 col-md-2 col-lg-2 col-xlg-2">
+                            <span style="font-family:cursive; font-weight:bold; color:blue;">
+                                {{applicant.fulltime |yesiandno}}
+                            </span>
+                            Full Time
+                        </div>
+                        <div class="col-xs-2 col-sm-2 col-md-2 col-lg-2 col-xlg-2">
+                            <span style="font-family:cursive; font-weight:bold; color:blue;">
+                                {{applicant.parttime |yesiandno}}
+                            </span>
+                            Part Time
+                        </div>
+                        <div class="col-xs-2 col-sm-2 col-md-2 col-lg-2 col-xlg-2">
+                            <span style="font-family:cursive; font-weight:bold; color:blue;">
+                                {{applicant.shiftwork |yesiandno}}
+                            </span>
+                            Shift Work
+                        </div>
+                        <div class="col-xs-2 col-sm-2 col-md-2 col-lg-2 col-xlg-2">
+                            <span style="font-family:cursive; font-weight:bold; color:blue;">
+                                {{applicant.temporary |yesiandno}}
+                            </span>
+                            Temporary
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        <div class="col-xs-8 col-sm-8 col-md-8 col-lg-8 col-xlg-8">
+                            <label for="name">Are you currently on "lay-off" status and subject to recall?</label>
+                        </div>
+                        <div class="col-xs-2 col-sm-2 col-md-2 col-lg-2 col-xlg-2">
+                            <span style="font-family:cursive; font-weight:bold; color:blue;">
+                                {{applicant.q7y |yesiandno}}
+                            </span>
+                            Yes
+                        </div>
+                        <div class="col-xs-2 col-sm-2 col-md-2 col-lg-2 col-xlg-2">
+                            <span style="font-family:cursive; font-weight:bold; color:blue;">
+                                {{applicant.q7n |yesiandno}}
+                            </span>
+                            No
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        <div class="col-xs-8 col-sm-8 col-md-8 col-lg-8 col-xlg-8">
+                            <label for="name">Can you travel if a job requires it?</label>
+                        </div>
+                        <div class="col-xs-2 col-sm-2 col-md-2 col-lg-2 col-xlg-2">
+                            <span style="font-family:cursive; font-weight:bold; color:blue;">
+                                {{applicant.q8y |yesiandno}}
+                            </span>
+                            Yes
+                        </div>
+                        <div class="col-xs-2 col-sm-2 col-md-2 col-lg-2 col-xlg-2">
+                            <span style="font-family:cursive; font-weight:bold; color:blue;">
+                                {{applicant.q8n |yesiandno}}
+                            </span>
+                            No
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        <div class="col-xs-8 col-sm-8 col-md-8 col-lg-8 col-xlg-8">
+                            <label for="name">Have you been convicted of a felony within the last 7 years?</label>
+                            <p style="font-family:'Times New Roman', Times, serif; font-size:9px; font-weight:bold">Conviction will not necessarily disqualify an applicant from employment.</p>
+                        </div>
+                        <div class="col-xs-2 col-sm-2 col-md-2 col-lg-2 col-xlg-2">
+                            <span style="font-family:cursive; font-weight:bold; color:blue;">
+                                {{applicant.q9y |yesiandno}}
+                            </span>
+                            Yes
+                        </div>
+                        <div class="col-xs-2 col-sm-2 col-md-2 col-lg-2 col-xlg-2">
+                            <span style="font-family:cursive; font-weight:bold; color:blue;">
+                                {{applicant.q9n |yesiandno}}
+                            </span>
+                            No
+                        </div>
+                    </div>
+
+                    <div class="row" *ngIf="applicant.q9y">
+                        <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 col-xlg-12" *ngIf="applicant.q9y">
+                            <label for="name">If Yes, please explain </label>
+
+                            <p style="font-family:cursive; font-weight:bold; margin-left: 20px;">
+                                {{applicant.ifconvited}}
+                            </p>
+
+                        </div>
+                    </div>
+
+                    <br>
+
+
+                    <h1>EDUCATION</h1>
+
+                    <div class="table-responsive">
+                        <table class="table">
+                            <thead>
+                                <tr>
+                                    <th></th>
+                                    <th>Elementary School</th>
+                                    <th>High School</th>
+                                    <th>Undergraduate College/University</th>
+                                    <th>Graduate/Professional</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>School Name and Location</td>
+                                    <td>
+                                        {{applicant.elementaryname}}
+                                    </td>
+                                    <td>
+                                        {{applicant.hightschoolname}}
+                                    </td>
+                                    <td>
+                                        {{applicant.collegename}}
+                                    </td>
+                                    <td>
+                                        {{applicant.professionalname}}
+                                    </td>
+                                </tr>
+
+                                <tr>
+                                    <td>
+                                        Years Completed
+                                    </td>
+                                    <td>
+                                        {{applicant.yearscompleted1}}
+
+                                    </td>
+                                    <td>
+                                        {{applicant.yearscompleted2}}
+                                    </td>
+                                    <td>
+                                        {{applicant.yearscompleted2}}
+                                    </td>
+                                    <td>
+                                        {{applicant.yearscompleted3}}
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>
+                                        Diploma/Degree
+                                    </td>
+                                    <td>
+                                        {{applicant.diplomadegree1}}
+                                    </td>
+                                    <td>
+                                        {{applicant.diplomadegree2}}
+                                    </td>
+                                    <td>
+                                        {{applicant.diplomadegree4}}
+                                    </td>
+                                    <td>
+                                        {{applicant.diplomadegree4}}
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+
+                        <hr>
+                        <div class="row">
+                            <div class="col-xs-4 col-sm-4 col-md-4 col-lg-4 col-xlg-4">
+                                <label for="name" style="margin-left: 20px;">Describe any specialized training, apprenticeship, skills and extra-curricular activities</label>
+                            </div>
+                            <div class="col-xs-8 col-sm-8 col-md-8 col-lg-8 col-xlg-8">
+                                <p style="font-family:cursive; font-weight:bold; margin-left: 20px;">
+                                    {{applicant.trainings}}
+                                </p>
+                            </div>
+                        </div>
+                        <br>
+                        <div class="row">
+                            <div class="col-xs-4 col-sm-4 col-md-4 col-lg-4 col-xlg-4">
+                                <label for="name" style="margin-left: 20px;">Describe any honors you have received</label>
+                            </div>
+                            <div class="col-xs-8 col-sm-8 col-md-8 col-lg-8 col-xlg-8">
+                                <p style="font-family:cursive; font-weight:bold; margin-left: 20px;">
+                                    {{applicant.honors}}
+                                </p>
+                            </div>
+                        </div>
+                        <br>
+                        <div class="row">
+                            <div class="col-xs-4 col-sm-4 col-md-4 col-lg-4 col-xlg-4">
+                                <label for="name" style="margin-left: 20px;">State any additional information you feel may be helpfull to us in considering your application</label>
+                            </div>
+                            <div class="col-xs-8 col-sm-8 col-md-8 col-lg-8 col-xlg-8">
+                                <p style="font-family:cursive; font-weight:bold; margin-left: 20px;">
+                                    {{applicant.moreinfo}}
+                                </p>
+                            </div>
+                        </div>
+                        <br>
+
+                        <br>
+                        <div class="card" style="padding-left: 30px; background-color:white">
+                            <h5 style="text-align: center">Indicate any foreign languages you can speak, read and/or write</h5>
+                            <table class="table table table-sm">
+                                <thead>
+                                    <tr>
+                                        <th></th>
+                                        <th style="text-align: center">FLUENT</th>
+                                        <th style="text-align: center">GOOD</th>
+                                        <th style="text-align: center">FAIR</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <td>SPEAK </td>
+                                        <td>
+                                            <p style="font-family:cursive; font-weight:bold; margin-left: 20px;">
+                                                {{ applicant.speakfluent }}
+                                            </p>
+                                        </td>
+                                        <td>
+                                            <p style="font-family:cursive; font-weight:bold; margin-left: 20px;">
+                                                {{ applicant.speakgood }}
+                                            </p>
+                                        </td>
+                                        <td>
+                                            <p style="font-family:cursive; font-weight:bold; margin-left: 20px;">
+                                                {{ applicant.speakfail }}
+                                            </p>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td>READ</td>
+                                        <td>
+                                            <p style="font-family:cursive; font-weight:bold; margin-left: 0px;">
+                                                {{ applicant.readfluent }}
+                                            </p>
+                                        </td>
+                                        <td>
+                                            <p style="font-family:cursive; font-weight:bold; margin-left: 0px;">
+                                                {{ applicant.readgood }}
+                                            </p>
+                                        </td>
+                                        <td>
+                                            <p style="font-family:cursive; font-weight:bold; margin-left: 0px;">
+                                                {{ applicant.readfail }}
+                                            </p>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td>WRITE</td>
+                                        <td>
+                                            <p style="font-family:cursive; font-weight:bold; margin-left: 0px;">
+                                                {{ applicant.writefluent }}
+                                            </p>
+                                        </td>
+                                        <td>
+                                            <p style="font-family:cursive; font-weight:bold; margin-left: 0px;">
+                                                {{ applicant.writegood }}
+                                            </p>
+                                        </td>
+                                        <td>
+                                            <p style="font-family:cursive; font-weight:bold; margin-left: 0px;">
+                                                {{ applicant.writefail }}
+                                            </p>
+                                        </td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                        <br>
+                        <div class="card" style="padding-left: 30px; background-color:white">
+                            <h5 style="text-align: center">In Case of Emergency Please Notify</h5>
+                            <hr>
+                            <div class="row">
+                                <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 col-xlg-12">
+                                    Name
+                                    <p style="font-family:cursive; font-weight:bold; margin-left: 20px;">
+                                        {{ applicant.emergencyname}}
+                                    </p>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 col-xlg-12">
+                                    Addrress
+                                    <p style="font-family:cursive; font-weight:bold; margin-left: 20px;">
+                                        {{ applicant.emergencyaddress }}
+                                    </p>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 col-xlg-12">
+                                    Telephone Number
+                                    <p style="font-family:cursive; font-weight:bold; margin-left: 20px;">
+                                        {{ applicant.emergencynumber }}
+                                    </p>
+                                </div>
+                            </div>
+                        </div>
+
+
+                        <br>
+                        <div class="card" style="padding-left: 30px; background-color:white">
+                            <div class="row">
+                                <div class="col-xs-8 col-sm-8 col-md-8 col-lg-8 col-xlg-8">
+                                    <p>Have you ever had any job-related training in United States military? </p>
+                                </div>
+                                <div class="col-xs-2 col-sm-2 col-md-2 col-lg-2 col-xlg-2">
+                                    {{ applicant.usamilitaryyes |yesiandno }} Yes
+                                    <br>
+                                </div>
+                                <div class="col-xs-2 col-sm-2 col-md-2 col-lg-2 col-xlg-2">
+                                    {{ applicant.usamilitaryno |yesiandno }} No
+                                    <br>
+                                </div>
+
+                                <br>
+                                <div class="row">
+                                    <div>
+                                        <label for="name" style="margin-left: 30px;">If Yes, please describe: </label>
+                                        <br>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div>
+                                        <br>
+                                        <p style="font-family:cursive; font-weight:bold; margin-left: 30px;">
+                                            {{ applicant.usamilataryexplain }}
+                                        </p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <br>
+                        <div class="card" style="padding-left: 30px; background-color:white">
+                            <br>
+                            <h5> Employment Experience</h5>
+                            <ul>
+                                <li>
+                                    Start with your present or last job.
+                                </li>
+                                <li>
+                                    List your employment experience for the past 5 years, explain any gaps between jobs.
+                                </li>
+                                <li>
+                                    Include any job-related military service assignments and volunteer activities.
+                                </li>
+                                <li>
+                                    You may exclude organizations which indicate race, color, religion, gender, national origin, disability or other protected
+                                    status.
+                                </li>
+                            </ul>
+                            <h1># 1</h1>
+
+                            <div class="card" style="background-color: white">
+
+                                <table class="table-responsive">
+
+                                    <tbody>
+                                        <tr>
+                                            <td style="width: 40%">
+                                                Employer
+                                                <p style="font-family:cursive; font-weight:bold;">
+                                                    {{ applicant.employer1name }}
+                                                </p>
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td style="width: 40%">
+                                                Address
+                                                <p style="font-family:cursive; font-weight:bold;">
+                                                    {{ applicant.employer1address}}
+                                                </p>
+                                            </td>
+                                            <td style="width: 30%">
+                                                Date Employed
+                                                <table class="table-responsive">
+                                                    <td style="width: 15%">From</td>
+                                                    <td style="width: 15%">To</td>
+                                                    <tr>
+                                                        <td style="width: 15%">
+                                                            <p style="font-family:cursive; font-weight:bold;">
+                                                                {{ applicant.from1 }}
+                                                            </p>
+                                                        </td>
+                                                        <td style="width: 15%">
+                                                            <p style="font-family:cursive; font-weight:bold;">
+                                                                {{ applicant.to1 }}
+                                                            </p>
+                                                        </td>
+                                                    </tr>
+                                                </table>
+                                            </td>
+                                            <td style="width: 40%">
+                                                Work Performed
+                                                <p style="font-family:cursive; font-weight:bold;">
+                                                    {{ applicant.wperformed1 }}
+                                                </p>
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td style="width: 40%">
+                                                Telephone Number(s)
+                                                <p style="font-family:cursive; font-weight:bold;">
+                                                    {{ applicant.employer1number }}
+                                                </p>
+                                            </td>
+                                            <td style="width: 30%">
+                                                Hourly Rate/Salary
+                                                <table class="table-responsive">
+                                                    <td style="width: 15%">Starting</td>
+                                                    <td style="width: 15%">Final</td>
+                                                    <tr>
+                                                        <td style="width: 15%">
+                                                            <p style="font-family:cursive; font-weight:bold;">
+                                                                {{ applicant.start1 }}
+                                                            </p>
+                                                        </td>
+                                                        <td style="width: 15%">
+                                                            <p style="font-family:cursive; font-weight:bold;">
+                                                                {{ applicant.final1 }}
+                                                            </p>
+                                                        </td>
+                                                    </tr>
+                                                </table>
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td style="width: 40%">
+                                                Job Title
+                                                <p style="font-family:cursive; font-weight:bold;">
+                                                    {{applicant.jobtitle1}}
+                                                </p>
+
+                                            </td>
+                                            <td style="width: 40%">
+                                                Supervisor
+                                                <p style="font-family:cursive; font-weight:bold;">
+                                                    {{ applicant.supervisor1}}
+                                                </p>
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td style="width: 40%">
+                                                Reason for Leaving
+                                                <p style="font-family:cursive; font-weight:bold;">
+                                                    {{ applicant.reasonforleaving1}}
+                                                </p>
+
+                                            </td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+
+                            <h1># 2</h1>
+                            <div class="card" style="background-color: white">
+
+                                <table class="table-responsive">
+
+                                    <tbody>
+                                        <tr>
+                                            <td style="width: 40%">
+                                                Employer
+                                                <p style="font-family:cursive; font-weight:bold;">
+                                                    {{ applicant.employer2name }}
+                                                </p>
+                                            </td>
+                                        </tr>
+
+
+                                        <tr>
+                                            <td style="width: 40%">
+                                                Address
+                                                <p style="font-family:cursive; font-weight:bold;">
+                                                    {{ applicant.employer2address}}
+                                                </p>
+                                            </td>
+                                            <td style="width: 30%">
+                                                Date Employed
+                                                <table class="table-responsive">
+                                                    <td style="width: 15%">From</td>
+                                                    <td style="width: 15%">To</td>
+                                                    <tr>
+                                                        <td style="width: 15%">
+                                                            <p style="font-family:cursive; font-weight:bold;">
+                                                                {{ applicant.from2 }}
+                                                            </p>
+                                                        </td>
+                                                        <td style="width: 15%">
+                                                            <p style="font-family:cursive; font-weight:bold;">
+                                                                {{ applicant.to2 }}
+                                                            </p>
+                                                        </td>
+                                                    </tr>
+                                                </table>
+                                            </td>
+                                            <td style="width: 40%">
+                                                Work Performed
+                                                <p style="font-family:cursive; font-weight:bold;">
+                                                    {{ applicant.wperformed2 }}
+                                                </p>
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td style="width: 40%">
+                                                Telephone Number(s)
+                                                <p style="font-family:cursive; font-weight:bold;">
+                                                    {{ applicant.employer2number }}
+                                                </p>
+                                            </td>
+                                            <td style="width: 30%">
+                                                Hourly Rate/Salary
+                                                <table class="table-responsive">
+                                                    <td style="width: 15%">Starting</td>
+                                                    <td style="width: 15%">Final</td>
+                                                    <tr>
+                                                        <td style="width: 15%">
+                                                            <p style="font-family:cursive; font-weight:bold;">
+                                                                {{ applicant.start2 }}
+                                                            </p>
+                                                        </td>
+                                                        <td style="width: 15%">
+                                                            <p style="font-family:cursive; font-weight:bold;">
+                                                                {{ applicant.final2 }}
+                                                            </p>
+                                                        </td>
+                                                    </tr>
+                                                </table>
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td style="width: 40%">
+                                                Job Title
+                                                <p style="font-family:cursive; font-weight:bold;">
+                                                    {{applicant.jobtitle2}}
+                                                </p>
+
+                                            </td>
+                                            <td style="width: 40%">
+                                                Supervisor
+                                                <p style="font-family:cursive; font-weight:bold;">
+                                                    {{ applicant.supervisor2}}
+                                                </p>
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td style="width: 40%">
+                                                Reason for Leaving
+                                                <p style="font-family:cursive; font-weight:bold;">
+                                                    {{ applicant.reasonforleaving2}}
+                                                </p>
+
+                                            </td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+
+
+                            <h1># 3</h1>
+                            <div class="card" style="background-color: white">
+
+                                <table class="table-responsive">
+
+                                    <tbody>
+                                        <tr>
+                                            <td style="width: 40%">
+                                                Employer
+                                                <p style="font-family:cursive; font-weight:bold;">
+                                                    {{ applicant.employer3name }}
+                                                </p>
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td style="width: 40%">
+                                                Address
+                                                <p style="font-family:cursive; font-weight:bold;">
+                                                    {{ applicant.employer3address}}
+                                                </p>
+                                            </td>
+                                            <td style="width: 30%">
+                                                Date Employed
+                                                <table class="table-responsive">
+                                                    <td style="width: 15%">From</td>
+                                                    <td style="width: 15%">To</td>
+                                                    <tr>
+                                                        <td style="width: 15%">
+                                                            <p style="font-family:cursive; font-weight:bold;">
+                                                                {{ applicant.from3 }}
+                                                            </p>
+                                                        </td>
+                                                        <td style="width: 15%">
+                                                            <p style="font-family:cursive; font-weight:bold;">
+                                                                {{ applicant.to3 }}
+                                                            </p>
+                                                        </td>
+                                                    </tr>
+                                                </table>
+                                            </td>
+                                            <td style="width: 40%">
+                                                Work Performed
+                                                <p style="font-family:cursive; font-weight:bold;">
+                                                    {{ applicant.wperformed3 }}
+                                                </p>
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td style="width: 40%">
+                                                Telephone Number(s)
+                                                <p style="font-family:cursive; font-weight:bold;">
+                                                    {{ applicant.employer3number }}
+                                                </p>
+                                            </td>
+                                            <td style="width: 30%">
+                                                Hourly Rate/Salary
+                                                <table class="table-responsive">
+                                                    <td style="width: 15%">Starting</td>
+                                                    <td style="width: 15%">Final</td>
+                                                    <tr>
+                                                        <td style="width: 15%">
+                                                            <p style="font-family:cursive; font-weight:bold;">
+                                                                {{ applicant.start3 }}
+                                                            </p>
+                                                        </td>
+                                                        <td style="width: 15%">
+                                                            <p style="font-family:cursive; font-weight:bold;">
+                                                                {{ applicant.final3 }}
+                                                            </p>
+                                                        </td>
+                                                    </tr>
+                                                </table>
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td style="width: 40%">
+                                                Job Title
+                                                <p style="font-family:cursive; font-weight:bold;">
+                                                    {{applicant.jobtitle3}}
+                                                </p>
+
+                                            </td>
+                                            <td style="width: 40%">
+                                                Supervisor
+                                                <p style="font-family:cursive; font-weight:bold;">
+                                                    {{ applicant.supervisor3}}
+                                                </p>
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td style="width: 40%">
+                                                Reason for Leaving
+                                                <p style="font-family:cursive; font-weight:bold;">
+                                                    {{ applicant.reasonforleaving3}}
+                                                </p>
+
+                                            </td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+
+                            <h1># 4</h1>
+                            <div class="card" style="background-color: white">
+
+                                <table class="table-responsive">
+
+                                    <tbody>
+                                        <tr>
+                                            <td style="width: 40%">
+                                                Employer
+                                                <p style="font-family:cursive; font-weight:bold;">
+                                                    {{ applicant.employer4name }}
+                                                </p>
+                                            </td>
+                                        </tr>
+
+
+                                        <tr>
+                                            <td style="width: 40%">
+                                                Address
+                                                <p style="font-family:cursive; font-weight:bold;">
+                                                    {{ applicant.employer4address}}
+                                                </p>
+                                            </td>
+                                            <td style="width: 30%">
+                                                Date Employed
+                                                <table class="table-responsive">
+                                                    <td style="width: 15%">From</td>
+                                                    <td style="width: 15%">To</td>
+                                                    <tr>
+                                                        <td style="width: 15%">
+                                                            <p style="font-family:cursive; font-weight:bold;">
+                                                                {{ applicant.from4 }}
+                                                            </p>
+                                                        </td>
+                                                        <td style="width: 15%">
+                                                            <p style="font-family:cursive; font-weight:bold;">
+                                                                {{ applicant.to4 }}
+                                                            </p>
+                                                        </td>
+                                                    </tr>
+                                                </table>
+                                            </td>
+                                            <td style="width: 40%">
+                                                Work Performed
+                                                <p style="font-family:cursive; font-weight:bold;">
+                                                    {{ applicant.wperformed4 }}
+                                                </p>
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td style="width: 40%">
+                                                Telephone Number(s)
+                                                <p style="font-family:cursive; font-weight:bold;">
+                                                    {{ applicant.employer4number }}
+                                                </p>
+                                            </td>
+                                            <td style="width: 30%">
+                                                Hourly Rate/Salary
+                                                <table class="table-responsive">
+                                                    <td style="width: 15%">Starting</td>
+                                                    <td style="width: 15%">Final</td>
+                                                    <tr>
+                                                        <td style="width: 15%">
+                                                            <p style="font-family:cursive; font-weight:bold;">
+                                                                {{ applicant.start4 }}
+                                                            </p>
+                                                        </td>
+                                                        <td style="width: 15%">
+                                                            <p style="font-family:cursive; font-weight:bold;">
+                                                                {{ applicant.final4 }}
+                                                            </p>
+                                                        </td>
+                                                    </tr>
+                                                </table>
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td style="width: 40%">
+                                                Job Title
+                                                <p style="font-family:cursive; font-weight:bold;">
+                                                    {{applicant.jobtitle4}}
+                                                </p>
+
+                                            </td>
+                                            <td style="width: 40%">
+                                                Supervisor
+                                                <p style="font-family:cursive; font-weight:bold;">
+                                                    {{ applicant.supervisor4}}
+                                                </p>
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td style="width: 40%">
+                                                Reason for Leaving
+                                                <p style="font-family:cursive; font-weight:bold;">
+                                                    {{ applicant.reasonforleaving4}}
+                                                </p>
+
+                                            </td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                            <h1># 5</h1>
+                            <div class="card" style="background-color: white">
+
+                                <table class="table-responsive">
+
+                                    <tbody>
+                                        <tr>
+                                            <td style="width: 40%">
+                                                Employer
+                                                <p style="font-family:cursive; font-weight:bold;">
+                                                    {{ applicant.employer5name }}
+                                                </p>
+                                            </td>
+                                        </tr>
+
+
+                                        <tr>
+                                            <td style="width: 40%">
+                                                Address
+                                                <p style="font-family:cursive; font-weight:bold;">
+                                                    {{ applicant.employer5address}}
+                                                </p>
+                                            </td>
+                                            <td style="width: 30%">
+                                                Date Employed
+                                                <table class="table-responsive">
+                                                    <td style="width: 15%">From</td>
+                                                    <td style="width: 15%">To</td>
+                                                    <tr>
+                                                        <td style="width: 15%">
+                                                            <p style="font-family:cursive; font-weight:bold;">
+                                                                {{ applicant.from5 }}
+                                                            </p>
+                                                        </td>
+                                                        <td style="width: 15%">
+                                                            <p style="font-family:cursive; font-weight:bold;">
+                                                                {{ applicant.to5 }}
+                                                            </p>
+                                                        </td>
+                                                    </tr>
+                                                </table>
+                                            </td>
+                                            <td style="width: 40%">
+                                                Work Performed
+                                                <p style="font-family:cursive; font-weight:bold;">
+                                                    {{ applicant.wperformed5 }}
+                                                </p>
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td style="width: 40%">
+                                                Telephone Number(s)
+                                                <p style="font-family:cursive; font-weight:bold;">
+                                                    {{ applicant.employer5number }}
+                                                </p>
+                                            </td>
+                                            <td style="width: 30%">
+                                                Hourly Rate/Salary
+                                                <table class="table-responsive">
+                                                    <td style="width: 15%">Starting</td>
+                                                    <td style="width: 15%">Final</td>
+                                                    <tr>
+                                                        <td style="width: 15%">
+                                                            <p style="font-family:cursive; font-weight:bold;">
+                                                                {{ applicant.start5 }}
+                                                            </p>
+                                                        </td>
+                                                        <td style="width: 15%">
+                                                            <p style="font-family:cursive; font-weight:bold;">
+                                                                {{ applicant.final5 }}
+                                                            </p>
+                                                        </td>
+                                                    </tr>
+                                                </table>
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td style="width: 40%">
+                                                Job Title
+                                                <p style="font-family:cursive; font-weight:bold;">
+                                                    {{applicant.jobtitle5}}
+                                                </p>
+
+                                            </td>
+                                            <td style="width: 40%">
+                                                Supervisor
+                                                <p style="font-family:cursive; font-weight:bold;">
+                                                    {{ applicant.supervisor5}}
+                                                </p>
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td style="width: 40%">
+                                                Reason for Leaving
+                                                <p style="font-family:cursive; font-weight:bold;">
+                                                    {{ applicant.reasonforleaving5}}
+                                                </p>
+
+                                            </td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                        <br>
+                        <div class="card" style="background-color: white; padding: 3%;">
+                            <h5>Special Skills and Qualifications </h5>
+                            <p>Sumarize especial job-related skills and qualifications acquired from employment or other experience.</p>
+
+                            <p style="font-family:cursive; font-weight:bold;">
+                                {{ applicant.skillandqualifications}}
+                            </p>
+
+                        </div>
+
+                        <br>
+                        <div style="text-align: justify; border: 1px solid black; padding: 3%;">
+
+                            <h1 style="text-align: center">ARMELLINI INDUSTRIES, INC</h1>
+                            <H2 style="text-align: center"> EMPLOYMENT APPLICATION ACKNOWLEDGMENT AND RELEASE</H2>
+                            <br>
+                            <em style="text-align: justify;">
+                                <p>I understand that this application for employment will be given consideration, but it is
+                                    not a promise of employment.
+                                </p>
+                                <p>I certify that all of the information furnished on this application is true, complete and
+                                    correct. I understand and agree that any falsification, misrepresentation, misleading
+                                    statement, or omission of fact on either this application or during the pre-hire process
+                                    will be sufficient reason for (1) my not being offered employment; or (2) dismissal at
+                                    any time if I am employed.
+                                </p>
+                                <p>I understand and agree that If I am hired, my employment will be for no definite period of
+                                    time and may, regardless of the time and manner of payment of my wages, be terminated
+                                    at any time by me or the Company, with or without cause and without any previous notice.
+                                    I also understand that the Company has the right to unilaterally modify and terminate
+                                    any policies, practices, procedures, and standars it has adopted or implemented, to the
+                                    extend not limited by law.
+                                </p>
+                                <p>
+                                    In the event of my employment by the Company, I will comply all rules and regulations as set forth in the Company's policy
+                                    manual or other communication distributed to employees.
+                                </p>
+                                <p>
+                                    I understand that I must consent to and authorize a pre-employment verification of background information. I authorize the
+                                    Company to (1) investigate the truthfulness of all statements made on my application
+                                    or resume, or verbal statements made by me in the interview process; (2) conduct any
+                                    verification of my education, employment, workers' compensation claims, personal, credit,
+                                    and motor vehicle records, and to receive any criminal history record information relating
+                                    to me which may be on file with any federal, state, or local agencies; and (3) disclose
+                                    verbally or in writing, the results of any investigation with authorized employees or
+                                    agents of Armellini Industries, Inc. & Subsidiaries involved in the hiring process. I
+                                    understand that consideration for employment is contingent upon the results of this reference
+                                    and background investigation.
+                                </p>
+
+                                <p>
+                                    I also understand that a consumer credit report may be obtained from a consumer reporting agency in connection with this
+                                    application, and if I request, I understand that I will be informed of the name and address
+                                    of the agency.
+                                </p>
+                                <p>
+                                    I authorize the Company to contact my previous employers for the purpose of checking muy employment history. My signature
+                                    below constitutes my knowing and my voluntary waiver of any claims I may have against
+                                    the Company for contacting my previous employers. I also waive and release my previous
+                                    employers from any claims I may have against them based upon the information they furnish
+                                    to the company.
+                                </p>
+                                <p>
+                                    I authorize the Company to supply my employment record, in whole or in part, to any prospective employer, government agency,
+                                    or other party with a legal interest, and I release all such parties from any liability
+                                    for direct or consequential damages resulting from such release and disclosure.
+                                </p>
+                                <p>
+                                    I understand that employment by the Company may be conditioned upon an acceptable fitness for duty medical and health evaluation
+                                    that may include a physical examination paid for by the Company and conducted by a doctor
+                                    selected by the Company. I also understand that employment with the Company may be conditioned
+                                    upon a drug and/or alcohol screening test result administered by a medical organization
+                                    selected by the Company. I further agree to submit, at any reasonable time during my
+                                    employment, and without notice, to a drug and/or alcohol screening test. I understand
+                                    that refusal to take a requested drug and/or alcohol screening may result in discharge.
+                                    I further understand that, if employed, a positive test result in immediate discharge.
+                                </p>
+                                <p>
+                                    I authorize the Company to supply my medical and health evaluation, including drug and/or alcohol screening test results,
+                                    in whole or in part, to any prospective employer, government agency, or other party with
+                                    a legal interest, and I release all such parties from any liability for direct or consequential
+                                    damages resulting from such release and disclosure.
+                                </p>
+
+                            </em>
+                        </div>
+                    </div>
+
+
+
+                    <div class="row">
+                        <div class="col-sm-6 col-md-6 col-lg-6" style="text-align: left">
+
+                            <img [src]="applicant.signatureofapplicant" alt="Witness Sign" width="50%" height="50%" />
+                            <p>
+                                ____________________________
+                            </p>
+
+                            <p>Signature of Applicant</p>
+                        </div>
+                        <div class="col-sm-6 col-md-6 col-lg-6" style="text-align: left">
+
+                            <span>{{applicant.dateapply |date:'fullDate'}}</span>
+                            <p>
+                                ____________________________
+                            </p>
+                            <p>Date</p>
+                        </div>
+                    </div>
+                    <br>
+                    <div class="row">
+                        <div class="col-sm-6 col-md-6 col-lg-6" style="text-align: left">
+
+                            <img [src]="applicant.withness" alt="Witness Sign" width="50%" height="50%" />
+                            <p>
+                                ____________________________
+                            </p>
+
+                            <p>Witness</p>
+                        </div>
+                        <div class="col-sm-6 col-md-6 col-lg-6" style="text-align: left;">
+
+                            <span>{{applicant.datesignature |date:'fullDate'}}</span>
+                            <p>
+                                ____________________________
+                            </p>
+                            <p>Date</p>
+                        </div>
+                    </div>
+
+
+                </div>
+                <br>
+                <hr>
+
+
+                <div class="row">
+                    <div class="col-sm-0 col-md-0 col-lg-0">
+                    </div>
+                    <div class="col-sm-12 col-md-12 col-lg-12" style="text-align:right">
+                        <div class="btn-group btn-group-lg">
+                            <div class="col-sm-12 col-md-12 col-lg-12">
+                                <button type="button" class="btn btn-primary" routerLink="/singn/{{applicant.id}}">
+                                    <i class="fa fa-pencil"></i>
+                                </button>
+                                <button type="button" class="btn btn-primary" (click)="onPrint()">
+                                    <i class="fa fa-print"></i>
+                                </button>
+                                <button type="button" class="btn btn-success" (click)="donwloadPdf()">
+                                    <i class="fa fa-download"></i>
+                                </button>
+                                <button type="button" class="btn btn-info" (click)="onEdit()">
+                                    <i class="fa fa-edit"></i>
+                                </button>
+                                <button type="button" class="btn btn-danger" (click)="onDelete()">
+                                    <i class="fa fa-remove"></i>
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<div id="content" *ngIf="print">
+
+
+    <div style="text-align: left; margin-top:0%;">
+        <h1>
+            <img src="/assets/logo.png" width="30%" height="25%" />
+            <div class="lbl">
+                <p>
+                    <span>P.O.BOX 678</span>
+                    <span>PALM CITY, FL 34991</span>
+                    <span>(772) 287-0575</span>
+                </p>
+            </div>
+            <h1 style="font-size: 230%; text-align:right; margin-right:0%; position:absolute; top: 30px; left:32%;">Application For Employment</h1>
+        </h1>
+    </div>
+    <br>
+    <div class="row">
+        <div>
+            <div class="card">
+                We consider applicants for all positions without regard to race, color, religion, sex, national origin, age, marital or veteran
+                status, the presence of a non-job-related medical condition or disability, or any other legally protected
+                status
+            </div>
+        </div>
+    </div>
+    <br>
+
+    <table style="margin-left: 0%;">
+        <tr>
+            <th>Position(s) Applied For:</th>
+            <td></td>
+            <td></td>
+            <td></td>
+            <th>Date of Appplications:</th>
+        </tr>
+        <tr>
+            <td>{{applicant.applyfor}}</td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td>{{ applicant.dateapply }}</td>
+        </tr>
+        <tr>
+            <td>
+                <br>
+            </td>
+            <td>
+                <br>
+            </td>
+            <td>
+                <br>
+            </td>
+        </tr>
+        <tr>
+            <th>How Did You Learn About Us?</th>
+            <td></td>
+            <td></td>
+            <th> Where Do You Want to Work?</th>
+        </tr>
+        <tr>
+            <td>{{applicant.heardabouts}}</td>
+            <td></td>
+            <td></td>
+            <td>{{applicant.wherewanttowork}}</td>
+        </tr>
+
+    </table>
+
+
+    <hr>
+    <table>
+        <th></th>
+        <tr>
+            <th>
+                Last Name
+            </th>
+            <th>
+                First Name
+
+            </th>
+            <th>
+                Middle Name
+            </th>
+
+        </tr>
+        <tr>
+            <td>
+                {{applicant.lastName}}
+            </td>
+            <td>
+                {{applicant.firstName}}
+            </td>
+            <td>
+                {{applicant.middleName}}
+            </td>
+
+        </tr>
+        <tr>
+            <th>Address Number</th>
+            <th>Street</th>
+            <th>City</th>
+            <th>State</th>
+            <th>Zip Code</th>
+        </tr>
+        <tr>
+            <td>{{applicant.number}}</td>
+            <td>{{applicant.street}}</td>
+            <td>{{applicant.city}}</td>
+            <td>{{applicant.state}}</td>
+            <td>{{applicant.zipcode}}</td>
+        </tr>
+        <tr>
+            <th>Telephone Number(s)</th>
+            <th>County</th>
+            <th>Social Security Number</th>
+        </tr>
+        <td>{{applicant.phone}}</td>
+        <td>{{applicant.county}}</td>
+        <td>{{applicant.ssn}}</td>
+
+    </table>
+
+    <hr>
+
+    <table>
+        <th></th>
+        <th>Yes</th>
+        <th>No</th>
+        <tr>
+            <td>If you are under 18 years of age, can you provide required proof of your eligibility to work?</td>
+            <td> {{applicant.q1y |yesiandno}}</td>
+            <td> {{applicant.q1n |yesiandno}}</td>
+        </tr>
+        <tr>
+            <td>Have you ever filed an application with us before?</td>
+            <td> {{applicant.q2y |yesiandno}}</td>
+            <td> {{applicant.q2n |yesiandno}}</td>
+        </tr>
+        <tr>
+            <p style="font-weight:bold;" *ngIf="applicant.q2y">
+                {{applicant.ifyes}}
+            </p>
+        </tr>
+        <tr>
+            <td>Have you ever been employed with us before?</td>
+            <td> {{applicant.q3y |yesiandno}}</td>
+            <td> {{applicant.q3n |yesiandno}}</td>
+        </tr>
+        <tr>
+            <label for="name" *ngIf="applicant.q3y">If Yes, give date and location: </label>
+            <p style="font-weight:bold;" *ngIf="applicant.q3y">
+                {{ applicant.ifemployedwhenandwhere }}
+            </p>
+        </tr>
+        <tr>
+            <td>Are you currently employed?</td>
+            <td> {{applicant.q4y |yesiandno}}</td>
+            <td> {{applicant.q4n |yesiandno}}</td>
+        </tr>
+        <tr>
+            <td>May we contact your present employer?</td>
+            <td> {{applicant.q5y |yesiandno}}</td>
+            <td> {{applicant.q5n |yesiandno}}</td>
+        </tr>
+        <tr>
+            <td>Are you prevented from lawfully becoming employed in this country because of Visa or Immigration Status?
+                <p style="font-size:9px; font-weight:bold">Proof of Citizenship or immigration status will be required upon employment.</p>
+
+            </td>
+            <td> {{applicant.q6y |yesiandno}}</td>
+            <td> {{applicant.q6n |yesiandno}}</td>
+        </tr>
+        <tr>
+            <td>Are you currently on "lay-off" status and subject to recall?</td>
+            <td>{{applicant.q7y |yesiandno}}</td>
+            <td>{{applicant.q7n |yesiandno}}</td>
+        </tr>
+        <tr>
+            <td> Can you travel if a job requires it?</td>
+            <td> {{applicant.q8y |yesiandno}}</td>
+            <td> {{applicant.q8n |yesiandno}}</td>
+        </tr>
+
+        <tr>
+            <td>On What date would you be available for work?
+                <span style="margin-left: 10%; font-weight: bold;"> {{applicant.availabetowork}}</span>
+            </td>
+        </tr>
+        <tr>
+            <td>Are you available to work?</td>
+        </tr>
+        <tr></tr>
+        <table style="left:100px; border: 1px solid black">
+            <tr>
+                <th>Full Time</th>
+                <th> Part Time</th>
+                <th> Shift Work</th>
+                <th> Temporary</th>
+            </tr>
+            <tr>
+                <td>{{applicant.fulltime |yesiandno}}</td>
+                <td>{{applicant.parttime |yesiandno}}</td>
+                <td>{{applicant.shiftwork |yesiandno}}</td>
+                <td>{{applicant.temporary |yesiandno}}</td>
+            </tr>
+
+        </table>
+    </table>
+
+    <div>
+
+        <table>
+            <th></th>
+            <th>Yes</th>
+            <th>No</th>
+            <tr>
+                <td>Have you been convicted of a felony within the last 7 years?</td>
+                <td> {{applicant.q9y |yesiandno}}</td>
+                <td> {{applicant.q9n |yesiandno}}</td>
+            </tr>
+            <tr>
+                <label for="name" *ngIf="applicant.q3y">If Yes, please explain: </label>
+                <p style="font-weight:bold;" *ngIf="applicant.q3y">
+                    {{applicant.ifconvited}}
+                </p>
+            </tr>
+
+        </table>
+        <p class="break"></p>
+        <h1>EDUCATION</h1>
+        <hr>
+        <div class="table-responsive">
+            <table class="table">
+                <thead>
+                    <tr>
+                        <th></th>
+                        <th>Elementary School</th>
+                        <th>High School</th>
+                        <th>Undergraduate College/University</th>
+                        <th>Graduate/Professional</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>School Name and Location</td>
+                        <td>
+                            {{applicant.elementaryname}}
+                        </td>
+                        <td>
+                            {{applicant.hightschoolname}}
+                        </td>
+                        <td>
+                            {{applicant.collegename}}
+                        </td>
+                        <td>
+                            {{applicant.professionalname}}
+                        </td>
+                    </tr>
+
+                    <tr>
+                        <td>
+                            Years Completed
+                        </td>
+                        <td>
+                            {{applicant.yearscompleted1}}
+
+                        </td>
+                        <td>
+                            {{applicant.yearscompleted2}}
+                        </td>
+                        <td>
+                            {{applicant.yearscompleted2}}
+                        </td>
+                        <td>
+                            {{applicant.yearscompleted3}}
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            Diploma/Degree
+                        </td>
+                        <td>
+                            {{applicant.diplomadegree1}}
+                        </td>
+                        <td>
+                            {{applicant.diplomadegree2}}
+                        </td>
+                        <td>
+                            {{applicant.diplomadegree4}}
+                        </td>
+                        <td>
+                            {{applicant.diplomadegree4}}
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+
+
+
+            <hr>
+
+            <table>
+                <tr>
+                    <td>Describe any specialized training, apprenticeship, skills and extra-curricular activities</td>
+                </tr>
+                <tr>
+                    <td> {{applicant.trainings}}</td>
+                </tr>
+                <tr>
+                    <td>Describe any honors you have received</td>
+                </tr>
+                <tr>
+                    <td> {{applicant.honors}}</td>
+                </tr>
+                <tr>
+                    <td>State any additional information you feel may be helpfull to us in considering your application</td>
+                </tr>
+                <tr>
+                    <td> {{applicant.moreinfo}}</td>
+                </tr>
+            </table>
+
+
+
+            <p style="text-align: left; font-weight:bold;">Indicate any foreign languages you can speak, read and/or write</p>
+            <hr>
+            <table>
+                <tr>
+                    <th></th>
+                    <th style="text-align: center">FLUENT</th>
+                    <th style="text-align: center">GOOD</th>
+                    <th style="text-align: center">FAIR</th>
+                </tr>
+                <tr>
+                    <td>SPEAK </td>
+                    <td>
+                        {{ applicant.speakfluent }}
+                    </td>
+                    <td>
+                        {{ applicant.speakgood }}
+                    </td>
+                    <td>
+                        {{ applicant.speakfail }}
+                    </td>
+                </tr>
+                <tr>
+                    <td>READ</td>
+                    <td>
+                        {{ applicant.readfluent }}
+                    </td>
+                    <td>
+                        {{ applicant.readgood }}
+                    </td>
+                    <td>
+                        {{ applicant.readfail }}
+                    </td>
+                </tr>
+                <tr>
+                    <td>WRITE</td>
+                    <td>
+                        {{ applicant.writefluent }}
+                    </td>
+                    <td>
+                        {{ applicant.writegood }}
+                    </td>
+                    <td>
+                        {{ applicant.writefail }}
+                    </td>
+                </tr>
+            </table>
+
+            <br>
+            <div class="card" style="padding-left: 30px; background-color:white">
+                <p style="text-align: left">In Case of Emergency Please Notify</p>
+                <hr>
+                <div class="row">
+                    <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 col-xlg-12">
+                        Name
+                        <p style="font-weight:bold; margin-left: 20px;">
+                            {{ applicant.emergencyname}}
+                        </p>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 col-xlg-12">
+                        Addrress
+                        <p style="font-weight:bold; margin-left: 20px;">
+                            {{ applicant.emergencyaddress }}
+                        </p>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 col-xlg-12">
+                        Telephone Number
+                        <p style="font-weight:bold; margin-left: 20px;">
+                            {{ applicant.emergencynumber }}
+                        </p>
+                    </div>
+                </div>
+            </div>
+
+            <br>
+
+
+            <table>
+                <th></th>
+                <th>Yes</th>
+                <th>No</th>
+                <tr>
+                    <td>Have you ever had any job-related training in United States military?</td>
+                    <td>{{applicant.usamilitaryyes |yesiandno}}</td>
+                    <td>{{applicant.usamilitaryno |yesiandno}}</td>
+                </tr>
+                <tr>
+                    <label for="name" *ngIf="applicant.usamilitaryyes">If Yes, please describe: </label>
+                    <p style="font-weight:bold;" *ngIf="applicant.q3y">
+                        {{ applicant.usamilataryexplain }}
+                    </p>
+                </tr>
+
+            </table>
+
+
+        </div>
+
+        <p class="break"></p>
+
+        <div class="card" style="padding-left: 30px; background-color:white">
+            <br>
+            <h1> Employment Experience</h1>
+            <ul>
+                <li>
+                    Start with your present or last job.
+                </li>
+                <li>
+                    List your employment experience for the past 5 years, explain any gaps between jobs.
+                </li>
+                <li>
+                    Include any job-related military service assignments and volunteer activities.
+                </li>
+                <li>
+                    You may exclude organizations which indicate race, color, religion, gender, national origin, disability or other protected
+                    status.
+                </li>
+            </ul>
+            <h1># 1</h1>
+
+            <div class="card" style="background-color: white">
+
+                <table class="table-responsive">
+
+                    <tbody>
+                        <tr>
+                            <td style="width: 40%">
+                                Employer
+                                <p style="font-family:cursive; font-weight:bold;">
+                                    {{ applicant.employer1name }}
+                                </p>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td style="width: 40%">
+                                Address
+                                <p style="font-family:cursive; font-weight:bold;">
+                                    {{ applicant.employer1address}}
+                                </p>
+                            </td>
+                            <td style="width: 30%">
+                                Date Employed
+                                <table class="table-responsive">
+                                    <td style="width: 15%">From</td>
+                                    <td style="width: 15%">To</td>
+                                    <tr>
+                                        <td style="width: 15%">
+                                            <p style="font-family:cursive; font-weight:bold;">
+                                                {{ applicant.from1 }}
+                                            </p>
+                                        </td>
+                                        <td style="width: 15%">
+                                            <p style="font-family:cursive; font-weight:bold;">
+                                                {{ applicant.to1 }}
+                                            </p>
+                                        </td>
+                                    </tr>
+                                </table>
+                            </td>
+                            <td style="width: 40%">
+                                Work Performed
+                                <p style="font-family:cursive; font-weight:bold;">
+                                    {{ applicant.wperformed1 }}
+                                </p>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td style="width: 40%">
+                                Telephone Number(s)
+                                <p style="font-family:cursive; font-weight:bold;">
+                                    {{ applicant.employer1number }}
+                                </p>
+                            </td>
+                            <td style="width: 30%">
+                                Hourly Rate/Salary
+                                <table class="table-responsive">
+                                    <td style="width: 15%">Starting</td>
+                                    <td style="width: 15%">Final</td>
+                                    <tr>
+                                        <td style="width: 15%">
+                                            <p style="font-family:cursive; font-weight:bold;">
+                                                {{ applicant.start1 }}
+                                            </p>
+                                        </td>
+                                        <td style="width: 15%">
+                                            <p style="font-family:cursive; font-weight:bold;">
+                                                {{ applicant.final1 }}
+                                            </p>
+                                        </td>
+                                    </tr>
+                                </table>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td style="width: 40%">
+                                Job Title
+                                <p style="font-family:cursive; font-weight:bold;">
+                                    {{applicant.jobtitle1}}
+                                </p>
+
+                            </td>
+                            <td style="width: 40%">
+                                Supervisor
+                                <p style="font-family:cursive; font-weight:bold;">
+                                    {{ applicant.supervisor1}}
+                                </p>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td style="width: 40%">
+                                Reason for Leaving
+                                <p style="font-family:cursive; font-weight:bold;">
+                                    {{ applicant.reasonforleaving1}}
+                                </p>
+
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+
+            <h1># 2</h1>
+            <div class="card" style="background-color: white">
+
+                <table class="table-responsive">
+
+                    <tbody>
+                        <tr>
+                            <td style="width: 40%">
+                                Employer
+                                <p style="font-family:cursive; font-weight:bold;">
+                                    {{ applicant.employer2name }}
+                                </p>
+                            </td>
+                        </tr>
+
+
+                        <tr>
+                            <td style="width: 40%">
+                                Address
+                                <p style="font-family:cursive; font-weight:bold;">
+                                    {{ applicant.employer2address}}
+                                </p>
+                            </td>
+                            <td style="width: 30%">
+                                Date Employed
+                                <table class="table-responsive">
+                                    <td style="width: 15%">From</td>
+                                    <td style="width: 15%">To</td>
+                                    <tr>
+                                        <td style="width: 15%">
+                                            <p style="font-family:cursive; font-weight:bold;">
+                                                {{ applicant.from2 }}
+                                            </p>
+                                        </td>
+                                        <td style="width: 15%">
+                                            <p style="font-family:cursive; font-weight:bold;">
+                                                {{ applicant.to2 }}
+                                            </p>
+                                        </td>
+                                    </tr>
+                                </table>
+                            </td>
+                            <td style="width: 40%">
+                                Work Performed
+                                <p style="font-family:cursive; font-weight:bold;">
+                                    {{ applicant.wperformed2 }}
+                                </p>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td style="width: 40%">
+                                Telephone Number(s)
+                                <p style="font-family:cursive; font-weight:bold;">
+                                    {{ applicant.employer2number }}
+                                </p>
+                            </td>
+                            <td style="width: 30%">
+                                Hourly Rate/Salary
+                                <table class="table-responsive">
+                                    <td style="width: 15%">Starting</td>
+                                    <td style="width: 15%">Final</td>
+                                    <tr>
+                                        <td style="width: 15%">
+                                            <p style="font-family:cursive; font-weight:bold;">
+                                                {{ applicant.start2 }}
+                                            </p>
+                                        </td>
+                                        <td style="width: 15%">
+                                            <p style="font-family:cursive; font-weight:bold;">
+                                                {{ applicant.final2 }}
+                                            </p>
+                                        </td>
+                                    </tr>
+                                </table>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td style="width: 40%">
+                                Job Title
+                                <p style="font-family:cursive; font-weight:bold;">
+                                    {{applicant.jobtitle2}}
+                                </p>
+
+                            </td>
+                            <td style="width: 40%">
+                                Supervisor
+                                <p style="font-family:cursive; font-weight:bold;">
+                                    {{ applicant.supervisor2}}
+                                </p>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td style="width: 40%">
+                                Reason for Leaving
+                                <p style="font-family:cursive; font-weight:bold;">
+                                    {{ applicant.reasonforleaving2}}
+                                </p>
+
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+
+            <p class="break"></p>
+            <h1># 3</h1>
+            <div class="card" style="background-color: white">
+
+                <table class="table-responsive">
+
+                    <tbody>
+                        <tr>
+                            <td style="width: 40%">
+                                Employer
+                                <p style="font-family:cursive; font-weight:bold;">
+                                    {{ applicant.employer3name }}
+                                </p>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td style="width: 40%">
+                                Address
+                                <p style="font-family:cursive; font-weight:bold;">
+                                    {{ applicant.employer3address}}
+                                </p>
+                            </td>
+                            <td style="width: 30%">
+                                Date Employed
+                                <table class="table-responsive">
+                                    <td style="width: 15%">From</td>
+                                    <td style="width: 15%">To</td>
+                                    <tr>
+                                        <td style="width: 15%">
+                                            <p style="font-family:cursive; font-weight:bold;">
+                                                {{ applicant.from3 }}
+                                            </p>
+                                        </td>
+                                        <td style="width: 15%">
+                                            <p style="font-family:cursive; font-weight:bold;">
+                                                {{ applicant.to3 }}
+                                            </p>
+                                        </td>
+                                    </tr>
+                                </table>
+                            </td>
+                            <td style="width: 40%">
+                                Work Performed
+                                <p style="font-family:cursive; font-weight:bold;">
+                                    {{ applicant.wperformed3 }}
+                                </p>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td style="width: 40%">
+                                Telephone Number(s)
+                                <p style="font-family:cursive; font-weight:bold;">
+                                    {{ applicant.employer3number }}
+                                </p>
+                            </td>
+                            <td style="width: 30%">
+                                Hourly Rate/Salary
+                                <table class="table-responsive">
+                                    <td style="width: 15%">Starting</td>
+                                    <td style="width: 15%">Final</td>
+                                    <tr>
+                                        <td style="width: 15%">
+                                            <p style="font-family:cursive; font-weight:bold;">
+                                                {{ applicant.start3 }}
+                                            </p>
+                                        </td>
+                                        <td style="width: 15%">
+                                            <p style="font-family:cursive; font-weight:bold;">
+                                                {{ applicant.final3 }}
+                                            </p>
+                                        </td>
+                                    </tr>
+                                </table>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td style="width: 40%">
+                                Job Title
+                                <p style="font-family:cursive; font-weight:bold;">
+                                    {{applicant.jobtitle3}}
+                                </p>
+
+                            </td>
+                            <td style="width: 40%">
+                                Supervisor
+                                <p style="font-family:cursive; font-weight:bold;">
+                                    {{ applicant.supervisor3}}
+                                </p>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td style="width: 40%">
+                                Reason for Leaving
+                                <p style="font-family:cursive; font-weight:bold;">
+                                    {{ applicant.reasonforleaving3}}
+                                </p>
+
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+
+            <h1># 4</h1>
+            <div class="card" style="background-color: white">
+
+                <table class="table-responsive">
+
+                    <tbody>
+                        <tr>
+                            <td style="width: 40%">
+                                Employer
+                                <p style="font-family:cursive; font-weight:bold;">
+                                    {{ applicant.employer4name }}
+                                </p>
+                            </td>
+                        </tr>
+
+
+                        <tr>
+                            <td style="width: 40%">
+                                Address
+                                <p style="font-family:cursive; font-weight:bold;">
+                                    {{ applicant.employer4address}}
+                                </p>
+                            </td>
+                            <td style="width: 30%">
+                                Date Employed
+                                <table class="table-responsive">
+                                    <td style="width: 15%">From</td>
+                                    <td style="width: 15%">To</td>
+                                    <tr>
+                                        <td style="width: 15%">
+                                            <p style="font-family:cursive; font-weight:bold;">
+                                                {{ applicant.from4 }}
+                                            </p>
+                                        </td>
+                                        <td style="width: 15%">
+                                            <p style="font-family:cursive; font-weight:bold;">
+                                                {{ applicant.to4 }}
+                                            </p>
+                                        </td>
+                                    </tr>
+                                </table>
+                            </td>
+                            <td style="width: 40%">
+                                Work Performed
+                                <p style="font-family:cursive; font-weight:bold;">
+                                    {{ applicant.wperformed4 }}
+                                </p>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td style="width: 40%">
+                                Telephone Number(s)
+                                <p style="font-family:cursive; font-weight:bold;">
+                                    {{ applicant.employer4number }}
+                                </p>
+                            </td>
+                            <td style="width: 30%">
+                                Hourly Rate/Salary
+                                <table class="table-responsive">
+                                    <td style="width: 15%">Starting</td>
+                                    <td style="width: 15%">Final</td>
+                                    <tr>
+                                        <td style="width: 15%">
+                                            <p style="font-family:cursive; font-weight:bold;">
+                                                {{ applicant.start4 }}
+                                            </p>
+                                        </td>
+                                        <td style="width: 15%">
+                                            <p style="font-family:cursive; font-weight:bold;">
+                                                {{ applicant.final4 }}
+                                            </p>
+                                        </td>
+                                    </tr>
+                                </table>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td style="width: 40%">
+                                Job Title
+                                <p style="font-family:cursive; font-weight:bold;">
+                                    {{applicant.jobtitle4}}
+                                </p>
+
+                            </td>
+                            <td style="width: 40%">
+                                Supervisor
+                                <p style="font-family:cursive; font-weight:bold;">
+                                    {{ applicant.supervisor4}}
+                                </p>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td style="width: 40%">
+                                Reason for Leaving
+                                <p style="font-family:cursive; font-weight:bold;">
+                                    {{ applicant.reasonforleaving4}}
+                                </p>
+
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+            <h1># 5</h1>
+            <div class="card" style="background-color: white">
+
+                <table class="table-responsive">
+
+                    <tbody>
+                        <tr>
+                            <td style="width: 40%">
+                                Employer
+                                <p style="font-family:cursive; font-weight:bold;">
+                                    {{ applicant.employer5name }}
+                                </p>
+                            </td>
+                        </tr>
+
+
+                        <tr>
+                            <td style="width: 40%">
+                                Address
+                                <p style="font-family:cursive; font-weight:bold;">
+                                    {{ applicant.employer5address}}
+                                </p>
+                            </td>
+                            <td style="width: 30%">
+                                Date Employed
+                                <table class="table-responsive">
+                                    <td style="width: 15%">From</td>
+                                    <td style="width: 15%">To</td>
+                                    <tr>
+                                        <td style="width: 15%">
+                                            <p style="font-family:cursive; font-weight:bold;">
+                                                {{ applicant.from5 }}
+                                            </p>
+                                        </td>
+                                        <td style="width: 15%">
+                                            <p style="font-family:cursive; font-weight:bold;">
+                                                {{ applicant.to5 }}
+                                            </p>
+                                        </td>
+                                    </tr>
+                                </table>
+                            </td>
+                            <td style="width: 40%">
+                                Work Performed
+                                <p style="font-family:cursive; font-weight:bold;">
+                                    {{ applicant.wperformed5 }}
+                                </p>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td style="width: 40%">
+                                Telephone Number(s)
+                                <p style="font-family:cursive; font-weight:bold;">
+                                    {{ applicant.employer5number }}
+                                </p>
+                            </td>
+                            <td style="width: 30%">
+                                Hourly Rate/Salary
+                                <table class="table-responsive">
+                                    <td style="width: 15%">Starting</td>
+                                    <td style="width: 15%">Final</td>
+                                    <tr>
+                                        <td style="width: 15%">
+                                            <p style="font-family:cursive; font-weight:bold;">
+                                                {{ applicant.start5 }}
+                                            </p>
+                                        </td>
+                                        <td style="width: 15%">
+                                            <p style="font-family:cursive; font-weight:bold;">
+                                                {{ applicant.final5 }}
+                                            </p>
+                                        </td>
+                                    </tr>
+                                </table>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td style="width: 40%">
+                                Job Title
+                                <p style="font-family:cursive; font-weight:bold;">
+                                    {{applicant.jobtitle5}}
+                                </p>
+
+                            </td>
+                            <td style="width: 40%">
+                                Supervisor
+                                <p style="font-family:cursive; font-weight:bold;">
+                                    {{ applicant.supervisor5}}
+                                </p>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td style="width: 40%">
+                                Reason for Leaving
+                                <p style="font-family:cursive; font-weight:bold;">
+                                    {{ applicant.reasonforleaving5}}
+                                </p>
+
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+
+        <p class="break"></p>
+        <br>
+        <div class="card" style="background-color: white; padding: 3%;">
+            <h5>Special Skills and Qualifications </h5>
+            <p>Sumarize especial job-related skills and qualifications acquired from employment or other experience.</p>
+
+            <p style="font-weight:bold;">
+                {{ applicant.skillandqualifications}}
+            </p>
+
+        </div>
+
+        <p class="break"></p>
+
+
+        <h1 style="text-align: center">ARMELLINI INDUSTRIES, INC</h1>
+        <H2 style="text-align: center"> EMPLOYMENT APPLICATION ACKNOWLEDGMENT AND RELEASE</H2>
+        <br>
+        <em style="text-align: justify;">
+            <p>I understand that this application for employment will be given consideration, but it is not a promise of employment.
+            </p>
+            <p>I certify that all of the information furnished on this application is true, complete and correct. I understand
+                and agree that any falsification, misrepresentation, misleading statement, or omission of fact on either
+                this application or during the pre-hire process will be sufficient reason for (1) my not being offered employment;
+                or (2) dismissal at any time if I am employed.
+            </p>
+            <p>I understand and agree that If I am hired, my employment will be for no definite period of time and may, regardless
+                of the time and manner of payment of my wages, be terminated at any time by me or the Company, with or without
+                cause and without any previous notice. I also understand that the Company has the right to unilaterally modify
+                and terminate any policies, practices, procedures, and standars it has adopted or implemented, to the extend
+                not limited by law.
+            </p>
+            <p>
+                In the event of my employment by the Company, I will comply all rules and regulations as set forth in the Company's policy
+                manual or other communication distributed to employees.
+            </p>
+            <p>
+                I understand that I must consent to and authorize a pre-employment verification of background information. I authorize the
+                Company to (1) investigate the truthfulness of all statements made on my application or resume, or verbal
+                statements made by me in the interview process; (2) conduct any verification of my education, employment,
+                workers' compensation claims, personal, credit, and motor vehicle records, and to receive any criminal history
+                record information relating to me which may be on file with any federal, state, or local agencies; and (3)
+                disclose verbally or in writing, the results of any investigation with authorized employees or agents of
+                Armellini Industries, Inc. & Subsidiaries involved in the hiring process. I understand that consideration
+                for employment is contingent upon the results of this reference and background investigation.
+            </p>
+
+            <p>
+                I also understand that a consumer credit report may be obtained from a consumer reporting agency in connection with this
+                application, and if I request, I understand that I will be informed of the name and address of the agency.
+            </p>
+            <p>
+                I authorize the Company to contact my previous employers for the purpose of checking muy employment history. My signature
+                below constitutes my knowing and my voluntary waiver of any claims I may have against the Company for contacting
+                my previous employers. I also waive and release my previous employers from any claims I may have against
+                them based upon the information they furnish to the company.
+            </p>
+            <p>
+                I authorize the Company to supply my employment record, in whole or in part, to any prospective employer, government agency,
+                or other party with a legal interest, and I release all such parties from any liability for direct or consequential
+                damages resulting from such release and disclosure.
+            </p>
+            <p>
+                I understand that employment by the Company may be conditioned upon an acceptable fitness for duty medical and health evaluation
+                that may include a physical examination paid for by the Company and conducted by a doctor selected by the
+                Company. I also understand that employment with the Company may be conditioned upon a drug and/or alcohol
+                screening test result administered by a medical organization selected by the Company. I further agree to
+                submit, at any reasonable time during my employment, and without notice, to a drug and/or alcohol screening
+                test. I understand that refusal to take a requested drug and/or alcohol screening may result in discharge.
+                I further understand that, if employed, a positive test result in immediate discharge.
+            </p>
+            <p>
+                I authorize the Company to supply my medical and health evaluation, including drug and/or alcohol screening test results,
+                in whole or in part, to any prospective employer, government agency, or other party with a legal interest,
+                and I release all such parties from any liability for direct or consequential damages resulting from such
+                release and disclosure.
+            </p>
+        </em>
+
+
+
+        <table>
+            <tr>
+                <th>
+                    <img [src]="applicant.signatureofapplicant" alt="Witness Sign" width="70%" height="50%" />
+                </th>
+                <th>
+                    <span>{{applicant.dateapply |date:'fullDate'}}</span>
+                </th>
+            </tr>
+            <tr>
+                <td>Signature of Applicant</td>
+                <td>Date</td>
+            </tr>
+            <tr>
+                <th>
+                    <img [src]="applicant.withness" alt="Witness Sign" width="70%" height="50%" />
+                </th>
+                <th>
+                    <span>{{applicant.datesignature |date:'fullDate'}}</span>
+                </th>
+            </tr>
+            <tr>
+                <td>Witness</td>
+                <td>Date</td>
+            </tr>
+
+        </table>
+
+
+    </div>
+</div>
+
+
+<ng-template #noData>
+    <hr>
+    <h5>There are no data in the system</h5>
+  </ng-template>
+  

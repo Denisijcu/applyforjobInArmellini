@@ -1,0 +1,75 @@
+<div class="row">
+    <div class="col-md-6">
+        <a routerLink='/' class="btn btn-link">
+            <i class="fa fa-arrow-circle-o-left"></i> Back to Dashboard
+        </a>
+    </div>
+    <div class="col-md-6">
+    </div>
+</div>
+
+<div class="card">
+    <div class="card-header">
+        Add Applicant
+    </div>
+    <div class="card-body">
+        <form #applicantForm="ngForm" (ngSubmit)="onSubmit(applicantForm)">
+            <div class="form-group">
+                <label for="firstName">First Name</label>
+                <input type="text" class="form-control" name="firstName" #applicantFirstName="ngModel" [ngClass]="{'is-invalid':applicantFirstName && applicantFirstName.touched}"
+                    [(ngModel)]="firstName" minlength="2" required>
+                <div [hidden]="!applicantFirstName.errors?.required" class="invalid-feedback">
+                    First name required
+                </div>
+                <div [hidden]="!applicantFirstName.errors?.minlength" class="invalid-feedback">
+                    Must be at least 2 characters
+                </div>
+            </div>
+            <div class="form-group">
+                <label for="lastName">Last Name</label>
+                <input type="text" class="form-control" name="lastName" #applicantLastName="ngModel" [ngClass]="{'is-invalid':applicantLastName && applicantLastName.touched}"
+                    [(ngModel)]="lastName" minlength="2" required>
+                <div [hidden]="!applicantLastName.errors?.required" class="invalid-feedback">
+                    Last name required
+                </div>
+                <div [hidden]="!applicantLastName.errors?.minlength" class="invalid-feedback">
+                    Must be at least 2 characters
+                </div>
+            </div>
+            <div class="form-group">
+                    <label for="email">Email</label>
+                    <input type="text" class="form-control" name="email" #applicantEmail="ngModel" [ngClass]="{'is-invalid':applicantEmail && applicantEmail.touched}"
+                        [(ngModel)]="email" pattern="^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$" required>
+                    <div [hidden]="!applicantEmail.errors?.required" class="invalid-feedback">
+                        Email required
+                    </div>
+                    <div [hidden]="!applicantEmail.errors?.pattern" class="invalid-feedback">
+                       Email is not valid
+                    </div>
+                </div>
+
+                <div class="form-group">
+                        <label for="phone">Phone</label>
+                        <input 
+                          type="text"
+                          class="form-control"
+                          [ngClass]="{'is-invalid':applicantPhone.errors &&  applicantPhone.touched}"
+                          [(ngModel)]="applicant.phone"
+                          name="phone"
+                          #applicantPhone = "ngModel"
+                          minlength="10"
+                          required
+                        >
+                        <div [hidden]="!applicantPhone.errors?.required" class="invalid-feedback">
+                            Phone is required
+                          </div>
+                      
+                          <div [hidden]="!applicantPhone.errors?.minlength" class="invalid-feedback">
+                              Must be at least 10 characters
+                          </div>
+                      </div>
+
+                      <input type = "submit" value = "Submit" class = "btn btn- primary btn-block">
+        </form>
+    </div>
+</div>

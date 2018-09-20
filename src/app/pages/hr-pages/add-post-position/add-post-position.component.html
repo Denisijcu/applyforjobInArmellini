@@ -1,0 +1,67 @@
+<hr>
+<div class="row">
+
+    <div class="col-md-12">
+        <h2>
+            <i class="fa fa-plus" style="color:royalblue"></i> Add New Position
+        </h2>
+    </div>
+</div>
+<hr>
+
+<form #postForm="ngForm" (ngSubmit)="onSubmit(postForm)">
+    <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 col-xlg-12">
+        <div class="form-group">
+            <label for="title">Title</label>
+            <input type="text" class="form-control" id="title" required [(ngModel)]="position.title" name="title" #title="ngModel">
+            <div [hidden]="title.valid || title.pristine" class="alert alert-danger">
+                Title is required
+            </div>
+        </div>
+    </div>
+    <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 col-xlg-12">
+        <div class="form-group">
+            <label for="subtitle">Description</label>
+            <input type="text" class="form-control" id="subtitle" required [(ngModel)]="position.subtitle" name="subtitle" #subtitle="ngModel">
+            <div [hidden]="subtitle || subtitle.pristine" class="alert alert-danger">
+                Description is required
+            </div>
+        </div>
+    </div>
+    <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 col-xlg-12">
+        <div class="form-group">
+            <label for="compensation">Compensation</label>
+            <input type="text" class="form-control" id="compensation" [(ngModel)]="position.compensation" name="compensation" #compensation="ngModel">
+            <div [hidden]="compensation || compensation.pristine" class="alert alert-danger">
+                Compensation is required
+            </div>
+        </div>
+    </div>
+
+    <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 col-xlg-12">
+        <div class="progress">
+            <div class="progress-bar progress-bar-striped bg-success" role="progressbar" [style.width]="(uploadProgress | async) + '%'"
+                [attr.aria-valuenow]="(uploadProgress | async)" aria-valuemin="0" aria-valuemax="100"></div>
+        </div>
+        <div class="form-group">
+            <h5 class="card-title">Select a file for upload:</h5>
+            <input type="file" (change)="upload($event)" accept=".png,.jpg" />
+        </div>
+    </div>
+
+
+    <div class="card">
+        <img [src]="position.url" alt="mypicture" height="30%" width="30%" />
+    </div>
+
+
+
+
+    <p class="full">
+
+        <button type="submit" name="button" class="btn btn-success" [disabled]="postForm.invalid"> Save </button>
+        <button type="button" name="button" class="btn btn-primary" (click)="onBack()"> Back </button>
+    </p>
+
+
+</form>
